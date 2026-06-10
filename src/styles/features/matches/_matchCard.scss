@@ -1,0 +1,250 @@
+/* =========================================================
+   IMPORTS
+========================================================= */
+@use "../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   MATCH CARD (PREMIUM SPORTS UI)
+=========================================================
+   Features:
+   - Glassmorphism (dark mode)
+   - Solid clean UI (light mode)
+   - IPL-style hover glow
+   - Responsive design system
+========================================================= */
+
+.match-card {
+  position: relative;
+  overflow: hidden;
+
+  padding: 24px;
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  color: var(--text);
+
+  transition: all 0.3s ease;
+
+  /* =========================================================
+     THEME BASE
+  ========================================================= */
+
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+
+  /* =========================================================
+     DARK MODE GLASS EFFECT
+  ========================================================= */
+
+  [data-theme="dark"] & {
+    backdrop-filter: blur(14px);
+    background: rgba(20, 20, 28, 0.55);
+  }
+
+  /* =========================================================
+     LIGHT MODE CLEAN CARD
+  ========================================================= */
+
+  [data-theme="light"] & {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  }
+
+  /* =========================================================
+     HOVER EFFECT (PREMIUM LIFT + GLOW)
+  ========================================================= */
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    background: radial-gradient(
+      circle at top,
+      color-mix(in srgb, var(--skin-color) 18%, transparent),
+      transparent 60%
+    );
+
+    opacity: 0;
+    transition: 0.35s ease;
+  }
+
+  &:hover {
+    transform: translateY(-6px) scale(1.01);
+
+    border-color: var(--skin-color);
+
+    box-shadow:
+      0 18px 45px rgba(0, 0, 0, 0.12),
+      0 0 0 1px rgba(0, 245, 255, 0.08);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  /* =========================================================
+     CONTENT LAYER FIX
+  ========================================================= */
+
+  * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* =========================================================
+     MATCH TITLE
+  ========================================================= */
+
+  h3 {
+    font-size: 18px;
+    font-weight: 800;
+
+    margin: 6px 0;
+
+    color: var(--text);
+    letter-spacing: 0.2px;
+  }
+
+  /* =========================================================
+     MATCH DETAILS TEXT
+  ========================================================= */
+
+  p {
+    font-size: 13px;
+    line-height: 1.4;
+
+    color: var(--muted);
+    margin: 0;
+  }
+
+  /* =========================================================
+     BUTTON INSIDE CARD
+  ========================================================= */
+
+  .btn-primary {
+    margin-top: 12px;
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   MATCH STATUS BADGE
+========================================================= */
+
+.match-status {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 6px 10px;
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  border: 1px solid var(--badge-border);
+
+  align-self: flex-start;
+}
+
+/* LIVE STATE */
+.match-status.live {
+  color: #ff3b3b;
+  background: rgba(255, 59, 59, 0.12);
+  border-color: rgba(255, 59, 59, 0.3);
+  animation: pulseLive 1.6s infinite;
+}
+
+/* =========================================================
+   LIVE PULSE ANIMATION
+========================================================= */
+
+@keyframes pulseLive {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.08);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN SYSTEM
+========================================================= */
+
+/* ================= XXL (1400px+) ================= */
+@include xxl {
+  .match-card {
+    padding: 26px;
+  }
+}
+
+/* ================= XL (1200px - 1399px) ================= */
+@include xl {
+  .match-card h3 {
+    font-size: 17px;
+  }
+}
+
+/* ================= LG (992px - 1199px) ================= */
+@include lg {
+  .match-card {
+    padding: 22px;
+  }
+}
+
+/* ================= MD (768px - 991px) ================= */
+@include md {
+  .match-card {
+    padding: 20px;
+  }
+}
+
+/* ================= SM (576px - 767px) ================= */
+@include sm {
+  .match-card {
+    padding: 18px;
+  }
+
+  .match-card h3 {
+    font-size: 16px;
+  }
+}
+
+/* ================= XS (420px - 575px) ================= */
+@include xs {
+  .match-card {
+    padding: 16px;
+  }
+
+  .match-card p {
+    font-size: 12px;
+  }
+}
+
+/* ================= XXS (360px and below) ================= */
+@include xxs {
+  .match-card {
+    padding: 14px;
+  }
+
+  .match-card h3 {
+    font-size: 15px;
+  }
+}
