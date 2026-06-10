@@ -1,13 +1,14 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { Player } from "./types";
 
 import PlayerStats from "./components/PlayerStats";
 import PlayerFilters from "./components/PlayerFilters";
 import PlayerGrid from "./components/PlayerGrid";
 import PlayerRegistrationButton from "./components/PlayerRegistrationButton";
 
-const players = [
+const players: Player[] = [
   {
     id: 1,
     name: "Amol Pawar",
@@ -47,20 +48,12 @@ const players = [
 ];
 
 export default function PlayersPage() {
-  const [activeRole, setActiveRole] =
-    useState("ALL");
+  const [activeRole, setActiveRole] = useState("ALL");
 
-  const filteredPlayers =
-    useMemo(() => {
-      if (activeRole === "ALL") {
-        return players;
-      }
-
-      return players.filter(
-        (player) =>
-          player.role === activeRole
-      );
-    }, [activeRole]);
+  const filteredPlayers = useMemo(() => {
+    if (activeRole === "ALL") return players;
+    return players.filter((player) => player.role === activeRole);
+  }, [activeRole]);
 
   return (
     <main className="players-page">
@@ -68,10 +61,7 @@ export default function PlayersPage() {
       <section className="page-header">
         <div className="container">
           <h1>Players</h1>
-
-          <p>
-            BPL Official Players Directory
-          </p>
+          <p>BPL Official Players Directory</p>
         </div>
       </section>
 
@@ -79,32 +69,10 @@ export default function PlayersPage() {
 
         <PlayerStats
           total={players.length}
-          batsmen={
-            players.filter(
-              (p) =>
-                p.role === "BATSMAN"
-            ).length
-          }
-          bowlers={
-            players.filter(
-              (p) =>
-                p.role === "BOWLER"
-            ).length
-          }
-          keepers={
-            players.filter(
-              (p) =>
-                p.role ===
-                "WICKET_KEEPER"
-            ).length
-          }
-          allRounders={
-            players.filter(
-              (p) =>
-                p.role ===
-                "ALL_ROUNDER"
-            ).length
-          }
+          batsmen={players.filter((p) => p.role === "BATSMAN").length}
+          bowlers={players.filter((p) => p.role === "BOWLER").length}
+          keepers={players.filter((p) => p.role === "WICKET_KEEPER").length}
+          allRounders={players.filter((p) => p.role === "ALL_ROUNDER").length}
         />
 
         <PlayerFilters
@@ -114,9 +82,7 @@ export default function PlayersPage() {
 
         <PlayerRegistrationButton />
 
-        <PlayerGrid
-          players={filteredPlayers}
-        />
+        <PlayerGrid players={filteredPlayers} />
 
       </div>
 
