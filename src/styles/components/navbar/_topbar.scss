@@ -1,0 +1,243 @@
+/* =========================================================
+   IMPORTS
+========================================================= */
+@use "../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   TOPBAR (PREMIUM LIVE STRIP)
+========================================================= */
+
+.topbar {
+  position: relative;
+  overflow: hidden;
+
+  /* ================= THEME BACKGROUND ================= */
+  background: var(--bg);
+  color: var(--text);
+
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+
+  box-shadow: 0 10px 30px color-mix(in srgb, black 10%, transparent);
+
+  transition: all 0.3s ease;
+
+  /* =========================================================
+     SOFT BACKGROUND LAYER (PREMIUM FEEL)
+  ========================================================= */
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: radial-gradient(
+      circle at top,
+      color-mix(in srgb, var(--skin-color) 12%, transparent),
+      transparent 60%
+    );
+
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* =========================================================
+     INNER WRAPPER
+  ========================================================= */
+
+  .topbar__inner {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 8px 18px;
+    gap: 10px;
+  }
+
+  /* =========================================================
+     LEFT: LIVE INDICATOR
+  ========================================================= */
+
+  .topbar__live {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    color: #ff3b3b;
+
+    letter-spacing: 1px;
+    white-space: nowrap;
+
+    .dot {
+      width: 8px;
+      height: 8px;
+
+      background: #ff3b3b;
+      border-radius: 50%;
+
+      box-shadow: 0 0 12px #ff3b3b;
+      animation: pulse 1.2s infinite;
+    }
+  }
+
+  /* =========================================================
+     CENTER MESSAGE (FIXED LIGHT MODE READABILITY)
+  ========================================================= */
+
+  .topbar__message {
+    flex: 1;
+    text-align: center;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    color: var(--muted);
+
+    letter-spacing: 0.3px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    animation: fade 0.4s ease-in-out;
+  }
+
+  /* =========================================================
+     RIGHT BADGE (PREMIUM STYLE)
+  ========================================================= */
+
+  .topbar__badge {
+    font-size: 11px;
+    font-weight: 700;
+
+    color: var(--skin-color);
+
+    padding: 5px 10px;
+    border-radius: 999px;
+
+    border: 1px solid color-mix(in srgb, var(--skin-color) 40%, transparent);
+
+    background: color-mix(in srgb, var(--skin-color) 10%, transparent);
+
+    backdrop-filter: blur(10px);
+
+    white-space: nowrap;
+  }
+
+  /* =========================================================
+     RESPONSIVE DESIGN
+  ========================================================= */
+
+  @include xxl {
+    .topbar__inner {
+      padding: 10px 30px;
+    }
+
+    .topbar__message {
+      font-size: 14px;
+    }
+  }
+
+  @include xl {
+    .topbar__inner {
+      padding: 8px 14px;
+    }
+
+    .topbar__message {
+      font-size: 12.5px;
+    }
+  }
+
+  @include lg {
+    .topbar__message {
+      font-size: 12px;
+    }
+
+    .topbar__badge {
+      font-size: 10px;
+      padding: 3px 8px;
+    }
+  }
+
+  @include md {
+    .topbar__inner {
+      padding: 7px 12px;
+    }
+
+    .topbar__message {
+      font-size: 11.5px;
+    }
+  }
+
+  @include sm {
+    .topbar__inner {
+      flex-direction: column;
+      gap: 6px;
+      padding: 8px 10px;
+    }
+
+    .topbar__message {
+      font-size: 11px;
+    }
+
+    .topbar__live,
+    .topbar__badge {
+      font-size: 10px;
+    }
+  }
+
+  @include xs {
+    .topbar__message {
+      font-size: 10.5px;
+    }
+
+    .topbar__badge {
+      display: none;
+    }
+  }
+
+  @include xxs {
+    .topbar__inner {
+      padding: 6px 8px;
+    }
+
+    .topbar__message {
+      font-size: 10px;
+    }
+  }
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
