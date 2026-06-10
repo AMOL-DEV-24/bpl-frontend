@@ -21,19 +21,16 @@ interface ThemeHook {
 
 export default function useTheme(): ThemeHook {
 
-  // ✅ Default values only — no localStorage here (server safe)
-  const [theme, setThemeState] = useState<ThemeType>("dark");
-  const [color, setColorState] = useState<ColorType>("blue");
+  // ✅ Read localStorage only if window exists (client only)
+  const [theme, setThemeState] = useState<ThemeType>(() => {
+    if (typeof window === "undefined") return "dark";
+    return (localStorage.getItem("theme") as ThemeType) ?? "dark";
+  });
 
-  /* ================= LOAD FROM LOCALSTORAGE (CLIENT ONLY) ================= */
-
-  useEffect(() => {
-    // This runs ONLY on client, never on server
-    const savedTheme = localStorage.getItem("theme") as ThemeType | null;
-    const savedColor = localStorage.getItem("color") as ColorType | null;
-    if (savedTheme) setThemeState(savedTheme);
-    if (savedColor) setColorState(savedColor);
-  }, []); // ← runs once on mount
+  const [color, setColorState] = useState<ColorType>(() => {
+    if (typeof window === "undefined") return "blue";
+    return (localStorage.getItem("color") as ColorType) ?? "blue";
+  });
 
   /* ================= SYNC DOM ON CHANGE ================= */
 
