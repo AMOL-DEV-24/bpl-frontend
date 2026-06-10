@@ -20,14 +20,22 @@ interface ThemeHook {
 ========================================================= */
 
 export default function useTheme(): ThemeHook {
-  const [theme, setThemeState] = useState<ThemeType>(
-    () => (localStorage.getItem("theme") as ThemeType | null) ?? "dark"
-  );
-  const [color, setColorState] = useState<ColorType>(
-    () => (localStorage.getItem("color") as ColorType | null) ?? "blue"
-  );
 
-  /* ================= SYNC DOM ON MOUNT + CHANGE ================= */
+  // ✅ Default values only — no localStorage here (server safe)
+  const [theme, setThemeState] = useState<ThemeType>("dark");
+  const [color, setColorState] = useState<ColorType>("blue");
+
+  /* ================= LOAD FROM LOCALSTORAGE (CLIENT ONLY) ================= */
+
+  useEffect(() => {
+    // This runs ONLY on client, never on server
+    const savedTheme = localStorage.getItem("theme") as ThemeType | null;
+    const savedColor = localStorage.getItem("color") as ColorType | null;
+    if (savedTheme) setThemeState(savedTheme);
+    if (savedColor) setColorState(savedColor);
+  }, []); // ← runs once on mount
+
+  /* ================= SYNC DOM ON CHANGE ================= */
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -50,8 +58,8 @@ export default function useTheme(): ThemeHook {
   };
 
   const resetTheme = () => {
-    setTheme("dark");
-    setColor("blue");
+    setThemeState("dark");
+    setColorState("blue");
     localStorage.removeItem("theme");
     localStorage.removeItem("color");
   };
