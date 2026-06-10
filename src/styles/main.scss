@@ -1,0 +1,83 @@
+/* =========================================================
+   MAIN STYLES ENTRY FILE (BPL OFFICIAL WEBSITE)
+   - Central SCSS loader
+   - Manages abstracts, base, components, features
+========================================================= */
+
+/* =========================================================
+   1. ABSTRACTS (GLOBAL SYSTEM FILES)
+   - Variables, breakpoints, mixins
+   - MUST load first (foundation layer)
+========================================================= */
+
+@use "./abstracts/breakpoints";
+@use "./abstracts/variables";
+@use "./abstracts/mixins";
+
+/* =========================================================
+   2. BASE STYLES
+   - Global reset, typography, base UI setup
+   - Applies across entire project
+========================================================= */
+
+@use "./base/reset";
+@use "./base/global";
+@use "./base/typography";
+
+/* =========================================================
+   3. COMPONENTS
+   - Reusable UI blocks
+   - Navbar, Topbar, Footer, Buttons, etc.
+========================================================= */
+
+
+@use "./components/navbar/navbar";
+@use "./components/navbar/topbar";
+@use "./components/navbar/mobileMenu";
+@use "./components/theme/themeSwitcher";
+
+@use "./components/footer/footer";
+
+/* =========================================================
+   4. FEATURES (PAGE LEVEL STYLES)
+   - Each page/module has its own SCSS
+   - Keeps project scalable and maintainable
+========================================================= */
+
+// 1.Home page styles
+@use "./features/home/home";
+@use "./features/home/hero";
+@use "./features/home/liveMatch";
+@use "./features/home/tournamentStats";
+@use "./features/home/teamsPreview";
+@use "./features/home/sponsors";
+
+
+// 2.Teams page styles
+@use "./features/teams/teams";
+@use "./features/teams/teamStats";
+@use "./features/teams/teamGrid";
+@use "./features/teams/teamCard";
+
+// 3. Matches page styles
+@use "./features/matches/matches";
+@use "./features/matches/matchCard";
+@use "./features/matches/liveScoreCard";
+@use "./features/matches/matchList";
+
+// 4. Players page styles
+@use "./features/players";
+
+// 5. Player registration page styles
+@use "./features/playerRegistration/playerRegistration";
+
+@use "./features/auction";
+@use "./features/gallery";
+@use "./features/pointsTable";
+@use "./features/admin";
+
+/* =========================================================
+   END OF MAIN STYLES FILE
+   - Do NOT write component styles here
+   - Only imports are allowed in this file
+========================================================= */

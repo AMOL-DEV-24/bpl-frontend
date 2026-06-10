@@ -1,0 +1,75 @@
+/* =========================================================
+   BASE THEME VARIABLES (CLEAN SYSTEM)
+========================================================= */
+
+/* ================= DEFAULT (DARK BASE) ================= */
+:root {
+  --bg: #050816;
+  --text: #ffffff;
+  --muted: rgba(255, 255, 255, 0.7);
+
+  --skin-color: #00f7ffcb;
+  --skin-secondary: #7c3aed;
+
+  --card-bg: rgba(255, 255, 255, 0.05);
+}
+/* =========================================================
+   DARK MODE (SPORTS / NEON)
+========================================================= */
+[data-theme="dark"] {
+  --bg: #050816;
+  --text: #ffffff;
+  --muted: rgba(255, 255, 255, 0.7);
+
+  --surface: rgba(255, 255, 255, 0.05);
+  --border: rgba(255, 255, 255, 0.08);
+
+  --shadow: 0 0 30px rgba(0, 245, 255, 0.08);
+}
+
+/* =========================================================
+   LIGHT MODE (PREMIUM DASHBOARD)
+========================================================= */
+[data-theme="light"] {
+  --bg: #f6f8fc;
+  --text: #0b1220;
+  --muted: rgba(0, 0, 0, 0.65);
+
+  --surface: #ffffff;
+  --border: rgba(15, 23, 42, 0.08);
+
+  --shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+/* =========================================================
+   COLOR SKINS (ACCENTS ONLY)
+========================================================= */
+
+/* RED */
+[data-skin="red"] {
+  --skin-color: #ff0033;
+  --skin-secondary: #ff4d6d;
+}
+
+/* ORANGE */
+[data-skin="orange"] {
+  --skin-color: #ff7a00;
+  --skin-secondary: #ffb703;
+}
+
+/* GREEN */
+[data-skin="green"] {
+  --skin-color: #00c853;
+  --skin-secondary: #64dd17;
+}
+
+/* BLUE */
+[data-skin="blue"] {
+  --skin-color: #00f7fff8;
+  --skin-secondary: #3b82f6;
+}
+
+/* PINK */
+[data-skin="pink"] {
+  --skin-color: #f021b2;
+  --skin-secondary: #ec4899;
+}
