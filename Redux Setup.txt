@@ -1,0 +1,111 @@
+src/
+├── redux/
+│   ├── store.ts
+│   ├── hooks.ts
+│   ├── api/
+│   │   └── baseApi.ts
+│   ├── persist.ts
+│   └── modules/
+
+src/
+│
+├── redux/
+│
+│   ├── store.ts
+│   │   // 🏗️ Main Redux store
+│   │   // - Combines RTK Query + all slices
+│   │   // - Middleware setup
+│
+│
+│   ├── hooks.ts
+│   │   // 🧠 Typed Redux hooks
+│   │   // - useAppDispatch
+│   │   // - useAppSelector
+│
+│
+│   ├── api/
+│   │
+│   │   ├── baseApi.ts
+│   │   │   // 🌐 RTK Query base configuration
+│   │   │   // - Base URL setup
+│   │   │   // - Auth headers (if needed)
+│   │   │   // - tagTypes for caching
+│
+│
+│   ├── modules/
+│   │
+│   │   ├── players/
+│   │   │
+│   │   │   ├── player.api.ts
+│   │   │   │   // 🌐 Player API (RTK Query)
+│   │   │   │   // - getPlayers
+│   │   │   │   // - getPlayer
+│   │   │   │   // - createPlayer
+│   │   │   │
+│   │   │   ├── player.slice.ts
+│   │   │   │   // 🧩 UI state only
+│   │   │   │   // - selectedPlayer
+│   │   │   │   // - filters (role, search)
+│   │   │   │
+│   │   │   ├── player.hooks.ts
+│   │   │   │   // 🪝 Custom hooks abstraction
+│   │   │   │   // - usePlayers()
+│   │   │   │   // - usePlayer()
+│   │   │   │   // - useCreatePlayer()
+│   │   │   │
+│   │   │   ├── player.types.ts
+│   │   │       // 📘 Player TypeScript definitions
+│
+│
+│   │   ├── matches/
+│   │   │
+│   │   │   ├── match.api.ts
+│   │   │   │   // 🌐 Match API (RTK Query)
+│   │   │   │   // - getMatches
+│   │   │   │   // - createMatch
+│   │   │   │   // - updateScore
+│   │   │   │
+│   │   │   ├── match.slice.ts
+│   │   │   │   // 🧩 Match UI state
+│   │   │   │   // - selectedMatch
+│   │   │   │   // - liveMatchId
+│   │   │   │
+│   │   │   ├── match.hooks.ts
+│   │   │   │   // 🪝 Custom hooks
+│   │   │   │   // - useMatches()
+│   │   │   │   // - useLiveMatch()
+│   │   │   │
+│   │   │   ├── match.types.ts
+│   │
+│
+│   │   ├── pointsTable/
+│   │   │
+│   │   │   ├── points.api.ts
+│   │   │   │   // 🌐 Points Table API
+│   │   │   │
+│   │   │   ├── points.slice.ts
+│   │   │   │   // 🧩 UI state (sorting/filtering only)
+│   │   │   │
+│   │   │   ├── points.hooks.ts
+│   │   │   │   // 🪝 usePointsTable()
+│   │   │   │
+│   │   │   ├── points.types.ts
+│   │
+│
+│   │   ├── payment/
+│   │   │
+│   │   │   ├── payment.api.ts
+│   │   │   │   // 💳 Razorpay API calls
+│   │   │   │   // - createOrder
+│   │   │   │   // - verifyPayment
+│   │   │   │
+│   │   │   ├── payment.slice.ts
+│   │   │   │   // 🧩 Payment UI state
+│   │   │   │   // - status (idle, loading, success, failed)
+│   │   │   │
+│   │   │   ├── payment.hooks.ts
+│   │   │   │   // 🪝 usePayment()
+│   │   │   │
+│   │   │   ├── payment.types.ts
+│
+

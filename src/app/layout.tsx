@@ -1,3 +1,5 @@
+import Providers from "./Provider";
+
 import "@/styles/main.scss";
 
 import ThemeSwitcher from "@/components/theme/index.themeSwitcher";
@@ -36,7 +38,9 @@ export default function RootLayout({
         <ThemeSwitcher />
 
         {/* ================= PAGE CONTENT ================= */}
-        <main>{children}</main>
+        <Providers>
+          {children}
+        </Providers>
 
         {/* ================= FOOTER ================= */}
         <Footer />
