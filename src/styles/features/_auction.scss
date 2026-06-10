@@ -1,0 +1,81 @@
+.auction-page {
+  min-height: 100vh;
+}
+
+.team-purse {
+  padding: 60px 0;
+}
+
+.purse-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.purse-card {
+  padding: 24px;
+  text-align: center;
+
+  border-radius: 20px;
+
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+
+  h3 {
+    margin-bottom: 10px;
+  }
+
+  span {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+}
+
+.auction-list {
+  padding-bottom: 80px;
+}
+
+.auction-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 24px;
+}
+
+.auction-player-card {
+  padding: 24px;
+
+  text-align: center;
+
+  border-radius: 20px;
+
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.player-avatar {
+  font-size: 4rem;
+  margin-bottom: 16px;
+}
+
+.sold-price {
+  margin-top: 16px;
+
+  font-size: 1.25rem;
+  font-weight: 700;
+
+  color: #f5c542;
+}
+
+@media (max-width: 992px) {
+  .purse-grid,
+  .auction-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .purse-grid,
+  .auction-grid {
+    grid-template-columns: 1fr;
+  }
+}
