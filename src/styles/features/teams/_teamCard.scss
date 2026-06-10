@@ -1,0 +1,202 @@
+/* =========================================================
+   IMPORTS
+========================================================= */
+@use "../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   TEAM CARD (PREMIUM SPORTS UI)
+   - Glass card design
+   - IPL-style glow hover
+   - Theme-aware styling
+========================================================= */
+
+.team-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 18px;
+  padding: 22px;
+
+  text-align: center;
+
+  position: relative;
+  overflow: hidden;
+
+  transition: all 0.3s ease;
+
+  /* =========================================================
+     TOP GLOW EFFECT
+  ========================================================= */
+
+  &::before {
+    content: "";
+    position: absolute;
+
+    inset: 0;
+
+    background: radial-gradient(
+      circle at top,
+      color-mix(in srgb, var(--skin-color) 15%, transparent),
+      transparent 60%
+    );
+
+    opacity: 0;
+    transition: 0.3s ease;
+    z-index: 0;
+  }
+
+  /* =========================================================
+     LOGO
+  ========================================================= */
+
+  .team-card__logo {
+    font-size: 42px;
+    margin-bottom: 12px;
+
+    position: relative;
+    z-index: 1;
+  }
+
+  /* =========================================================
+     TEXT CONTENT
+  ========================================================= */
+
+  h3 {
+    font-size: 18px;
+    font-weight: 800;
+
+    color: var(--text);
+
+    margin-bottom: 10px;
+
+    position: relative;
+    z-index: 1;
+  }
+
+  p {
+    font-size: 13px;
+    color: var(--muted);
+
+    margin: 4px 0;
+
+    position: relative;
+    z-index: 1;
+
+    strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+  }
+
+  /* =========================================================
+     BUTTON
+  ========================================================= */
+
+  .btn-primary {
+    margin-top: 14px;
+
+    padding: 10px 14px;
+    width: 100%;
+
+    border: none;
+    border-radius: 12px;
+
+    background: var(--skin-color);
+    color: #0b1020;
+
+    font-weight: 700;
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+
+    position: relative;
+    z-index: 1;
+
+    &:hover {
+      transform: translateY(-3px);
+      filter: brightness(1.1);
+      box-shadow: 0 10px 25px rgba(0, 245, 255, 0.2);
+    }
+  }
+
+  /* =========================================================
+     HOVER EFFECT (PREMIUM LIFT)
+  ========================================================= */
+
+  &:hover {
+    transform: translateY(-6px);
+    border-color: var(--skin-color);
+
+    box-shadow: 0 15px 40px rgba(0, 245, 255, 0.12);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  /* =========================================================
+     RESPONSIVE DESIGN
+  ========================================================= */
+
+  /* ================= 1400px (XXL) ================= */
+  @include xxl {
+    padding: 24px;
+
+    h3 {
+      font-size: 19px;
+    }
+  }
+
+  /* ================= 1200px (XL) ================= */
+  @include xl {
+    padding: 22px;
+  }
+
+  /* ================= 992px (LG) ================= */
+  @include lg {
+    padding: 20px;
+
+    .team-card__logo {
+      font-size: 38px;
+    }
+  }
+
+  /* ================= 768px (MD) ================= */
+  @include md {
+    padding: 18px;
+
+    h3 {
+      font-size: 17px;
+    }
+  }
+
+  /* ================= 576px (SM) ================= */
+  @include sm {
+    padding: 16px;
+
+    .team-card__logo {
+      font-size: 34px;
+    }
+  }
+
+  /* ================= 420px (XS) ================= */
+  @include xs {
+    padding: 14px;
+
+    h3 {
+      font-size: 16px;
+    }
+  }
+
+  /* ================= 360px (XXS) ================= */
+  @include xxs {
+    padding: 12px;
+
+    .btn-primary {
+      font-size: 12px;
+      padding: 9px 12px;
+    }
+  }
+}
