@@ -1,0 +1,240 @@
+/* =========================================================
+   IMPORTS
+========================================================= */
+@use "../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   LIVE MATCH SECTION (PREMIUM THEME SYSTEM)
+========================================================= */
+
+.live-match {
+  position: relative;
+  padding: 60px 0;
+
+  /* ✅ FIX: Theme based background instead of hardcoded dark */
+  background: var(--bg);
+  color: var(--text);
+
+  transition: all 0.3s ease;
+}
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 30px;
+
+  h2 {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--text);
+  }
+
+  .section-subtitle {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+}
+
+/* =========================================================
+   SCOREBOARD CARD (PREMIUM GLASS THAT WORKS IN LIGHT + DARK)
+========================================================= */
+
+.live-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+
+  padding: 22px 26px;
+  border-radius: 18px;
+
+  /* ✅ FIX: adaptive glass */
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  border: 1px solid color-mix(in srgb, var(--skin-color) 15%, transparent);
+
+  backdrop-filter: blur(14px);
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+  transition: 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: var(--skin-color);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  }
+}
+
+/* =========================================================
+   TEAM BLOCK
+========================================================= */
+
+.team {
+  flex: 1;
+  text-align: center;
+
+  h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+
+  .score {
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--skin-color);
+
+    span {
+      font-size: 18px;
+      color: var(--muted);
+    }
+  }
+
+  small {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+}
+
+/* =========================================================
+   CENTER LIVE STATUS
+========================================================= */
+
+.match-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* LIVE BADGE */
+.live-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  color: #ff3b3b;
+
+  padding: 6px 12px;
+  border-radius: 999px;
+
+  background: rgba(255, 0, 0, 0.08);
+  border: 1px solid rgba(255, 0, 0, 0.25);
+
+  animation: pulseLive 1.5s infinite;
+}
+
+/* DOT */
+.live-badge .dot {
+  width: 8px;
+  height: 8px;
+  background: #ff3b3b;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #ff3b3b;
+}
+
+/* MATCH INFO */
+.match-info {
+  text-align: center;
+
+  p {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  span {
+    font-size: 11px;
+    color: var(--muted);
+  }
+}
+
+/* =========================================================
+   META STATS (FIX LIGHT MODE TOO)
+========================================================= */
+
+.live-meta {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  padding: 12px 16px;
+  border-radius: 12px;
+
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  border: 1px solid color-mix(in srgb, var(--skin-color) 10%, transparent);
+
+  text-align: center;
+  min-width: 120px;
+
+  transition: 0.3s ease;
+
+  &:hover {
+    border-color: var(--skin-color);
+    transform: translateY(-3px);
+  }
+
+  span {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  strong {
+    font-size: 14px;
+    color: var(--skin-color);
+  }
+}
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes pulseLive {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@include md {
+  .live-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 18px;
+  }
+
+  .team {
+    width: 100%;
+  }
+}
+
+@include sm {
+  .section-heading h2 {
+    font-size: 24px;
+  }
+}
+
+@include xxs {
+  .live-card {
+    padding: 16px;
+  }
+}
