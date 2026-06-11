@@ -1,0 +1,12 @@
+// constants/cloudinary.ts
+
+export const CLOUDINARY_PRESETS = {
+  PLAYER:
+    process.env.NEXT_PUBLIC_CLOUDINARY_PLAYER_PRESET!,
+  TEAM:
+    process.env.NEXT_PUBLIC_CLOUDINARY_TEAM_PRESET!,
+  SPONSOR:
+    process.env.NEXT_PUBLIC_CLOUDINARY_SPONSOR_PRESET!,
+  MATCH:
+    process.env.NEXT_PUBLIC_CLOUDINARY_MATCH_PRESET!,
+};
