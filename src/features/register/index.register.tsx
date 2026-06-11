@@ -1,4 +1,4 @@
-import PlayerRegistrationForm from "./components/PlayerRegistrationForm";
+import PlayerRegistrationForm from "./components/registrationForm";
 
 export default function PlayerRegistrationPage() {
   return (

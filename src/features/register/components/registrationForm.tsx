@@ -1,10 +1,38 @@
 /* eslint-disable @next/next/no-img-element */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+
+import { usePayment } from "@/redux/modules/payment/usePayment";
+import { usePlayerRegistration } from "@/redux/modules/player/usePlayerRegistration";
+
+/* =========================================================
+   RAZORPAY TYPES
+========================================================= */
+declare global {
+  interface Window {
+    Razorpay: new (options: RazorpayOptions) => { open(): void };
+  }
+}
+interface RazorpayOptions {
+  key: string;
+  amount: number;
+  currency: string;
+  name: string;
+  description: string;
+  order_id: string;
+  prefill?: { name?: string; email?: string; contact?: string };
+  theme?: { color?: string };
+  handler(response: RazorpayResponse): void;
+  modal?: { ondismiss?(): void };
+}
+interface RazorpayResponse {
+  razorpay_order_id: string;
+  razorpay_payment_id: string;
+  razorpay_signature: string;
+}
 
 /* =========================================================
    ERROR COMPONENT
@@ -20,72 +48,110 @@ function ErrorMessage({
   return <p className="error">{error}</p>;
 }
 
+/* =========================================================
+   COMPONENT
+========================================================= */
 export default function PlayerRegistrationForm() {
-  const [preview, setPreview] = useState<string>("");
+  const [preview, setPreview]       = useState<string>("");
+  const [fatalError, setFatalError] = useState<string>("");
+  const [isSuccess, setIsSuccess]   = useState(false);
+
+  const { openPayment, stepMessage, error: paymentError } = usePayment();
+  const { register } = usePlayerRegistration();
 
   const formik = useFormik({
     initialValues: {
-      photo: null as File | null,
-
-      firstName: "",
-      lastName: "",
-      email: "",
-      mobile: "",
-      village: "",
-      age: "",
+      photo:        null as File | null,
+      firstName:    "",
+      lastName:     "",
+      email:        "",
+      mobile:       "",
+      village:      "",
+      age:          "",
       jerseyNumber: "",
-
-      role: "",
+      role:         "",
       battingStyle: "",
       bowlingStyle: "",
-      experience: "",
-
-      matches: "",
-      runs: "",
-      wickets: "",
-      strikeRate: "",
-
-      about: "",
+      experience:   "",
+      matches:      "",
+      runs:         "",
+      wickets:      "",
+      strikeRate:   "",
+      about:        "",
     },
 
     validationSchema: Yup.object({
-      photo: Yup.mixed().required("Photo is required"),
-
-      firstName: Yup.string().required("First name is required"),
-      lastName: Yup.string().required("Last name is required"),
-
-      email: Yup.string()
-        .email("Invalid email")
-        .required("Email is required"),
-
-      mobile: Yup.string()
-        .matches(/^[0-9]{10}$/, "Invalid mobile number")
-        .required("Mobile is required"),
-
-      age: Yup.number()
-        .typeError("Age must be a number")
-        .required("Age is required"),
-
-      role: Yup.string().required("Role is required"),
+      photo:        Yup.mixed().required("Photo is required"),
+      firstName:    Yup.string().required("First name is required"),
+      lastName:     Yup.string().required("Last name is required"),
+      email:        Yup.string().email("Invalid email").required("Email is required"),
+      mobile:       Yup.string()
+                      .matches(/^[0-9]{10}$/, "Invalid mobile number")
+                      .required("Mobile is required"),
+      age:          Yup.number().typeError("Age must be a number").required("Age is required"),
+      role:         Yup.string().required("Role is required"),
       battingStyle: Yup.string().required("Batting style is required"),
       bowlingStyle: Yup.string().required("Bowling style is required"),
     }),
 
-    onSubmit: (values) => {
-      const fullName = `${values.firstName} ${values.lastName}`;
+    onSubmit: async (values, { setSubmitting }) => {
+      setFatalError("");
 
-      alert(`Registration Successful 🎉\nPlayer: ${fullName}`);
+      try {
+        // Step 1 + 2 + 3: payment (cloudinary upload happens inside register)
+        const orderId = await openPayment({
+          email:   values.email,
+          name:    `${values.firstName} ${values.lastName}`,
+          contact: values.mobile,
+        });
+
+        // Step 4: upload photo + register player
+        await register({ values, orderId });
+
+        setIsSuccess(true);
+
+      } catch (err: unknown) {
+        const e = err as { data?: { message?: string }; message?: string };
+        setFatalError(e?.data?.message ?? e?.message ?? "Something went wrong. Please try again.");
+      } finally {
+        setSubmitting(false);
+      }
     },
   });
 
+  /* =========================================================
+     HANDLE IMAGE
+  ========================================================= */
   const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
     formik.setFieldValue("photo", file);
     setPreview(URL.createObjectURL(file));
   };
 
+  /* =========================================================
+     SUCCESS SCREEN
+  ========================================================= */
+  if (isSuccess) {
+    return (
+      <section className="player-registration-page">
+        <div className="registration-container">
+          <div className="registration-success">
+            <span className="registration-success__icon">✅</span>
+            <h2>Registration Submitted!</h2>
+            <p>
+              Your registration is awaiting admin approval.
+              You will appear on the site once approved.
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  /* =========================================================
+     FORM
+  ========================================================= */
   return (
     <section className="player-registration-page">
       <div className="registration-container">
@@ -99,9 +165,7 @@ export default function PlayerRegistrationForm() {
 
         <form className="player-form" onSubmit={formik.handleSubmit}>
 
-          {/* =========================================================
-              PHOTO
-          ========================================================= */}
+          {/* PHOTO */}
           <div className="field image-upload">
             <div className="preview">
               {preview ? (
@@ -110,21 +174,21 @@ export default function PlayerRegistrationForm() {
                 <span>Upload Photo</span>
               )}
             </div>
-
-            <input type="file" accept="image/*" onChange={handleImage} />
-
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImage}
+              disabled={formik.isSubmitting}
+            />
             <ErrorMessage
-              touched={formik.touched.photo as any}
+              touched={!!formik.touched.photo}
               error={formik.errors.photo as string}
             />
           </div>
 
-          {/* =========================================================
-              PERSONAL INFORMATION
-          ========================================================= */}
+          {/* PERSONAL INFORMATION */}
           <div className="form-section">
             <h2>Personal Information</h2>
-
             <div className="grid">
 
               <div className="field">
@@ -159,12 +223,9 @@ export default function PlayerRegistrationForm() {
             </div>
           </div>
 
-          {/* =========================================================
-              CRICKET INFORMATION
-          ========================================================= */}
+          {/* CRICKET INFORMATION */}
           <div className="form-section">
             <h2>Cricket Information</h2>
-
             <div className="grid">
 
               <div className="field">
@@ -202,26 +263,20 @@ export default function PlayerRegistrationForm() {
             </div>
           </div>
 
-          {/* =========================================================
-              STATISTICS (RESTORED)
-          ========================================================= */}
+          {/* STATISTICS */}
           <div className="form-section">
             <h2>Statistics</h2>
-
             <div className="grid">
-              <input placeholder="Matches" {...formik.getFieldProps("matches")} />
-              <input placeholder="Runs" {...formik.getFieldProps("runs")} />
-              <input placeholder="Wickets" {...formik.getFieldProps("wickets")} />
+              <input placeholder="Matches"     {...formik.getFieldProps("matches")} />
+              <input placeholder="Runs"        {...formik.getFieldProps("runs")} />
+              <input placeholder="Wickets"     {...formik.getFieldProps("wickets")} />
               <input placeholder="Strike Rate" {...formik.getFieldProps("strikeRate")} />
             </div>
           </div>
 
-          {/* =========================================================
-              ABOUT PLAYER (RESTORED)
-          ========================================================= */}
+          {/* ABOUT */}
           <div className="form-section">
             <h2>About Player</h2>
-
             <textarea
               rows={5}
               placeholder="Tell us about yourself..."
@@ -229,9 +284,36 @@ export default function PlayerRegistrationForm() {
             />
           </div>
 
+          {/* STEP MESSAGE */}
+          {stepMessage && (
+            <p className="form-step-message" aria-live="polite">
+              {stepMessage}
+            </p>
+          )}
+
+          {/* PAYMENT ERROR */}
+          {paymentError && (
+            <p className="form-fatal-error" role="alert">
+              {paymentError}
+            </p>
+          )}
+
+          {/* FATAL ERROR */}
+          {fatalError && (
+            <p className="form-fatal-error" role="alert">
+              {fatalError}
+            </p>
+          )}
+
           {/* SUBMIT */}
-          <button type="submit" className="submit-btn">
-            Register & Pay ₹150
+          <button
+            type="submit"
+            className="submit-btn"
+            disabled={formik.isSubmitting}
+          >
+            {formik.isSubmitting
+              ? stepMessage || "Processing…"
+              : "Register & Pay ₹1"}
           </button>
 
         </form>

@@ -1,1 +1,1 @@
-export { default } from "@/features/playerRegistration/index.playerRegistration";
+export { default } from "@/features/register/index.register";
