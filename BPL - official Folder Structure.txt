@@ -1,0 +1,167 @@
+src/
+│
+├── app/
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── globals.scss
+│   │
+│   ├── teams/
+│   │   └── page.tsx
+│   │
+│   ├── matches/
+│   │   └── page.tsx
+│   │
+│   ├── auction/
+│   │   └── page.tsx
+│   │
+│   ├── points-table/
+│   │   └── page.tsx
+│   │
+│   ├── gallery/
+│   │   └── page.tsx
+│   │
+│   ├── admin/
+│   │   └── page.tsx
+│   │
+│   ├── loading.tsx
+│   ├── error.tsx
+│   └── not-found.tsx
+│
+├── features/
+│   │
+│   ├── home/
+│   │   ├── index.home.tsx
+│   │   └── components/
+│   │       ├── Hero.tsx
+│   │       ├── LiveMatch.tsx
+│   │       ├── UpcomingMatches.tsx
+│   │       ├── PointsTablePreview.tsx
+│   │       └── Sponsors.tsx
+│   │
+│   ├── teams/
+│   │   ├── index.teams.tsx
+│   │   └── components/
+│   │       ├── TeamCard.tsx
+│   │       ├── TeamGrid.tsx
+│   │       └── TeamDetails.tsx
+│   │
+│   ├── matches/
+│   │   ├── index.matches.tsx
+│   │   └── components/
+│   │       ├── MatchCard.tsx
+│   │       ├── MatchList.tsx
+│   │       └── LiveScore.tsx
+│   │
+│   ├── auction/
+│   │   ├── index.auction.tsx
+│   │   └── components/
+│   │       ├── AuctionCard.tsx
+│   │       ├── BidPanel.tsx
+│   │       └── PurseTracker.tsx
+│   │
+│   ├── points-table/
+│   │   ├── index.points-table.tsx
+│   │   └── components/
+│   │       └── PointsTable.tsx
+│   │
+│   ├── gallery/
+│   │   ├── index.gallery.tsx
+│   │   └── components/
+│   │       └── GalleryGrid.tsx
+│   │
+│   └── admin/
+│       ├── index.admin.tsx
+│       └── components/
+│           ├── Dashboard.tsx
+│           ├── MatchManager.tsx
+│           ├── TeamManager.tsx
+│           └── AuctionManager.tsx
+│
+├── components/
+│   │
+│   ├── layout/
+│   │   ├── Navbar.tsx
+│   │   ├── Footer.tsx
+│   │   └── Sidebar.tsx
+│   │
+│   ├── common/
+│   │   ├── EmptyState.tsx
+│   │   ├── Loader.tsx
+│   │   └── ErrorMessage.tsx
+│   │
+│   └── ui/
+│       ├── Button.tsx
+│       ├── Card.tsx
+│       ├── Input.tsx
+│       ├── Modal.tsx
+│       ├── Table.tsx
+│       └── Badge.tsx
+│
+├── hooks/
+│   ├── useSocket.ts
+│   ├── useTheme.ts
+│   ├── useDebounce.ts
+│   └── useLocalStorage.ts
+│
+├── services/
+│   ├── api.ts
+│   ├── team.service.ts
+│   ├── player.service.ts
+│   ├── match.service.ts
+│   ├── auction.service.ts
+│   ├── score.service.ts
+│   └── auth.service.ts
+│
+├── store/
+│   ├── auth.store.ts
+│   ├── match.store.ts
+│   ├── team.store.ts
+│   └── theme.store.ts
+│
+├── lib/
+│   ├── prisma.ts
+│   ├── socket.ts
+│   ├── auth.ts
+│   └── validations.ts
+│
+├── types/
+│   ├── team.types.ts
+│   ├── player.types.ts
+│   ├── match.types.ts
+│   ├── auction.types.ts
+│   ├── score.types.ts
+│   └── api.types.ts
+│
+├── constants/
+│   ├── routes.constants.ts
+│   ├── theme.constants.ts
+│   ├── api.constants.ts
+│   └── app.constants.ts
+│
+├── utils/
+│   ├── formatDate.ts
+│   ├── slugify.ts
+│   ├── calculateNRR.ts
+│   └── helpers.ts
+│
+└── styles/
+    ├── abstracts/
+    │   ├── _variables.scss
+    │   ├── _mixins.scss
+    │   └── _breakpoints.scss
+    │
+    ├── base/
+    │   ├── _reset.scss
+    │   ├── _typography.scss
+    │   └── _global.scss
+    │
+    ├── components/
+    │
+    └── features/
+        ├── home/
+        ├── teams/
+        ├── matches/
+        ├── auction/
+        ├── points-table/
+        ├── gallery/
+        └── admin/
