@@ -1,7 +1,7 @@
 /* =========================================================
    MAIN STYLES ENTRY FILE (BPL OFFICIAL WEBSITE)
    - Central SCSS loader
-   - Manages abstracts, base, components, features
+   - Manages abstracts, base, components, pages
 ========================================================= */
 
 /* =========================================================
@@ -39,42 +39,30 @@
 @use "./components/footer/footer";
 
 /* =========================================================
-   4. FEATURES (PAGE LEVEL STYLES)
+   4. pages (PAGE LEVEL STYLES)
    - Each page/module has its own SCSS
    - Keeps project scalable and maintainable
 ========================================================= */
 
 // 1.Home page styles
-@use "./features/home/home";
-@use "./features/home/hero";
-@use "./features/home/liveMatch";
-@use "./features/home/tournamentStats";
-@use "./features/home/teamsPreview";
-@use "./features/home/sponsors";
-
+@use "./pages/home/home.index";
 
 // 2.Teams page styles
-@use "./features/teams/teams";
-@use "./features/teams/teamStats";
-@use "./features/teams/teamGrid";
-@use "./features/teams/teamCard";
+@use "./pages/teams/teams.index";
 
 // 3. Matches page styles
-@use "./features/matches/matches";
-@use "./features/matches/matchCard";
-@use "./features/matches/liveScoreCard";
-@use "./features/matches/matchList";
+@use "./pages/matches/matches.index";
 
 // 4. Players page styles
-@use "./features/players";
+@use "./pages/players/players.index";
 
 // 5. Player registration page styles
-@use "./features/playerRegistration/playerRegistration";
+@use "./pages/register/register";
 
-@use "./features/auction";
-@use "./features/gallery";
-@use "./features/pointsTable";
-@use "./features/admin";
+@use "./pages/auction";
+@use "./pages/gallery";
+@use "./pages/pointsTable";
+@use "./pages/admin";
 
 /* =========================================================
    END OF MAIN STYLES FILE
