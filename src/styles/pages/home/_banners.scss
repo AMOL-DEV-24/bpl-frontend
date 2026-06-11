@@ -1,0 +1,200 @@
+/* =========================================================
+   IMPORTS
+========================================================= */
+@use "../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   TEAM BANNERS SECTION
+   ---------------------------------------------------------
+   Features:
+   - Professional Poster Gallery
+   - Theme Aware
+   - Uniform Card Layout
+   - Fully Responsive
+========================================================= */
+
+.banners-section {
+  padding: 80px 0;
+}
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.banners-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 24px;
+}
+
+/* =========================================================
+   BANNER CARD
+========================================================= */
+
+.banner-card {
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  background: var(--card-bg);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-8px);
+
+    border-color: var(--skin-color);
+
+    box-shadow: 0 16px 40px
+      color-mix(
+        in srgb,
+        var(--skin-color) 15%,
+        transparent
+      );
+  }
+}
+
+/* =========================================================
+   IMAGE WRAPPER
+========================================================= */
+
+.banner-image {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 4 / 5;
+
+  background: #111;
+
+  overflow: hidden;
+}
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.banner-img {
+  object-fit: contain;
+
+  padding: 10px;
+
+  transition: transform 0.4s ease;
+}
+
+.banner-card:hover .banner-img {
+  transform: scale(1.03);
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.banner-content {
+  padding: 16px;
+}
+
+.banner-content h3 {
+  font-size: 16px;
+  font-weight: 700;
+
+  text-align: center;
+
+  color: var(--skin);
+}
+
+/* =========================================================
+   XXL (>= 1400px)
+========================================================= */
+
+@include xxl {
+  .banners-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* =========================================================
+   XL (<= 1200px)
+========================================================= */
+
+@include xl {
+  .banners-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* =========================================================
+   LG (<= 992px)
+========================================================= */
+
+@include lg {
+  .banners-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =========================================================
+   MD (<= 768px)
+========================================================= */
+
+@include md {
+  .banners-section {
+    padding: 60px 0;
+  }
+
+  .banners-grid {
+    gap: 20px;
+  }
+}
+
+/* =========================================================
+   SM (<= 576px)
+========================================================= */
+
+@include sm {
+  .banners-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .banner-card {
+    max-width: 420px;
+
+    margin: 0 auto;
+  }
+}
+
+/* =========================================================
+   XS (<= 420px)
+========================================================= */
+
+@include xs {
+  .banner-content {
+    padding: 14px;
+  }
+
+  .banner-content h3 {
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   XXS (<= 360px)
+========================================================= */
+
+@include xxs {
+  .banners-section {
+    padding: 40px 0;
+  }
+
+  .banner-card {
+    border-radius: 16px;
+  }
+
+  .banner-content h3 {
+    font-size: 13px;
+  }
+}

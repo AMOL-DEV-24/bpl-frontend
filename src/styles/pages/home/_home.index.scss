@@ -1,0 +1,178 @@
+/* =========================================================
+   IMPORTS
+========================================================= */
+@use "../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   FORWARD HOME MODULES
+========================================================= */
+
+@forward "./hero";
+@forward "./announcements";
+@forward "./liveMatch";
+@forward "./tournamentStats";
+@forward "./teamsPreview";
+@forward "./banners";
+@forward "./sponsors";
+
+/* =========================================================
+   HOME PAGE
+   ---------------------------------------------------------
+   Features:
+   - Global Homepage Layout
+   - Theme Aware
+   - Premium Sports UI
+========================================================= */
+
+.home-page {
+  position: relative;
+
+  min-height: 100vh;
+
+  background: var(--bg);
+  color: var(--text);
+
+  overflow-x: hidden;
+
+  transition: all 0.3s ease;
+}
+
+/* =========================================================
+   COMMON SECTION SPACING
+========================================================= */
+
+.home-page section {
+  position: relative;
+
+  padding: 80px 0;
+}
+
+/* =========================================================
+   SECTION TITLES
+========================================================= */
+
+.section-title {
+  margin-bottom: 50px;
+
+  text-align: center;
+}
+
+.section-title h2 {
+  font-size: 42px;
+  font-weight: 900;
+
+  color: var(--text);
+}
+
+.section-title p {
+  margin-top: 10px;
+
+  color: var(--muted);
+
+  max-width: 650px;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =========================================================
+   XXL BREAKPOINT (>= 1400px)
+========================================================= */
+
+@include xxl {
+  .section-title h2 {
+    font-size: 46px;
+  }
+}
+
+/* =========================================================
+   XL BREAKPOINT (<= 1200px)
+========================================================= */
+
+@include xl {
+  .section-title h2 {
+    font-size: 40px;
+  }
+}
+
+/* =========================================================
+   LG BREAKPOINT (<= 992px)
+========================================================= */
+
+@include lg {
+  .home-page section {
+    padding: 70px 0;
+  }
+
+  .section-title h2 {
+    font-size: 36px;
+  }
+}
+
+/* =========================================================
+   MD BREAKPOINT (<= 768px)
+========================================================= */
+
+@include md {
+  .home-page section {
+    padding: 60px 0;
+  }
+
+  .section-title {
+    margin-bottom: 40px;
+  }
+
+  .section-title h2 {
+    font-size: 32px;
+  }
+}
+
+/* =========================================================
+   SM BREAKPOINT (<= 576px)
+========================================================= */
+
+@include sm {
+  .home-page section {
+    padding: 50px 0;
+  }
+
+  .section-title h2 {
+    font-size: 28px;
+  }
+
+  .section-title p {
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   XS BREAKPOINT (<= 420px)
+========================================================= */
+
+@include xs {
+  .section-title h2 {
+    font-size: 24px;
+  }
+
+  .section-title p {
+    font-size: 13px;
+  }
+}
+
+/* =========================================================
+   XXS BREAKPOINT (<= 360px)
+========================================================= */
+
+@include xxs {
+  .home-page section {
+    padding: 40px 0;
+  }
+
+  .section-title h2 {
+    font-size: 22px;
+  }
+
+  .section-title p {
+    font-size: 12px;
+  }
+}
