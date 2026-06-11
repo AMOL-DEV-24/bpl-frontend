@@ -1,4 +1,5 @@
-import Providers from "./Provider";
+import Script from "next/script";
+import Providers from "../provider/Provider";
 
 import "@/styles/main.scss";
 
@@ -22,12 +23,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      data-theme="dark"
-      data-skin="blue"
-    >
+    <html lang="en" data-theme="dark" data-skin="blue">
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
       <body>
+        {/* ================= RAZORPAY ================= */}
+        <Script
+          src="https://checkout.razorpay.com/v1/checkout.js"
+          strategy="afterInteractive"
+        />
+
         {/* ================= TOP HEADER ================= */}
         <TopBar />
 
@@ -38,9 +45,7 @@ export default function RootLayout({
         <ThemeSwitcher />
 
         {/* ================= PAGE CONTENT ================= */}
-        <Providers>
-          {children}
-        </Providers>
+        <Providers>{children}</Providers>
 
         {/* ================= FOOTER ================= */}
         <Footer />
