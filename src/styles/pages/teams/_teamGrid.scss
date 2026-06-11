@@ -1,0 +1,217 @@
+/* =========================================================
+   IMPORTS
+========================================================= */
+@use "../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   TEAMS PAGE WRAPPER
+   - Full page theme layout
+   - Premium sports UI feel
+========================================================= */
+
+.teams-page {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+
+  padding-bottom: 60px;
+}
+
+/* =========================================================
+   PAGE HEADER
+   - Hero-style title section
+========================================================= */
+
+.page-header {
+  padding: 60px 0;
+  text-align: center;
+
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--skin-color) 8%, transparent),
+    transparent
+  );
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+  h1 {
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: 1px;
+  }
+
+  p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+}
+
+/* =========================================================
+   TEAM STATS SECTION
+========================================================= */
+
+.team-stats {
+  padding: 40px 0;
+}
+
+.team-stats .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* STAT CARD */
+.stat-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  padding: 20px;
+  border-radius: 16px;
+
+  text-align: center;
+
+  transition: 0.3s ease;
+
+  h3 {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--skin-color);
+  }
+
+  p {
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: var(--skin-color);
+    box-shadow: 0 10px 30px rgba(0, 245, 255, 0.1);
+  }
+}
+
+/* =========================================================
+   TEAM GRID SECTION
+========================================================= */
+
+.teams-grid-section {
+  padding: 40px 0;
+}
+
+.teams-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+/* TEAM CARD */
+.team-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 18px;
+  padding: 20px;
+
+  text-align: center;
+
+  transition: 0.3s ease;
+
+  .team-logo {
+    font-size: 34px;
+    margin-bottom: 10px;
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  &:hover {
+    transform: translateY(-6px);
+    border-color: var(--skin-color);
+    box-shadow: 0 12px 30px rgba(0, 245, 255, 0.12);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE BREAKPOINT SYSTEM
+========================================================= */
+
+/* ================= 1400px (XXL) ================= */
+@include xxl {
+  .teams-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .team-stats .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ================= 1200px (XL) ================= */
+@include xl {
+  .teams-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .team-stats .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ================= 992px (LG) ================= */
+@include lg {
+  .teams-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .team-stats .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ================= 768px (MD) ================= */
+@include md {
+  .page-header h1 {
+    font-size: 34px;
+  }
+
+  .teams-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-stats .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ================= 576px (SM) ================= */
+@include sm {
+  .page-header {
+    padding: 40px 0;
+  }
+
+  .team-stats .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================= 420px (XS) ================= */
+@include xs {
+  .page-header h1 {
+    font-size: 28px;
+  }
+}
+
+/* ================= 360px (XXS) ================= */
+@include xxs {
+  .stat-card {
+    padding: 16px;
+  }
+
+  .team-card {
+    padding: 16px;
+  }
+}
