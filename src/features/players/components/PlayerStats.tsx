@@ -13,34 +13,42 @@ export default function PlayerStats({
   keepers,
   allRounders,
 }: Props) {
+  const stats = [
+    {
+      value: total,
+      label: "Total Players",
+    },
+    {
+      value: batsmen,
+      label: "Batsmen",
+    },
+    {
+      value: bowlers,
+      label: "Bowlers",
+    },
+    {
+      value: keepers,
+      label: "Keepers",
+    },
+    {
+      value: allRounders,
+      label: "All Rounders",
+    },
+  ];
+
   return (
-    <div className="player-stats">
-
-      <div className="stat-card">
-        <h2>{total}</h2>
-        <p>Total Players</p>
+    <section className="player-stats-section">
+      <div className="stats-grid">
+        {stats.map((stat) => (
+          <div
+            key={stat.label}
+            className="stat-card"
+          >
+            <h3>{stat.value}</h3>
+            <p>{stat.label}</p>
+          </div>
+        ))}
       </div>
-
-      <div className="stat-card">
-        <h2>{batsmen}</h2>
-        <p>Batsmen</p>
-      </div>
-
-      <div className="stat-card">
-        <h2>{bowlers}</h2>
-        <p>Bowlers</p>
-      </div>
-
-      <div className="stat-card">
-        <h2>{keepers}</h2>
-        <p>Wicket Keepers</p>
-      </div>
-
-      <div className="stat-card">
-        <h2>{allRounders}</h2>
-        <p>All Rounders</p>
-      </div>
-
-    </div>
+    </section>
   );
 }

@@ -8,40 +8,46 @@ export default function PlayerCard({
   player,
 }: Props) {
   return (
-    <div className="player-card">
-      <img
-        src={player.image}
-        alt={player.name}
-      />
+    <article className="player-card">
+
+      <div className="player-image">
+        <img
+          src={player.image}
+          alt={player.name}
+        />
+      </div>
 
       <div className="player-content">
+
+        <span className="player-role">
+          {player.role.replace("_", " ")}
+        </span>
+
         <h3>{player.name}</h3>
 
-        <span>{player.role}</span>
+        <p>{player.village}</p>
+
       </div>
 
       <div className="player-overlay">
-        <h4>{player.name}</h4>
 
-        <p>Runs: {player.runs}</p>
+        <div>
+          <strong>{player.runs}</strong>
+          <span>Runs</span>
+        </div>
 
-        <p>Wickets: {player.wickets}</p>
+        <div>
+          <strong>{player.wickets}</strong>
+          <span>Wickets</span>
+        </div>
 
-        <p>
-          Strike Rate:
-          {player.strikeRate}
-        </p>
+        <div>
+          <strong>{player.matches}</strong>
+          <span>Matches</span>
+        </div>
 
-        <p>
-          Matches:
-          {player.matches}
-        </p>
-
-        <p>
-          Village:
-          {player.village}
-        </p>
       </div>
-    </div>
+
+    </article>
   );
 }

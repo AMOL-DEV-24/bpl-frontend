@@ -1,0 +1,199 @@
+/* =========================================================
+   IMPORTS
+========================================================= */
+@use "../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   PLAYER FILTERS
+   ---------------------------------------------------------
+   Features:
+   - Premium pill buttons
+   - Glassmorphism effect
+   - Theme aware
+   - Responsive layout
+   - Active state animation
+========================================================= */
+
+.player-filters {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin: 40px 0;
+}
+
+/* =========================================================
+   FILTER BUTTON
+========================================================= */
+
+.player-filters button {
+  border: none;
+  outline: none;
+
+  cursor: pointer;
+
+  padding: 12px 20px;
+
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  color: var(--text);
+
+  background: color-mix(
+    in srgb,
+    var(--card-bg) 85%,
+    transparent
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(10px);
+
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+
+    border-color: var(--skin-color);
+
+    color: var(--skin-color);
+  }
+}
+
+/* =========================================================
+   ACTIVE BUTTON
+========================================================= */
+
+.player-filters button.active {
+  background: var(--skin-color);
+
+  color: #000;
+
+  border-color: var(--skin-color);
+
+  font-weight: 700;
+
+  box-shadow: 0 8px 20px
+    color-mix(
+      in srgb,
+      var(--skin-color) 25%,
+      transparent
+    );
+}
+
+/* =========================================================
+   XXL BREAKPOINT (>= 1400px)
+========================================================= */
+
+@include xxl {
+  .player-filters button {
+    padding: 14px 24px;
+
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   XL BREAKPOINT (<= 1200px)
+========================================================= */
+
+@include xl {
+  .player-filters {
+    gap: 10px;
+  }
+}
+
+/* =========================================================
+   LG BREAKPOINT (<= 992px)
+========================================================= */
+
+@include lg {
+  .player-filters {
+    gap: 10px;
+  }
+
+  .player-filters button {
+    padding: 11px 18px;
+  }
+}
+
+/* =========================================================
+   MD BREAKPOINT (<= 768px)
+========================================================= */
+
+@include md {
+  .player-filters {
+    justify-content: center;
+  }
+
+  .player-filters button {
+    font-size: 12px;
+
+    padding: 10px 16px;
+  }
+}
+
+/* =========================================================
+   SM BREAKPOINT (<= 576px)
+========================================================= */
+
+@include sm {
+  .player-filters {
+    flex-wrap: nowrap;
+
+    justify-content: flex-start;
+
+    overflow-x: auto;
+
+    padding-bottom: 6px;
+
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .player-filters button {
+    flex-shrink: 0;
+  }
+}
+
+/* =========================================================
+   XS BREAKPOINT (<= 420px)
+========================================================= */
+
+@include xs {
+  .player-filters {
+    margin: 30px 0;
+  }
+
+  .player-filters button {
+    padding: 9px 14px;
+
+    font-size: 11px;
+  }
+}
+
+/* =========================================================
+   XXS BREAKPOINT (<= 360px)
+========================================================= */
+
+@include xxs {
+  .player-filters {
+    gap: 8px;
+  }
+
+  .player-filters button {
+    padding: 8px 12px;
+
+    font-size: 10px;
+  }
+}

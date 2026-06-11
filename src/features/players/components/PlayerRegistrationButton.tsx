@@ -5,9 +5,9 @@ export default function PlayerRegistrationButton() {
     <div className="player-registration">
       <Link
         href="/registerPlayer"
-        className="btn-primary"
+        className="register-btn"
       >
-        Register As Player
+        Register as Player
       </Link>
     </div>
   );

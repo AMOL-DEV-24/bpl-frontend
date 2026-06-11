@@ -3,33 +3,50 @@ interface Props {
   onChange: (role: string) => void;
 }
 
+const roles = [
+  {
+    value: "ALL",
+    label: "All",
+  },
+  {
+    value: "BATSMAN",
+    label: "Batsmen",
+  },
+  {
+    value: "BOWLER",
+    label: "Bowlers",
+  },
+  {
+    value: "ALL_ROUNDER",
+    label: "All Rounders",
+  },
+  {
+    value: "WICKET_KEEPER",
+    label: "Keepers",
+  },
+];
+
 export default function PlayerFilters({
   active,
   onChange,
 }: Props) {
-  const roles = [
-    "ALL",
-    "BATSMAN",
-    "BOWLER",
-    "ALL ROUNDER",
-    "WICKET KEEPER",
-  ];
-
   return (
-    <div className="player-filters">
+    <section className="player-filters">
       {roles.map((role) => (
         <button
-          key={role}
-          onClick={() => onChange(role)}
+          key={role.value}
+          onClick={() =>
+            onChange(role.value)
+          }
           className={
-            active === role
+            active === role.value
               ? "active"
               : ""
           }
         >
-          {role}
+          {role.label}
         </button>
       ))}
-    </div>
+    </section>
   );
 }

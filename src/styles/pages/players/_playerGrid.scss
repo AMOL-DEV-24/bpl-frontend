@@ -1,0 +1,193 @@
+/* =========================================================
+   IMPORTS
+========================================================= */
+@use "../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   PLAYERS GRID SECTION
+   ---------------------------------------------------------
+   Features:
+   - Responsive Grid Layout
+   - Premium Card Spacing
+   - Empty State Support
+   - Theme Aware Design
+========================================================= */
+
+.players-grid-section {
+  position: relative;
+
+  padding: 20px 0 50px;
+}
+
+/* =========================================================
+   PLAYERS GRID
+========================================================= */
+
+.players-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 24px;
+}
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.players-empty {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  min-height: 320px;
+
+  padding: 40px 20px;
+
+  margin: 40px 0;
+
+  border-radius: 20px;
+
+  background: color-mix(
+    in srgb,
+    var(--card-bg) 85%,
+    transparent
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(10px);
+
+  transition: all 0.3s ease;
+}
+
+.players-empty h3 {
+  font-size: 26px;
+  font-weight: 800;
+
+  color: var(--text);
+}
+
+.players-empty p {
+  margin-top: 10px;
+
+  max-width: 500px;
+
+  font-size: 14px;
+  line-height: 1.7;
+
+  color: var(--muted);
+}
+
+/* =========================================================
+   XXL BREAKPOINT (>= 1400px)
+========================================================= */
+
+@include xxl {
+  .players-grid {
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 28px;
+  }
+}
+
+/* =========================================================
+   XL BREAKPOINT (<= 1200px)
+========================================================= */
+
+@include xl {
+  .players-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* =========================================================
+   LG BREAKPOINT (<= 992px)
+========================================================= */
+
+@include lg {
+  .players-grid {
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+  }
+}
+
+/* =========================================================
+   MD BREAKPOINT (<= 768px)
+========================================================= */
+
+@include md {
+  .players-grid {
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 18px;
+  }
+
+  .players-empty {
+    min-height: 280px;
+  }
+}
+
+/* =========================================================
+   SM BREAKPOINT (<= 576px)
+========================================================= */
+
+@include sm {
+  .players-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .players-grid-section {
+    padding: 10px 0 40px;
+  }
+
+  .players-empty {
+    min-height: 250px;
+  }
+}
+
+/* =========================================================
+   XS BREAKPOINT (<= 420px)
+========================================================= */
+
+@include xs {
+  .players-empty {
+    padding: 30px 15px;
+  }
+
+  .players-empty h3 {
+    font-size: 22px;
+  }
+
+  .players-empty p {
+    font-size: 13px;
+  }
+}
+
+/* =========================================================
+   XXS BREAKPOINT (<= 360px)
+========================================================= */
+
+@include xxs {
+  .players-grid {
+    gap: 16px;
+  }
+
+  .players-empty {
+    min-height: 220px;
+  }
+
+  .players-empty h3 {
+    font-size: 20px;
+  }
+
+  .players-empty p {
+    font-size: 12px;
+  }
+}

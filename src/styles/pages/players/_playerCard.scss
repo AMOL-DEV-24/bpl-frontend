@@ -1,0 +1,261 @@
+/* =========================================================
+   IMPORTS
+========================================================= */
+@use "../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   PLAYER CARD
+   ---------------------------------------------------------
+   Premium BPL Player Card
+   - Glass UI
+   - Hover animation
+   - Responsive image
+   - Stats footer
+========================================================= */
+
+.player-card {
+  position: relative;
+
+  overflow: hidden;
+
+  background: var(--card-bg);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 20px;
+
+  transition: all 0.3s ease;
+
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-6px);
+
+    border-color: var(--skin-color);
+
+    box-shadow: 0 12px 30px
+      color-mix(
+        in srgb,
+        var(--skin-color) 18%,
+        transparent
+      );
+  }
+}
+
+/* =========================================================
+   PLAYER IMAGE
+========================================================= */
+
+.player-image {
+  position: relative;
+
+  width: 100%;
+  height: 280px;
+
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.4s ease;
+  }
+}
+
+.player-card:hover .player-image img {
+  transform: scale(1.05);
+}
+
+/* =========================================================
+   PLAYER CONTENT
+========================================================= */
+
+.player-content {
+  padding: 18px;
+}
+
+.player-role {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  background: color-mix(
+    in srgb,
+    var(--skin-color) 15%,
+    transparent
+  );
+
+  color: var(--skin-color);
+}
+
+.player-content h3 {
+  margin-top: 12px;
+
+  font-size: 18px;
+  font-weight: 800;
+
+  color: var(--text);
+}
+
+.player-content p {
+  margin-top: 6px;
+
+  font-size: 14px;
+
+  color: var(--muted);
+}
+
+/* =========================================================
+   PLAYER STATS FOOTER
+========================================================= */
+
+.player-overlay {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.player-overlay div {
+  padding: 14px 10px;
+
+  text-align: center;
+}
+
+.player-overlay strong {
+  display: block;
+
+  font-size: 18px;
+  font-weight: 800;
+
+  color: var(--skin-color);
+}
+
+.player-overlay span {
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 12px;
+
+  color: var(--muted);
+}
+
+/* =========================================================
+   XXL BREAKPOINT (>= 1400px)
+========================================================= */
+
+@include xxl {
+  .player-image {
+    height: 300px;
+  }
+
+  .player-content h3 {
+    font-size: 20px;
+  }
+}
+
+/* =========================================================
+   XL BREAKPOINT (<= 1200px)
+========================================================= */
+
+@include xl {
+  .player-image {
+    height: 260px;
+  }
+}
+
+/* =========================================================
+   LG BREAKPOINT (<= 992px)
+========================================================= */
+
+@include lg {
+  .player-image {
+    height: 240px;
+  }
+
+  .player-content h3 {
+    font-size: 17px;
+  }
+}
+
+/* =========================================================
+   MD BREAKPOINT (<= 768px)
+========================================================= */
+
+@include md {
+  .player-image {
+    height: 260px;
+  }
+
+  .player-content {
+    padding: 16px;
+  }
+}
+
+/* =========================================================
+   SM BREAKPOINT (<= 576px)
+========================================================= */
+
+@include sm {
+  .player-image {
+    height: 240px;
+  }
+
+  .player-overlay strong {
+    font-size: 16px;
+  }
+}
+
+/* =========================================================
+   XS BREAKPOINT (<= 420px)
+========================================================= */
+
+@include xs {
+  .player-image {
+    height: 220px;
+  }
+
+  .player-content h3 {
+    font-size: 16px;
+  }
+
+  .player-role {
+    font-size: 10px;
+  }
+}
+
+/* =========================================================
+   XXS BREAKPOINT (<= 360px)
+========================================================= */
+
+@include xxs {
+  .player-content {
+    padding: 14px;
+  }
+
+  .player-overlay div {
+    padding: 12px 6px;
+  }
+
+  .player-overlay strong {
+    font-size: 15px;
+  }
+
+  .player-overlay span {
+    font-size: 11px;
+  }
+}

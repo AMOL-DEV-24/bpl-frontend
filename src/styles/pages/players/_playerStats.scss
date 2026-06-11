@@ -1,0 +1,203 @@
+/* =========================================================
+   IMPORTS
+========================================================= */
+@use "../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   PLAYER STATS SECTION
+   ---------------------------------------------------------
+   Features:
+   - Glassmorphism Cards
+   - Theme Aware
+   - Premium Sports Dashboard UI
+   - Responsive Grid System
+========================================================= */
+
+.player-stats-section {
+  position: relative;
+
+  padding: 40px 0;
+}
+
+/* =========================================================
+   STATS GRID
+========================================================= */
+
+.player-stats-section .stats-grid {
+  display: grid;
+
+  grid-template-columns: repeat(5, 1fr);
+
+  gap: 20px;
+}
+
+/* =========================================================
+   STAT CARD
+========================================================= */
+
+.player-stats-section .stat-card {
+  position: relative;
+
+  padding: 24px 20px;
+
+  text-align: center;
+
+  border-radius: 18px;
+
+  background: color-mix(
+    in srgb,
+    var(--card-bg) 85%,
+    transparent
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(10px);
+
+  transition: all 0.3s ease;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-6px);
+
+    border-color: var(--skin-color);
+
+    box-shadow: 0 12px 30px
+      color-mix(
+        in srgb,
+        var(--skin-color) 18%,
+        transparent
+      );
+  }
+}
+
+.player-stats-section .stat-card h3 {
+  font-size: 32px;
+  font-weight: 900;
+
+  color: var(--skin-color);
+}
+
+.player-stats-section .stat-card p {
+  margin-top: 8px;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  color: var(--muted);
+}
+
+/* =========================================================
+   XXL BREAKPOINT (>= 1400px)
+========================================================= */
+
+@include xxl {
+  .player-stats-section .stats-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .player-stats-section .stat-card h3 {
+    font-size: 34px;
+  }
+}
+
+/* =========================================================
+   XL BREAKPOINT (<= 1200px)
+========================================================= */
+
+@include xl {
+  .player-stats-section .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* =========================================================
+   LG BREAKPOINT (<= 992px)
+========================================================= */
+
+@include lg {
+  .player-stats-section .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .player-stats-section .stat-card {
+    padding: 22px 18px;
+  }
+
+  .player-stats-section .stat-card h3 {
+    font-size: 30px;
+  }
+}
+
+/* =========================================================
+   MD BREAKPOINT (<= 768px)
+========================================================= */
+
+@include md {
+  .player-stats-section .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 16px;
+  }
+
+  .player-stats-section .stat-card {
+    padding: 20px 16px;
+  }
+
+  .player-stats-section .stat-card h3 {
+    font-size: 28px;
+  }
+}
+
+/* =========================================================
+   SM BREAKPOINT (<= 576px)
+========================================================= */
+
+@include sm {
+  .player-stats-section .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .player-stats-section {
+    padding: 30px 0;
+  }
+}
+
+/* =========================================================
+   XS BREAKPOINT (<= 420px)
+========================================================= */
+
+@include xs {
+  .player-stats-section .stat-card {
+    padding: 18px 14px;
+  }
+
+  .player-stats-section .stat-card h3 {
+    font-size: 26px;
+  }
+
+  .player-stats-section .stat-card p {
+    font-size: 13px;
+  }
+}
+
+/* =========================================================
+   XXS BREAKPOINT (<= 360px)
+========================================================= */
+
+@include xxs {
+  .player-stats-section .stat-card {
+    padding: 16px 12px;
+  }
+
+  .player-stats-section .stat-card h3 {
+    font-size: 24px;
+  }
+
+  .player-stats-section .stat-card p {
+    font-size: 12px;
+  }
+}
