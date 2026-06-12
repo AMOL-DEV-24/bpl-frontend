@@ -28,8 +28,8 @@ export default function useTheme(): ThemeHook {
   });
 
   const [color, setColorState] = useState<ColorType>(() => {
-    if (typeof window === "undefined") return "blue";
-    return (localStorage.getItem("color") as ColorType) ?? "blue";
+    if (typeof window === "undefined") return "red";
+    return (localStorage.getItem("color") as ColorType) ?? "red";
   });
 
   /* ================= SYNC DOM ON CHANGE ================= */
@@ -56,7 +56,7 @@ export default function useTheme(): ThemeHook {
 
   const resetTheme = () => {
     setThemeState("dark");
-    setColorState("blue");
+    setColorState("red");
     localStorage.removeItem("theme");
     localStorage.removeItem("color");
   };
