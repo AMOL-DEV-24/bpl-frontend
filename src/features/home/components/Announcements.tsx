@@ -1,46 +1,64 @@
 export default function Announcements() {
   return (
-    <section className="announcements-section">
+    <section className="announcements-wrapper">
 
-      <div className="announcement-badge">
-        🔥 BPL OFFICIAL
+      <div className="section-title">
+        <h2>Announcements</h2>
+
+        <p>
+          Latest updates from Bhalawani Premier League
+        </p>
       </div>
 
-      <div className="announcement-marquee">
+      <section className="announcements-section">
 
-        <div className="announcement-track">
+        <div className="announcement-badge">
+          🔥 BPL OFFICIAL
+        </div>
 
-          <span className="announcement-item">
-            📢 Player Registration Closes on 13 June 2026
-          </span>
+        <div className="announcement-marquee">
 
-          <span className="announcement-separator">•</span>
+          <div className="announcement-track">
 
-          <span className="announcement-item">
-            🏏 Bhalawani Premier League Season 2026 Coming Soon
-          </span>
+            <span className="announcement-item">
+              📢 Player Registration Closes on 13 June 2026
+            </span>
 
-          <span className="announcement-separator">•</span>
+            <span className="announcement-separator">•</span>
 
-          <span className="announcement-item">
-            💰 Official Auction Date Will Be Announced Shortly
-          </span>
+            <span className="announcement-item">
+              🚧 This Website Is Currently Under Development
+            </span>
 
-          <span className="announcement-separator">•</span>
+            <span className="announcement-separator">•</span>
 
-          <span className="announcement-item">
-            👥 Team Owners & Management Meeting Updates Available Soon
-          </span>
+            <span className="announcement-item">
+              🏏 Bhalawani Premier League Season 2026 Coming Soon
+            </span>
 
-          <span className="announcement-separator">•</span>
+            <span className="announcement-separator">•</span>
 
-          <span className="announcement-item">
-            🎯 Register Now Before Player Registration Window Closes
-          </span>
+            <span className="announcement-item">
+              💰 Official Auction Date Will Be Announced Shortly
+            </span>
+
+            <span className="announcement-separator">•</span>
+
+            <span className="announcement-item">
+              👥 Team Owners & Management Meeting Updates Available Soon
+            </span>
+
+            <span className="announcement-separator">•</span>
+
+            <span className="announcement-item">
+              🎯 Register Now Before Registration Closes
+            </span>
+
+          </div>
 
         </div>
 
-      </div>
+      </section>
 
     </section>
   );

@@ -4,7 +4,40 @@
 @use "../../abstracts/breakpoints" as *;
 
 /* =========================================================
-   BPL OFFICIAL ANNOUNCEMENT TICKER
+   ANNOUNCEMENT WRAPPER
+========================================================= */
+
+.announcements-wrapper {
+  padding: 80px 0;
+}
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.section-title {
+  text-align: center;
+
+  margin-bottom: 30px;
+
+  h2 {
+    font-size: 42px;
+    font-weight: 900;
+
+    color: var(--text);
+  }
+
+  p {
+    margin-top: 10px;
+
+    font-size: 15px;
+
+    color: var(--muted);
+  }
+}
+
+/* =========================================================
+   ANNOUNCEMENT SECTION
 ========================================================= */
 
 .announcements-section {
@@ -14,37 +47,46 @@
 
   overflow: hidden;
 
-  margin: 30px 0;
-
-  border-radius: 14px;
+  border-radius: 18px;
 
   background: var(--card-bg);
 
   border: 1px solid rgba(255, 255, 255, 0.08);
 
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 12px 35px
+      color-mix(
+        in srgb,
+        var(--skin-color) 10%,
+        transparent
+      );
 }
 
 /* =========================================================
-   LEFT BADGE
+   BADGE
 ========================================================= */
 
 .announcement-badge {
   flex-shrink: 0;
 
-  padding: 16px 24px;
+  padding: 18px 24px;
 
-  font-size: 13px;
-
+  font-size: 14px;
   font-weight: 800;
 
   letter-spacing: 1px;
 
   color: #fff;
 
-  background: var(--skin-color);
-
-  text-transform: uppercase;
+  background: linear-gradient(
+    135deg,
+    var(--skin-color),
+    color-mix(
+      in srgb,
+      var(--skin-color) 70%,
+      black
+    )
+  );
 }
 
 /* =========================================================
@@ -52,53 +94,76 @@
 ========================================================= */
 
 .announcement-marquee {
+  flex: 1;
+
   overflow: hidden;
 
-  width: 100%;
-
-  padding: 14px 0;
+  padding: 0 20px;
 }
 
+/* =========================================================
+   TRACK
+========================================================= */
+
 .announcement-track {
-  display: flex;
+  display: inline-flex;
 
   align-items: center;
 
-  gap: 20px;
+  gap: 18px;
 
-  width: max-content;
-
-  animation: ticker 30s linear infinite;
-}
-
-.announcement-item {
   white-space: nowrap;
 
-  font-size: 14px;
+  min-width: max-content;
+
+  animation:
+    announcement-scroll
+    30s
+    linear
+    infinite;
+}
+
+/* =========================================================
+   ITEMS
+========================================================= */
+
+.announcement-item {
+  font-size: 15px;
 
   font-weight: 600;
 
-  color: var(--skin-color);
+  color: var(--text);
 }
 
 .announcement-separator {
   color: var(--skin-color);
 
-  font-size: 18px;
+  font-size: 20px;
 
   font-weight: 900;
 }
 
 /* =========================================================
-   ANIMATION
+   HOVER PAUSE
 ========================================================= */
 
-@keyframes ticker {
-  from {
-    transform: translateX(100%);
+.announcements-section:hover
+.announcement-track {
+  animation-play-state: paused;
+}
+
+/* =========================================================
+   ANIMATION
+   Starts near right side immediately
+========================================================= */
+
+@keyframes announcement-scroll {
+
+  0% {
+    transform: translateX(15%);
   }
 
-  to {
+  100% {
     transform: translateX(-100%);
   }
 }
@@ -106,46 +171,68 @@
 /* =========================================================
    XXL (>= 1400px)
 ========================================================= */
+
 @include xxl {
-  .announcement-item {
-    font-size: 15px;
+  .section-title h2 {
+    font-size: 46px;
   }
 }
 
 /* =========================================================
    XL (<= 1200px)
 ========================================================= */
+
 @include xl {
+  .section-title h2 {
+    font-size: 40px;
+  }
 }
 
 /* =========================================================
    LG (<= 992px)
 ========================================================= */
+
 @include lg {
-  .announcement-badge {
-    padding: 14px 18px;
+  .section-title h2 {
+    font-size: 36px;
+  }
+
+  .announcement-item {
+    font-size: 14px;
   }
 }
 
 /* =========================================================
    MD (<= 768px)
 ========================================================= */
-@include md {
-  .announcement-badge {
-    font-size: 12px;
 
-    padding: 12px 16px;
+@include md {
+
+  .announcements-wrapper {
+    padding: 60px 0;
   }
 
-  .announcement-item {
-    font-size: 13px;
+  .section-title h2 {
+    font-size: 32px;
+  }
+
+  .announcement-badge {
+    padding: 15px 18px;
+
+    font-size: 12px;
+  }
+
+  .announcement-track {
+    animation-duration: 25s;
   }
 }
 
 /* =========================================================
    SM (<= 576px)
 ========================================================= */
+
 @include sm {
+
   .announcements-section {
     flex-direction: column;
   }
@@ -157,14 +244,34 @@
   }
 
   .announcement-marquee {
-    padding: 12px 0;
+    width: 100%;
+
+    padding: 12px;
+  }
+
+  .announcement-item {
+    font-size: 13px;
+  }
+
+  .announcement-track {
+    animation-duration: 22s;
   }
 }
 
 /* =========================================================
    XS (<= 420px)
 ========================================================= */
+
 @include xs {
+
+  .section-title h2 {
+    font-size: 26px;
+  }
+
+  .section-title p {
+    font-size: 13px;
+  }
+
   .announcement-item {
     font-size: 12px;
   }
@@ -173,7 +280,17 @@
 /* =========================================================
    XXS (<= 360px)
 ========================================================= */
+
 @include xxs {
+
+  .section-title h2 {
+    font-size: 22px;
+  }
+
+  .announcement-item {
+    font-size: 11px;
+  }
+
   .announcement-badge {
     font-size: 11px;
   }
