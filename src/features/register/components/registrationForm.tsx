@@ -313,7 +313,7 @@ export default function PlayerRegistrationForm() {
           >
             {formik.isSubmitting
               ? stepMessage || "Processing…"
-              : "Register & Pay ₹1"}
+              : "Register & Pay ₹150"}
           </button>
 
         </form>
