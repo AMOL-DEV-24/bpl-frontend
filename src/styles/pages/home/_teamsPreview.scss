@@ -1,176 +1,267 @@
 /* =========================================================
    IMPORTS
-   ---------------------------------------------------------
-   - Breakpoints system for responsive design
 ========================================================= */
 @use "../../abstracts/breakpoints" as *;
 
 /* =========================================================
    TEAMS PREVIEW SECTION
-   =========================================================
-   STYLE:
-   - IPL-style team showcase
-   - Glass cards + hover glow
-   - Responsive grid layout
+   ---------------------------------------------------------
+   Features:
+   - Premium Sports UI
+   - Team Logo Showcase
+   - Theme Aware
+   - Hover Effects
+   - Fully Responsive
 ========================================================= */
 
 .teams-preview {
-  position: relative;
-  padding: 70px 0;
+  padding: 80px 0;
+}
 
-  /* ✅ Theme aware background */
-  background: var(--bg);
-  color: var(--text);
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.section-heading {
+  text-align: center;
+
+  margin-bottom: 50px;
+
+  h2 {
+    font-size: 42px;
+    font-weight: 900;
+
+    color: var(--text);
+  }
+
+  p {
+    margin-top: 12px;
+
+    font-size: 15px;
+
+    color: var(--muted);
+
+    max-width: 650px;
+
+    margin-inline: auto;
+  }
+}
+
+/* =========================================================
+   TEAMS GRID
+========================================================= */
+
+.teams-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 24px;
+}
+
+/* =========================================================
+   TEAM CARD
+========================================================= */
+
+.team-card {
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  background: var(--card-bg);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
 
   transition: all 0.3s ease;
 
-  /* =========================================================
-     SECTION HEADING
-  ========================================================= */
+  backdrop-filter: blur(12px);
 
-  .section-heading {
-    text-align: center;
-    margin-bottom: 40px;
+  &:hover {
+    transform: translateY(-8px);
 
-    h2 {
-      font-size: 28px;
-      font-weight: 800;
-      color: var(--text);
-      letter-spacing: 1px;
-    }
+    border-color: var(--skin-color);
+
+    box-shadow: 0 16px 40px
+      color-mix(
+        in srgb,
+        var(--skin-color) 15%,
+        transparent
+      );
+  }
+}
+
+/* =========================================================
+   TEAM IMAGE
+========================================================= */
+
+.team-image {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 1 / 1;
+
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.team-img {
+  object-fit: contain;
+
+  padding: 20px;
+
+  transition: transform 0.4s ease;
+}
+
+.team-card:hover .team-img {
+  transform: scale(1.08);
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.team-content {
+  padding: 18px;
+}
+
+.team-content h3 {
+  text-align: center;
+
+  font-size: 18px;
+
+  font-weight: 800;
+
+  color: var(--text);
+}
+
+/* =========================================================
+   XXL (>= 1400px)
+========================================================= */
+
+@include xxl {
+  .teams-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* =========================================================
+   XL (<= 1200px)
+========================================================= */
+
+@include xl {
+  .teams-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 
-  /* =========================================================
-     GRID LAYOUT
-  ========================================================= */
+  .section-heading h2 {
+    font-size: 38px;
+  }
+}
+
+/* =========================================================
+   LG (<= 992px)
+========================================================= */
+
+@include lg {
+  .teams-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section-heading h2 {
+    font-size: 34px;
+  }
+}
+
+/* =========================================================
+   MD (<= 768px)
+========================================================= */
+
+@include md {
+  .teams-preview {
+    padding: 60px 0;
+  }
 
   .teams-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
   }
 
-  /* =========================================================
-     TEAM CARD
-  ========================================================= */
+  .section-heading {
+    margin-bottom: 40px;
+  }
+
+  .section-heading h2 {
+    font-size: 30px;
+  }
+}
+
+/* =========================================================
+   SM (<= 576px)
+========================================================= */
+
+@include sm {
+  .teams-grid {
+    grid-template-columns: 1fr;
+  }
 
   .team-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    max-width: 420px;
 
-    padding: 26px 18px;
-    border-radius: 18px;
+    margin-inline: auto;
 
-    text-align: center;
-
-    /* Glass effect (works in light + dark) */
-    background: color-mix(in srgb, var(--bg) 85%, transparent);
-    border: 1px solid color-mix(in srgb, var(--skin-color) 12%, transparent);
-
-    backdrop-filter: blur(12px);
-
-    cursor: pointer;
-
-    transition: all 0.3s ease;
-
-    /* Hover effect */
-    &:hover {
-      transform: translateY(-8px);
-      border-color: var(--skin-color);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
-    }
-
-    /* TEAM ICON */
-    .team-logo {
-      font-size: 34px;
-      margin-bottom: 12px;
-
-      filter: drop-shadow(0 0 10px var(--skin-color));
-    }
-
-    /* TEAM NAME */
-    h3 {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--skin-color);
-      letter-spacing: 0.5px;
-    }
+    width: 100%;
   }
 
-  /* =========================================================
-     RESPONSIVE DESIGN
-  ========================================================= */
+  .section-heading h2 {
+    font-size: 28px;
+  }
+}
 
-  /* ================= XXL ================= */
-  @include xxl {
-    .team-card {
-      padding: 28px 20px;
-    }
+/* =========================================================
+   XS (<= 420px)
+========================================================= */
+
+@include xs {
+  .team-content {
+    padding: 14px;
   }
 
-  /* ================= XL ================= */
-  @include xl {
-    .teams-grid {
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-    }
+  .team-content h3 {
+    font-size: 16px;
   }
 
-  /* ================= LG ================= */
-  @include lg {
-    .teams-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .team-card h3 {
-      font-size: 15px;
-    }
+  .section-heading h2 {
+    font-size: 24px;
   }
 
-  /* ================= MD ================= */
-  @include md {
-    .section-heading h2 {
-      font-size: 24px;
-    }
+  .section-heading p {
+    font-size: 14px;
+  }
+}
 
-    .team-card {
-      padding: 24px 16px;
-    }
+/* =========================================================
+   XXS (<= 360px)
+========================================================= */
+
+@include xxs {
+  .teams-preview {
+    padding: 40px 0;
   }
 
-  /* ================= SM ================= */
-  @include sm {
-    .teams-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-
-    .team-card .team-logo {
-      font-size: 30px;
-    }
+  .team-card {
+    border-radius: 16px;
   }
 
-  /* ================= XS ================= */
-  @include xs {
-    .teams-grid {
-      grid-template-columns: repeat(1, 1fr);
-    }
-
-    .team-card {
-      padding: 22px 14px;
-    }
+  .team-content h3 {
+    font-size: 15px;
   }
 
-  /* ================= XXS ================= */
-  @include xxs {
-    .section-heading h2 {
-      font-size: 22px;
-    }
+  .section-heading h2 {
+    font-size: 22px;
+  }
 
-    .team-card h3 {
-      font-size: 14px;
-    }
+  .section-heading p {
+    font-size: 13px;
   }
 }
