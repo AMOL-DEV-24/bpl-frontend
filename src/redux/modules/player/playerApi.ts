@@ -1,43 +1,41 @@
 import { baseApi } from "../../api/baseApi";
+import type { PlayersApiResponse, PlayerRole } from "@/features/players/types";
 
-export interface RegisterPlayerRequest {
-  firstName: string;
-  lastName: string;
-  email: string;
-  mobile: string;
-  village: string;
-  age: number;
-  jerseyNumber: number;
-  role: string;
-  battingStyle: string;
-  bowlingStyle: string;
-  experience: number;
-  stats: {
-    matches: number;
-    runs: number;
-    wickets: number;
-    strikeRate: number;
-    economy: number;
-    catches: number;
-  };
-  imageUrl: string;
-  orderId: string;
-  about: string;
+export interface GetPlayersParams {
+  page?: number;
+  limit?: number;
+  role?: PlayerRole | "ALL";
 }
 
 export const playerApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
 
-    registerPlayer: builder.mutation<void, RegisterPlayerRequest>({
-      query: (body) => ({
-        url: "/player/register",
-        method: "POST",
-        body,
-      }),
-      invalidatesTags: ["Player"],
+    getPlayers: builder.query<PlayersApiResponse, GetPlayersParams>({
+      query: ({ page = 1, limit = 50, role }) => {
+        const params: Record<string, string | number> = { page, limit };
+
+        if (role && role !== "ALL") {
+          params.role = role;
+        }
+
+        return {
+          url: "/player/all",   // ← was "/players"
+          params,
+        };
+      },
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.data.map(({ _id }) => ({
+                type: "Player" as const,
+                id: _id,
+              })),
+              { type: "Player", id: "LIST" },
+            ]
+          : [{ type: "Player", id: "LIST" }],
     }),
 
   }),
 });
 
-export const { useRegisterPlayerMutation } = playerApi;
+export const { useGetPlayersQuery } = playerApi;

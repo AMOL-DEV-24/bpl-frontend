@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { usePayment } from "@/redux/modules/payment/usePayment";
-import { usePlayerRegistration } from "@/redux/modules/player/usePlayerRegistration";
+import { usePlayerRegistration } from "@/redux/modules/register/usePlayerRegistration";
 
 /* =========================================================
    RAZORPAY TYPES

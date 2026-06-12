@@ -1,203 +1,144 @@
 /* =========================================================
-   IMPORTS
-========================================================= */
+   PLAYER STATS
+   Scope   : .player-stats
+   Purpose : Horizontal summary bar showing total player
+             count and per-role breakdown as stat pills.
+   ========================================================= */
+
 @use "../../abstracts/breakpoints" as *;
 
 /* =========================================================
    PLAYER STATS SECTION
-   ---------------------------------------------------------
-   Features:
-   - Glassmorphism Cards
-   - Theme Aware
-   - Premium Sports Dashboard UI
-   - Responsive Grid System
-========================================================= */
-
-.player-stats-section {
-  position: relative;
-
-  padding: 40px 0;
+   Outer wrapper with top/bottom spacing.
+   ========================================================= */
+.player-stats {
+  padding: 28px 0 0;
 }
 
 /* =========================================================
-   STATS GRID
-========================================================= */
-
-.player-stats-section .stats-grid {
-  display: grid;
-
-  grid-template-columns: repeat(5, 1fr);
-
-  gap: 20px;
+   PLAYER STATS LIST
+   Horizontal flex row of stat pill items.
+   Resets default UL styles.
+   ========================================================= */
+.player-stats-list {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
 }
 
 /* =========================================================
-   STAT CARD
-========================================================= */
-
-.player-stats-section .stat-card {
-  position: relative;
-
-  padding: 24px 20px;
-
-  text-align: center;
-
-  border-radius: 18px;
-
-  background: color-mix(
-    in srgb,
-    var(--card-bg) 85%,
-    transparent
-  );
-
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
-  backdrop-filter: blur(10px);
-
-  transition: all 0.3s ease;
-
-  cursor: pointer;
-
-  overflow: hidden;
+   PLAYER STATS ITEM
+   Individual stat pill — glass surface, centered content.
+   ========================================================= */
+.player-stats-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  flex: 1;
+  min-width: 90px;
+  padding: 14px 12px;
+  border-radius: 12px;
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(8px);
+  transition: border-color 0.2s ease, transform 0.2s ease;
 
   &:hover {
-    transform: translateY(-6px);
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
 
-    border-color: var(--skin-color);
+  /* Accent variant — Total Players pill */
+  &--accent {
+    border-color: rgba(var(--skin-color-rgb, 0, 245, 255), 0.25);
+    background: linear-gradient(
+      135deg,
+      rgba(var(--skin-color-rgb, 0, 245, 255), 0.08),
+      var(--card-bg)
+    );
 
-    box-shadow: 0 12px 30px
-      color-mix(
-        in srgb,
-        var(--skin-color) 18%,
-        transparent
-      );
+    .player-stats-item-value {
+      color: var(--skin-color);
+    }
   }
 }
 
-.player-stats-section .stat-card h3 {
-  font-size: 32px;
-  font-weight: 900;
-
-  color: var(--skin-color);
+/* =========================================================
+   PLAYER STATS ITEM VALUE
+   Large bold number — the stat count.
+   ========================================================= */
+.player-stats-item-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
 }
 
-.player-stats-section .stat-card p {
-  margin-top: 8px;
-
-  font-size: 14px;
-  font-weight: 500;
-
+/* =========================================================
+   PLAYER STATS ITEM LABEL
+   Small muted descriptor below the number.
+   ========================================================= */
+.player-stats-item-label {
+  font-size: 0.68rem;
+  font-weight: 600;
   color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  text-align: center;
 }
 
 /* =========================================================
-   XXL BREAKPOINT (>= 1400px)
-========================================================= */
+   RESPONSIVE — PLAYER STATS
+   ========================================================= */
 
-@include xxl {
-  .player-stats-section .stats-grid {
-    grid-template-columns: repeat(5, 1fr);
-  }
-
-  .player-stats-section .stat-card h3 {
-    font-size: 34px;
-  }
-}
-
-/* =========================================================
-   XL BREAKPOINT (<= 1200px)
-========================================================= */
-
-@include xl {
-  .player-stats-section .stats-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* =========================================================
-   LG BREAKPOINT (<= 992px)
-========================================================= */
-
-@include lg {
-  .player-stats-section .stats-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .player-stats-section .stat-card {
-    padding: 22px 18px;
-  }
-
-  .player-stats-section .stat-card h3 {
-    font-size: 30px;
-  }
-}
-
-/* =========================================================
-   MD BREAKPOINT (<= 768px)
-========================================================= */
-
+/* =======================================================
+   MD (<= 768px)
+   ======================================================= */
 @include md {
-  .player-stats-section .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-
-    gap: 16px;
+  .player-stats-list {
+    gap: 10px;
   }
 
-  .player-stats-section .stat-card {
-    padding: 20px 16px;
+  .player-stats-item {
+    min-width: 80px;
+    padding: 12px 10px;
   }
 
-  .player-stats-section .stat-card h3 {
-    font-size: 28px;
+  .player-stats-item-value {
+    font-size: 1.3rem;
   }
 }
 
-/* =========================================================
-   SM BREAKPOINT (<= 576px)
-========================================================= */
-
+/* =======================================================
+   SM (<= 576px)
+   ======================================================= */
 @include sm {
-  .player-stats-section .stats-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .player-stats-section {
-    padding: 30px 0;
+  /* 3 pills per row on small phones */
+  .player-stats-item {
+    min-width: calc(33.33% - 8px);
+    flex: unset;
   }
 }
 
-/* =========================================================
-   XS BREAKPOINT (<= 420px)
-========================================================= */
-
-@include xs {
-  .player-stats-section .stat-card {
-    padding: 18px 14px;
-  }
-
-  .player-stats-section .stat-card h3 {
-    font-size: 26px;
-  }
-
-  .player-stats-section .stat-card p {
-    font-size: 13px;
-  }
-}
-
-/* =========================================================
-   XXS BREAKPOINT (<= 360px)
-========================================================= */
-
+/* =======================================================
+   XXS (<= 360px)
+   ======================================================= */
 @include xxs {
-  .player-stats-section .stat-card {
-    padding: 16px 12px;
+  .player-stats-item {
+    padding: 10px 8px;
   }
 
-  .player-stats-section .stat-card h3 {
-    font-size: 24px;
+  .player-stats-item-value {
+    font-size: 1.1rem;
   }
 
-  .player-stats-section .stat-card p {
-    font-size: 12px;
+  .player-stats-item-label {
+    font-size: 0.62rem;
   }
 }

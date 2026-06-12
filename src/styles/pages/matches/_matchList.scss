@@ -1,230 +1,161 @@
 /* =========================================================
-   MATCHES PAGE (PREMIUM SPORTS UI SYSTEM)
-   =========================================================
-   DESIGN STYLE:
-   - Glassmorphism cards
-   - Stadium dark/light theme support
-   - Neon accent system
-   - Responsive grid layout
-========================================================= */
+   MATCH LIST
+   Scope   : .match-list, .match-list-grid
+   Purpose : Section wrapper and responsive grid layout
+             for all match cards on the matches page.
+   ========================================================= */
 
 @use "../../abstracts/breakpoints" as *;
 
-.matches-page {
-  min-height: 100vh;
-
-  background: var(--bg);
-  color: var(--text);
-
-  padding-bottom: 80px;
+/* =========================================================
+   MATCH LIST SECTION
+   Outer section with bottom padding for page breathing room.
+   ========================================================= */
+.match-list {
+  padding-bottom: 72px;
 }
 
 /* =========================================================
-   PAGE HEADER
-========================================================= */
-
-.page-header {
-  padding: 60px 0 30px;
-  text-align: center;
-
-  h1 {
-    font-size: 42px;
-    font-weight: 900;
-    color: var(--text);
-  }
-
-  p {
-    margin-top: 8px;
-    color: var(--muted);
-    font-size: 15px;
-  }
+   MATCH LIST CONTAINER
+   Max-width centered wrapper.
+   ========================================================= */
+.match-list-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 /* =========================================================
-   LIVE SCORE SECTION
-========================================================= */
-
-.live-score {
-  padding: 40px 0;
-}
-
-/* =========================================================
-   LIVE SCORE CARD
-========================================================= */
-
-.live-score-card {
+   MATCH LIST HEADER
+   Row containing section title and match count badge.
+   ========================================================= */
+.match-list-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  padding: 26px;
-  border-radius: 18px;
-
-  background: var(--card-bg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
-  backdrop-filter: blur(14px);
-
-  transition: 0.3s ease;
-
-  &:hover {
-    transform: translateY(-4px);
-    border-color: var(--skin-color);
-  }
+  margin-bottom: 20px;
 }
 
-/* LIVE BADGE */
-.live-badge {
-  color: #ff3b3b;
-  font-weight: 800;
-  font-size: 12px;
-
-  padding: 6px 12px;
-  border-radius: 999px;
-
-  background: rgba(255, 59, 59, 0.1);
-  border: 1px solid rgba(255, 59, 59, 0.3);
+/* =========================================================
+   MATCH LIST TITLE
+   Section heading — "Upcoming Fixtures" etc.
+   ========================================================= */
+.match-list-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+  letter-spacing: 0.02em;
 }
 
-/* TEAM BLOCK */
-.team-block {
-  text-align: center;
-
-  h3 {
-    font-size: 18px;
-    margin-bottom: 6px;
-  }
-
-  span {
-    font-size: 14px;
-    color: var(--muted);
-  }
-}
-
-/* VS TEXT */
-.vs {
-  font-size: 28px;
-  font-weight: 900;
+/* =========================================================
+   MATCH LIST COUNT
+   Small pill badge showing total match count.
+   ========================================================= */
+.match-list-count {
+  font-size: 0.75rem;
+  font-weight: 600;
   color: var(--skin-color);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px 12px;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
 }
 
 /* =========================================================
    MATCH LIST GRID
-========================================================= */
-
-.match-list {
-  padding-top: 20px;
-}
-
-.match-grid {
+   3-column responsive grid. Uses <ul> for semantics,
+   resets default list styling.
+   ========================================================= */
+.match-list-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 /* =========================================================
-   MATCH CARD
-========================================================= */
-
-.match-card {
-  padding: 22px;
-  border-radius: 16px;
-
-  background: var(--card-bg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
-  transition: 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-    border-color: var(--skin-color);
-  }
-
-  h3 {
-    margin: 14px 0;
-    font-size: 18px;
-  }
-
-  p {
-    margin-bottom: 8px;
-    color: var(--muted);
-    font-size: 14px;
-  }
-}
-
-/* STATUS BADGE */
-.match-status {
-  display: inline-block;
-
-  padding: 6px 12px;
-  border-radius: 999px;
-
-  font-size: 12px;
-  font-weight: 600;
-
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--skin-color);
+   MATCH LIST ITEM
+   Individual grid cell wrapping a MatchCard.
+   ========================================================= */
+.match-list-item {
+  display: flex;
+  flex-direction: column;
 }
 
 /* =========================================================
-   RESPONSIVE SYSTEM
-========================================================= */
+   RESPONSIVE — MATCH LIST
+   ========================================================= */
 
-/* 1400px */
+/* ======================================================= 
+   XXL (<= 1400px) 
+   ======================================================= */
 @include xxl {
-  .match-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-/* 1200px */
-@include xl {
-  .match-grid {
+  /* 3 columns maintained at xxl */
+  .match-list-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* 992px */
+/* ======================================================= 
+   XL (<= 1200px) 
+   ======================================================= */
+@include xl {
+  /* 3 columns maintained at xl */
+  .match-list-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ======================================================= 
+   LG (<= 992px) 
+   ======================================================= */
 @include lg {
-  .match-grid {
+  /* Drop to 2 columns on smaller desktops / large tablets */
+  .match-list-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  .vs {
-    font-size: 24px;
-  }
 }
 
-/* 768px */
+/* ======================================================= 
+   MD (<= 768px) 
+   ======================================================= */
 @include md {
-  .live-score-card {
-    flex-direction: column;
-    gap: 18px;
-    text-align: center;
-  }
-
-  .match-grid {
+  /* Single column on tablets */
+  .match-list-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .match-list-header {
+    margin-bottom: 16px;
   }
 }
 
-/* 576px */
+/* ======================================================= 
+   SM (<= 576px) 
+   ======================================================= */
 @include sm {
-  .page-header h1 {
-    font-size: 32px;
+  /* Reduce bottom padding on small phones */
+  .match-list {
+    padding-bottom: 48px;
   }
 }
 
-/* 420px */
-@include xs {
-  .match-card {
-    padding: 18px;
-  }
-}
-
-/* 360px */
+/* ======================================================= 
+   XXS (<= 360px) 
+   ======================================================= */
 @include xxs {
-  .page-header h1 {
-    font-size: 28px;
+  /* Tighten gap on very small screens */
+  .match-list-grid {
+    gap: 12px;
+  }
+
+  .match-list-title {
+    font-size: 1rem;
   }
 }

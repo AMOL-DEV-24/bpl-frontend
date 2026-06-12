@@ -1,287 +1,353 @@
 /* =========================================================
    IMPORTS
+   ---------------------------------------------------------
+   Abstracts only (no generated CSS)
 ========================================================= */
 @use "../../abstracts/breakpoints" as *;
 
 /* =========================================================
-   BPL TEAM BANNERS SECTION
+   BANNERS SECTION
    ---------------------------------------------------------
-   Features:
-   - Professional Sports Poster Gallery
-   - Theme Aware
-   - Full Poster Visibility
-   - Responsive Grid System
-   - Mobile Single Column Layout
+   Scope   : .banners-section
+   Purpose : Team poster showcase
+   Layout  : Premium responsive poster gallery
+
+   Future Safe:
+   ✅ Fully scoped
+   ✅ No global leakage
+   ✅ No shared class names
+   ✅ Responsive
+   ✅ Full poster visibility
 ========================================================= */
 
 .banners-section {
+  position: relative;
+
   padding: 80px 0;
-}
 
-/* =========================================================
-   SECTION TITLE
-========================================================= */
+  background: var(--bg);
+  color: var(--text);
 
-.section-title {
-  text-align: center;
+  /* =======================================================
+     HEADING
+  ======================================================= */
 
-  margin-bottom: 40px;
+  .banners-section-heading {
+    text-align: center;
 
-  h2 {
-    font-size: 42px;
-    font-weight: 900;
+    margin-bottom: 50px;
 
-    color: var(--text);
+    h2 {
+      font-size: 42px;
+      font-weight: 900;
+
+      color: var(--text);
+    }
+
+    p {
+      margin-top: 12px;
+
+      max-width: 650px;
+
+      margin-inline: auto;
+
+      font-size: 15px;
+      line-height: 1.7;
+
+      color: var(--muted);
+    }
   }
 
-  p {
-    margin-top: 10px;
+  /* =======================================================
+     GRID
+     -------------------------------------------------------
+     Keeps consistent spacing from left and right.
+  ======================================================= */
 
-    font-size: 15px;
+  .banners-section-grid {
+    display: grid;
 
-    color: var(--muted);
+    grid-template-columns: repeat(3, 1fr);
 
-    max-width: 650px;
+    gap: 24px;
+
+    max-width: 1100px;
 
     margin-inline: auto;
   }
-}
 
-/* =========================================================
-   BANNERS GRID
-========================================================= */
+  /* =======================================================
+     CARD
+     -------------------------------------------------------
+     Modern sports card
+     Neon accent
+     Glass effect
+  ======================================================= */
 
-.banners-grid {
-  display: grid;
+  .banners-section-card {
+    position: relative;
 
-  grid-template-columns: repeat(4, 1fr);
+    overflow: hidden;
 
-  gap: 24px;
-}
+    border-radius: 22px;
 
-/* =========================================================
-   BANNER CARD
-========================================================= */
+    background: var(--card-bg);
 
-.banner-card {
-  overflow: hidden;
-
-  border-radius: 20px;
-
-  background: var(--card-bg);
-
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-8px);
-
-    border-color: var(--skin-color);
-
-    box-shadow: 0 16px 40px
+    border: 1px solid
       color-mix(
         in srgb,
-        var(--skin-color) 15%,
+        var(--skin-color) 12%,
+        transparent
+      );
+
+    backdrop-filter: blur(12px);
+
+    transition:
+      transform 0.35s ease,
+      border-color 0.35s ease,
+      box-shadow 0.35s ease;
+
+    &::before {
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 3px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          var(--skin-color),
+          transparent
+        );
+
+      z-index: 5;
+    }
+
+    &:hover {
+      transform: translateY(-8px);
+
+      border-color: var(--skin-color);
+
+      box-shadow:
+        0 18px 40px
+        color-mix(
+          in srgb,
+          var(--skin-color) 20%,
+          transparent
+        );
+
+      .banners-section-img {
+        transform: scale(1.03);
+      }
+
+      .banners-section-content h3 {
+        color: var(--skin-color);
+      }
+    }
+  }
+
+  /* =======================================================
+     IMAGE WRAPPER
+     -------------------------------------------------------
+     Full poster visibility
+  ======================================================= */
+
+  .banners-section-image {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 3 / 4;
+
+    overflow: hidden;
+
+    background:
+      linear-gradient(
+        135deg,
+        color-mix(
+          in srgb,
+          var(--skin-color) 8%,
+          transparent
+        ),
         transparent
       );
   }
-}
 
-/* =========================================================
-   IMAGE WRAPPER
-========================================================= */
+  /* =======================================================
+     IMAGE
+     -------------------------------------------------------
+     contain = full poster visible
+     cover   = crops poster
+  ======================================================= */
 
-.banner-image {
-  position: relative;
+  .banners-section-img {
+    object-fit: contain;
 
-  width: 100%;
+    padding: 10px;
 
-  aspect-ratio: 9 / 16;
-
-  background: #111;
-
-  overflow: hidden;
-}
-
-/* =========================================================
-   BANNER IMAGE
-========================================================= */
-
-.banner-img {
-  object-fit: contain;
-
-  padding: 8px;
-
-  transition: transform 0.4s ease;
-}
-
-.banner-card:hover .banner-img {
-  transform: scale(1.03);
-}
-
-/* =========================================================
-   CONTENT
-========================================================= */
-
-.banner-content {
-  padding: 18px;
-}
-
-.banner-content h3 {
-  text-align: center;
-
-  font-size: 16px;
-  font-weight: 700;
-
-  color: var(--skin-color);
-}
-
-/* =========================================================
-   XXL (>= 1400px)
-========================================================= */
-
-@include xxl {
-  .banners-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-/* =========================================================
-   XL (<= 1200px)
-========================================================= */
-
-@include xl {
-  .banners-grid {
-    grid-template-columns: repeat(3, 1fr);
+    transition:
+      transform 0.4s ease,
+      filter 0.4s ease;
   }
 
-  .section-title h2 {
-    font-size: 38px;
+  /* =======================================================
+     CONTENT
+  ======================================================= */
+
+  .banners-section-content {
+    padding: 16px;
+
+    text-align: center;
+
+    h3 {
+      font-size: 16px;
+      font-weight: 800;
+
+      color: var(--text);
+
+      transition: color 0.3s ease;
+    }
   }
-}
 
-/* =========================================================
-   LG (<= 992px)
-========================================================= */
+  /* =======================================================
+     XXL (>= 1400px)
+  ======================================================= */
 
-@include lg {
-  .banners-grid {
-    grid-template-columns: repeat(2, 1fr);
+  @include xxl {
+    .banners-section-heading {
+      h2 {
+        font-size: 46px;
+      }
+    }
   }
 
-  .section-title h2 {
-    font-size: 34px;
+  /* =======================================================
+     XL (<= 1200px)
+  ======================================================= */
+
+  @include xl {
+    .banners-section-grid {
+      max-width: 950px;
+    }
+
+    .banners-section-heading {
+      h2 {
+        font-size: 38px;
+      }
+    }
   }
-}
 
-/* =========================================================
-   MD (<= 768px)
-========================================================= */
+  /* =======================================================
+     LG (<= 992px)
+  ======================================================= */
 
-@include md {
-  .banners-section {
+  @include lg {
+    .banners-section-grid {
+      grid-template-columns: repeat(2, 1fr);
+
+      max-width: 760px;
+    }
+
+    .banners-section-heading {
+      h2 {
+        font-size: 34px;
+      }
+    }
+  }
+
+  /* =======================================================
+     MD (<= 768px)
+  ======================================================= */
+
+  @include md {
     padding: 60px 0;
+
+    .banners-section-grid {
+      gap: 20px;
+    }
+
+    .banners-section-heading {
+      margin-bottom: 40px;
+
+      h2 {
+        font-size: 30px;
+      }
+    }
   }
 
-  .banners-grid {
-    gap: 20px;
+  /* =======================================================
+     SM (<= 576px)
+  ======================================================= */
+
+  @include sm {
+    .banners-section-grid {
+      grid-template-columns: 1fr;
+
+      max-width: 380px;
+    }
+
+    .banners-section-heading {
+      h2 {
+        font-size: 28px;
+      }
+    }
   }
 
-  .section-title {
-    margin-bottom: 32px;
+  /* =======================================================
+     XS (<= 420px)
+  ======================================================= */
+
+  @include xs {
+    .banners-section-heading {
+      h2 {
+        font-size: 24px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
+
+    .banners-section-content {
+      h3 {
+        font-size: 15px;
+      }
+    }
   }
 
-  .section-title h2 {
-    font-size: 30px;
-  }
+  /* =======================================================
+     XXS (<= 360px)
+  ======================================================= */
 
-  .section-title p {
-    font-size: 14px;
-  }
-}
-
-/* =========================================================
-   SM (<= 576px)
-   Mobile Layout
-========================================================= */
-
-@include sm {
-  .banners-grid {
-    grid-template-columns: 1fr;
-
-    gap: 24px;
-  }
-
-  .banner-card {
-    width: 100%;
-
-    max-width: 420px;
-
-    margin-inline: auto;
-  }
-
-  .banner-image {
-    aspect-ratio: 9 / 16;
-  }
-
-  .section-title h2 {
-    font-size: 26px;
-  }
-}
-
-/* =========================================================
-   XS (<= 420px)
-========================================================= */
-
-@include xs {
-  .banner-card {
-    max-width: 100%;
-  }
-
-  .banner-content {
-    padding: 14px;
-  }
-
-  .banner-content h3 {
-    font-size: 14px;
-  }
-
-  .section-title h2 {
-    font-size: 24px;
-  }
-
-  .section-title p {
-    font-size: 13px;
-  }
-}
-
-/* =========================================================
-   XXS (<= 360px)
-========================================================= */
-
-@include xxs {
-  .banners-section {
+  @include xxs {
     padding: 40px 0;
-  }
 
-  .banner-card {
-    border-radius: 16px;
-  }
+    .banners-section-card {
+      border-radius: 18px;
+    }
 
-  .banner-content {
-    padding: 12px;
-  }
+    .banners-section-heading {
+      h2 {
+        font-size: 22px;
+      }
 
-  .banner-content h3 {
-    font-size: 13px;
-  }
+      p {
+        font-size: 13px;
+      }
+    }
 
-  .section-title h2 {
-    font-size: 22px;
-  }
+    .banners-section-content {
+      padding: 14px;
 
-  .section-title p {
-    font-size: 12px;
+      h3 {
+        font-size: 14px;
+      }
+    }
   }
 }

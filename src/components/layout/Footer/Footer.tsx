@@ -1,31 +1,55 @@
+/* =========================================================
+   FOOTER
+   ---------------------------------------------------------
+   Scope   : .footer
+   Purpose : Site footer, quick links & developer credits
+
+   Structure:
+   - footer
+     - footer-content
+       - footer-brand
+       - footer-links
+     - footer-dev
+     - footer-bottom
+========================================================= */
+
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
   return (
     <footer className="footer">
+
       <div className="container">
 
-        <div className="footer__content">
+        {/* ===================================================
+           FOOTER CONTENT
+        =================================================== */}
+        <div className="footer-content">
 
-          {/* Logo + Brand */}
-          <div className="footer__brand">
-            <Image
-              src="/assets/images/hero/bpl-hero-1.png"
-              alt="BPL Logo"
-              width={50}
-              height={50}
-            />
+          {/* BRAND */}
+          <div className="footer-brand">
+
+            <div className="footer-brand-logo">
+              <Image
+                src="/assets/images/hero/bpl-hero-1.png"
+                alt="BPL Logo"
+                width={70}
+                height={70}
+              />
+            </div>
 
             <h3>BPL Official</h3>
 
             <p>
               Official website of Bhalawani Premier League.
             </p>
+
           </div>
 
-          {/* Quick Links */}
-          <div className="footer__links">
+          {/* QUICK LINKS */}
+          <div className="footer-links">
+
             <h4>Quick Links</h4>
 
             <ul>
@@ -34,29 +58,37 @@ export default function Footer() {
               <li>Auction</li>
               <li>Gallery</li>
             </ul>
+
           </div>
 
         </div>
 
-        {/* =========================================================
-           DEVELOPER CREDIT SECTION
-        ========================================================= */}
-        <div className="footer__dev">
+        {/* ===================================================
+           DEVELOPER CREDIT
+        =================================================== */}
+        <div className="footer-dev">
+
           Developed by{" "}
+
           <Link
             href="https://amolpawar.netlify.app/"
             target="_blank"
-            className="footer__devLink"
+            className="footer-dev-link"
           >
             Amol Pawar
           </Link>
+
         </div>
 
-        <div className="footer__bottom">
-          © 2026 BPL Official
+        {/* ===================================================
+           COPYRIGHT
+        =================================================== */}
+        <div className="footer-bottom">
+          © 2026 BPL Official. All Rights Reserved.
         </div>
 
       </div>
+
     </footer>
   );
 }

@@ -1,0 +1,382 @@
+/* =========================================================
+   POINTS TABLE
+   Scope   : .points-table-section, .points-table
+   Purpose : Full standings table — IPL broadcast style.
+             Glass surface, hover rows, qualifier markers,
+             NRR color coding, responsive horizontal scroll.
+   ========================================================= */
+
+@use "../../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   POINTS TABLE SECTION
+   Outer section padding wrapper.
+   ========================================================= */
+.points-table-section {
+  padding: 40px 0 32px;
+}
+
+/* =========================================================
+   POINTS TABLE CONTAINER
+   Max-width centered wrapper inside section.
+   ========================================================= */
+.points-table-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* =========================================================
+   POINTS TABLE HEADING
+   Row with section title and team count badge.
+   ========================================================= */
+.points-table-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+/* =========================================================
+   POINTS TABLE HEADING TITLE
+   "Standings" section label.
+   ========================================================= */
+.points-table-heading-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* =========================================================
+   POINTS TABLE HEADING BADGE
+   Small pill showing team count.
+   ========================================================= */
+.points-table-heading-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--skin-color);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px 12px;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+}
+
+/* =========================================================
+   POINTS TABLE WRAPPER
+   Horizontal scroll container for narrow viewports.
+   Applies glass card surface behind the table.
+   ========================================================= */
+.points-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 16px;
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+
+  /* Smooth scrollbar on webkit */
+  &::-webkit-scrollbar {
+    height: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+  }
+}
+
+/* =========================================================
+   POINTS TABLE — BASE TABLE
+   Full-width table, no default border collapse gaps.
+   ========================================================= */
+.points-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 520px;
+}
+
+/* =========================================================
+   POINTS TABLE HEAD
+   Sticky header row with muted label styling.
+   ========================================================= */
+.points-table-head {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* =========================================================
+   POINTS TABLE HEAD ROW
+   Single header row element.
+   ========================================================= */
+.points-table-head-row {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* =========================================================
+   POINTS TABLE HEAD CELL
+   Individual <th> — muted uppercase label.
+   ========================================================= */
+.points-table-head-cell {
+  padding: 12px 14px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  white-space: nowrap;
+
+  /* Team column left-aligned */
+  &--team {
+    text-align: left;
+    min-width: 160px;
+  }
+
+  /* Rank column narrow */
+  &--rank {
+    width: 40px;
+  }
+
+  /* Points column accent color */
+  &--pts {
+    color: var(--skin-color);
+  }
+}
+
+/* =========================================================
+   POINTS TABLE BODY
+   Tbody wrapper — no extra styles needed.
+   ========================================================= */
+.points-table-body {
+  // inherits from table
+}
+
+/* =========================================================
+   POINTS TABLE ROW
+   Individual data row with hover highlight.
+   Qualifier rows get a left accent border.
+   ========================================================= */
+.points-table-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.2s ease;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  /* Hover row highlight */
+  &:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  /* Top 4 qualifier accent — left border */
+  &--qualifier {
+    border-left: 3px solid var(--skin-color);
+  }
+}
+
+/* =========================================================
+   POINTS TABLE CELL
+   Individual <td> — base data cell styles.
+   ========================================================= */
+.points-table-cell {
+  padding: 13px 14px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text);
+  text-align: center;
+  white-space: nowrap;
+
+  /* Rank cell — centered muted number */
+  &--rank {
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  /* Team cell — left-aligned with flex row */
+  &--team {
+    text-align: left;
+  }
+
+  /* Won cell — green tint */
+  &--won {
+    color: #4ade80;
+    font-weight: 700;
+  }
+
+  /* Lost cell — red tint */
+  &--lost {
+    color: #f87171;
+    font-weight: 600;
+  }
+
+  /* Points cell — accent color, bold */
+  &--pts {
+    color: var(--skin-color);
+    font-weight: 800;
+    font-size: 0.95rem;
+  }
+
+  /* NRR positive — green */
+  &--nrr-pos {
+    color: #4ade80;
+    font-weight: 600;
+  }
+
+  /* NRR negative — red */
+  &--nrr-neg {
+    color: #f87171;
+    font-weight: 600;
+  }
+}
+
+/* =========================================================
+   POINTS TABLE RANK
+   Rank number wrapper inside rank cell.
+   ========================================================= */
+.points-table-rank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+/* =========================================================
+   POINTS TABLE TEAM NAME
+   Team name text inside team cell.
+   ========================================================= */
+.points-table-team-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* =========================================================
+   POINTS TABLE QUALIFIER DOT
+   Small accent dot beside top-4 team names.
+   ========================================================= */
+.points-table-qualifier-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--skin-color);
+  margin-left: 8px;
+  vertical-align: middle;
+  opacity: 0.8;
+}
+
+/* =========================================================
+   POINTS TABLE LEGEND
+   Bottom legend row explaining qualifier dot.
+   ========================================================= */
+.points-table-legend {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding-left: 4px;
+}
+
+/* =========================================================
+   POINTS TABLE LEGEND DOT
+   Colored dot matching qualifier marker.
+   ========================================================= */
+.points-table-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--skin-color);
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   POINTS TABLE LEGEND TEXT
+   Descriptor label beside the legend dot.
+   ========================================================= */
+.points-table-legend-text {
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+}
+
+/* =========================================================
+   RESPONSIVE — POINTS TABLE
+   ========================================================= */
+
+/* =======================================================
+   MD (<= 768px)
+   ======================================================= */
+@include md {
+  /* Reduce section padding */
+  .points-table-section {
+    padding: 28px 0 24px;
+  }
+
+  /* Table scrolls horizontally — already handled by wrapper */
+  .points-table-head-cell,
+  .points-table-cell {
+    padding: 11px 12px;
+  }
+}
+
+/* =======================================================
+   SM (<= 576px)
+   ======================================================= */
+@include sm {
+  .points-table-section {
+    padding: 20px 0 18px;
+  }
+
+  .points-table-head-cell {
+    font-size: 0.65rem;
+    padding: 10px 10px;
+  }
+
+  .points-table-cell {
+    font-size: 0.8rem;
+    padding: 10px 10px;
+  }
+
+  .points-table-team-name {
+    font-size: 0.82rem;
+  }
+}
+
+/* =======================================================
+   XS (<= 420px)
+   ======================================================= */
+@include xs {
+  .points-table-wrapper {
+    border-radius: 12px;
+  }
+
+  .points-table-rank {
+    width: 20px;
+    height: 20px;
+    font-size: 0.65rem;
+  }
+}
+
+/* =======================================================
+   XXS (<= 360px)
+   ======================================================= */
+@include xxs {
+  .points-table-head-cell,
+  .points-table-cell {
+    padding: 9px 8px;
+    font-size: 0.75rem;
+  }
+}

@@ -1,0 +1,192 @@
+/* =========================================================
+   TOP BATTERS
+   Scope   : .top-batters
+   Purpose : Orange Cap leaderboard card — ranked list
+             of top run scorers. Premium glass card style.
+   ========================================================= */
+
+@use "../../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   TOP BATTERS CARD
+   Glass surface card wrapping the full leaderboard.
+   ========================================================= */
+.top-batters {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-radius: 16px;
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: rgba(251, 146, 60, 0.4);
+  }
+}
+
+/* =========================================================
+   TOP BATTERS HEADER
+   Card title row with orange cap emoji and heading.
+   ========================================================= */
+.top-batters-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(251, 146, 60, 0.06);
+}
+
+/* =========================================================
+   TOP BATTERS CAP
+   Orange cap emoji — decorative icon.
+   ========================================================= */
+.top-batters-cap {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+/* =========================================================
+   TOP BATTERS TITLE
+   "Orange Cap" section heading.
+   ========================================================= */
+.top-batters-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fb923c;
+  margin: 0;
+  letter-spacing: 0.03em;
+}
+
+/* =========================================================
+   TOP BATTERS LABELS
+   Column header row — Batter / Runs labels.
+   ========================================================= */
+.top-batters-labels {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* =========================================================
+   TOP BATTERS LABEL
+   Individual column header label text.
+   ========================================================= */
+.top-batters-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* =========================================================
+   TOP BATTERS LIST
+   Ordered list — resets default OL styles.
+   ========================================================= */
+.top-batters-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================================================
+   TOP BATTERS ITEM
+   Single player row — rank, name, run count.
+   ========================================================= */
+.top-batters-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  transition: background 0.2s ease;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: rgba(251, 146, 60, 0.05);
+  }
+}
+
+/* =========================================================
+   TOP BATTERS ITEM RANK
+   Small numbered rank badge.
+   ========================================================= */
+.top-batters-item-rank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   TOP BATTERS ITEM NAME
+   Player name — takes up remaining space.
+   ========================================================= */
+.top-batters-item-name {
+  flex: 1;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* =========================================================
+   TOP BATTERS ITEM RUNS
+   Run tally — accent colored bold number.
+   ========================================================= */
+.top-batters-item-runs {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #fb923c;
+  letter-spacing: 0.02em;
+}
+
+/* =========================================================
+   RESPONSIVE — TOP BATTERS
+   ========================================================= */
+
+/* =======================================================
+   SM (<= 576px)
+   ======================================================= */
+@include sm {
+  .top-batters-header {
+    padding: 14px 16px 12px;
+  }
+
+  .top-batters-item {
+    padding: 11px 16px;
+  }
+
+  .top-batters-labels {
+    padding: 7px 16px;
+  }
+}
+
+/* =======================================================
+   XXS (<= 360px)
+   ======================================================= */
+@include xxs {
+  .top-batters-item-name {
+    font-size: 0.82rem;
+  }
+
+  .top-batters-item-runs {
+    font-size: 0.88rem;
+  }
+}

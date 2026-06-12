@@ -1,6 +1,20 @@
 import MatchCard from "./MatchCard";
 
-const matches = [
+/* =========================================================
+   MATCH LIST
+   Purpose : Renders the full grid of upcoming, live,
+             and completed match cards.
+   ========================================================= */
+
+interface Match {
+  teamA: string;
+  teamB: string;
+  date: string;
+  venue: string;
+  status: string;
+}
+
+const matches: Match[] = [
   {
     teamA: "BPL Warriors",
     teamB: "BPL Kings",
@@ -27,16 +41,22 @@ const matches = [
 export default function MatchList() {
   return (
     <section className="match-list">
-      <div className="container">
+      <div className="match-list-container">
 
-        <div className="match-grid">
-          {matches.map((match, index) => (
-            <MatchCard
-              key={index}
-              {...match}
-            />
-          ))}
+        {/* ── Section Heading ── */}
+        <div className="match-list-header">
+          <h2 className="match-list-title">Upcoming Fixtures</h2>
+          <span className="match-list-count">{matches.length} Matches</span>
         </div>
+
+        {/* ── Match Grid ── */}
+        <ul className="match-list-grid">
+          {matches.map((match, index) => (
+            <li key={index} className="match-list-item">
+              <MatchCard {...match} />
+            </li>
+          ))}
+        </ul>
 
       </div>
     </section>

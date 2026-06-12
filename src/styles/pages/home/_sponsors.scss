@@ -1,163 +1,297 @@
 /* =========================================================
    IMPORTS
    ---------------------------------------------------------
-   - Breakpoints system for responsive design
+   Abstracts only
 ========================================================= */
+
 @use "../../abstracts/breakpoints" as *;
 
 /* =========================================================
    SPONSORS SECTION
-   =========================================================
-   STYLE:
-   - Modern corporate sponsor showcase
-   - Glass cards + hover glow
-   - Responsive grid system
+   ---------------------------------------------------------
+   Scope   : .sponsors-section
+   Purpose : Tournament sponsor showcase
+
+   Future Safe:
+   ✅ Fully scoped
+   ✅ No global selectors
+   ✅ No style leakage
+   ✅ Theme aware
 ========================================================= */
 
-.sponsors {
+.sponsors-section {
   position: relative;
-  padding: 70px 0;
 
-  /* Theme based background */
+  padding: 80px 0;
+
   background: var(--bg);
   color: var(--text);
 
-  transition: all 0.3s ease;
+  /* =======================================================
+     HEADING
+  ======================================================= */
 
-  /* =========================================================
-     SECTION HEADING
-  ========================================================= */
-
-  .section-heading {
+  .sponsors-section-heading {
     text-align: center;
-    margin-bottom: 40px;
+
+    margin-bottom: 50px;
 
     h2 {
-      font-size: 28px;
-      font-weight: 800;
-      letter-spacing: 1px;
+      font-size: 42px;
+      font-weight: 900;
+
       color: var(--text);
+    }
+
+    p {
+      margin-top: 12px;
+
+      max-width: 650px;
+
+      margin-inline: auto;
+
+      font-size: 15px;
+      line-height: 1.7;
+
+      color: var(--muted);
     }
   }
 
-  /* =========================================================
-     GRID LAYOUT
-  ========================================================= */
+  /* =======================================================
+     GRID
+  ======================================================= */
 
-  .sponsor-grid {
+  .sponsors-section-grid {
     display: grid;
 
-    /* default desktop */
     grid-template-columns: repeat(4, 1fr);
 
-    gap: 20px;
+    gap: 24px;
+
+    max-width: 1100px;
+
+    margin-inline: auto;
   }
 
-  /* =========================================================
-     SPONSOR CARD
-  ========================================================= */
+  /* =======================================================
+     CARD
+  ======================================================= */
 
-  .sponsor-card {
+  .sponsors-section-card {
+    position: relative;
+
     display: flex;
     align-items: center;
     justify-content: center;
 
-    padding: 22px 16px;
+    min-height: 120px;
 
-    border-radius: 14px;
-    text-align: center;
+    padding: 24px;
 
-    font-size: 15px;
-    font-weight: 600;
+    border-radius: 20px;
 
-    /* Glass effect (light + dark safe) */
-    background: color-mix(in srgb, var(--bg) 85%, transparent);
-    border: 1px solid color-mix(in srgb, var(--skin-color) 12%, transparent);
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(
+          in srgb,
+          var(--skin-color) 3%,
+          var(--card-bg)
+        ),
+        var(--card-bg)
+      );
+
+    border: 1px solid
+      color-mix(
+        in srgb,
+        var(--skin-color) 12%,
+        transparent
+      );
 
     backdrop-filter: blur(12px);
 
-    cursor: pointer;
+    transition:
+      transform 0.35s ease,
+      border-color 0.35s ease,
+      box-shadow 0.35s ease;
 
-    transition: all 0.3s ease;
+    overflow: hidden;
 
-    /* hover effect */
+    &::before {
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 3px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          var(--skin-color),
+          transparent
+        );
+    }
+
     &:hover {
       transform: translateY(-6px);
+
       border-color: var(--skin-color);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-      color: var(--skin-color);
+
+      box-shadow:
+        0 16px 40px
+        color-mix(
+          in srgb,
+          var(--skin-color) 18%,
+          transparent
+        );
+
+      span {
+        color: var(--skin-color);
+      }
+    }
+
+    span {
+      font-size: 18px;
+      font-weight: 800;
+
+      color: var(--text);
+
+      transition: color 0.3s ease;
     }
   }
 
-  /* =========================================================
-     RESPONSIVE DESIGN
-  ========================================================= */
+  /* =======================================================
+     XXL (>= 1400px)
+  ======================================================= */
 
-  /* ================= XXL (1400px+) ================= */
   @include xxl {
-    .sponsor-grid {
-      grid-template-columns: repeat(4, 1fr);
-      gap: 22px;
+    .sponsors-section-heading {
+      h2 {
+        font-size: 46px;
+      }
     }
   }
 
-  /* ================= 1400px CUSTOM CONTROL ================= */
-  @media (max-width: 1400px) {
-    .sponsor-grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
+  /* =======================================================
+     XL (<= 1200px)
+  ======================================================= */
 
-  /* ================= XL (1200px) ================= */
   @include xl {
-    .sponsor-grid {
-      grid-template-columns: repeat(3, 1fr);
+    .sponsors-section-heading {
+      h2 {
+        font-size: 38px;
+      }
     }
   }
 
-  /* ================= LG (992px) ================= */
+  /* =======================================================
+     LG (<= 992px)
+  ======================================================= */
+
   @include lg {
-    .sponsor-grid {
+    .sponsors-section-grid {
       grid-template-columns: repeat(2, 1fr);
+
+      max-width: 760px;
+    }
+
+    .sponsors-section-heading {
+      h2 {
+        font-size: 34px;
+      }
     }
   }
 
-  /* ================= MD (768px) ================= */
+  /* =======================================================
+     MD (<= 768px)
+  ======================================================= */
+
   @include md {
-    .section-heading h2 {
-      font-size: 24px;
-    }
+    padding: 60px 0;
 
-    .sponsor-card {
-      font-size: 14px;
-      padding: 20px 14px;
+    .sponsors-section-heading {
+      margin-bottom: 40px;
+
+      h2 {
+        font-size: 30px;
+      }
     }
   }
 
-  /* ================= SM (576px) ================= */
+  /* =======================================================
+     SM (<= 576px)
+  ======================================================= */
+
   @include sm {
-    .sponsor-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+    .sponsors-section-grid {
+      grid-template-columns: 1fr;
+
+      max-width: 380px;
+    }
+
+    .sponsors-section-heading {
+      h2 {
+        font-size: 28px;
+      }
+    }
+
+    .sponsors-section-card {
+      min-height: 100px;
     }
   }
 
-  /* ================= XS (420px) ================= */
+  /* =======================================================
+     XS (<= 420px)
+  ======================================================= */
+
   @include xs {
-    .sponsor-grid {
-      grid-template-columns: repeat(1, 1fr);
+    .sponsors-section-heading {
+      h2 {
+        font-size: 24px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
+
+    .sponsors-section-card {
+      span {
+        font-size: 16px;
+      }
     }
   }
 
-  /* ================= XXS (360px) ================= */
+  /* =======================================================
+     XXS (<= 360px)
+  ======================================================= */
+
   @include xxs {
-    .section-heading h2 {
-      font-size: 22px;
+    padding: 40px 0;
+
+    .sponsors-section-heading {
+      h2 {
+        font-size: 22px;
+      }
+
+      p {
+        font-size: 13px;
+      }
     }
 
-    .sponsor-card {
-      font-size: 13px;
-      padding: 18px 12px;
+    .sponsors-section-card {
+      min-height: 90px;
+
+      border-radius: 16px;
+
+      span {
+        font-size: 15px;
+      }
     }
   }
 }

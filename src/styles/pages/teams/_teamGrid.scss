@@ -1,217 +1,223 @@
 /* =========================================================
+   TEAMS GRID SECTION
+   ---------------------------------------------------------
+   Scope   : .teams-grid-section
+   Purpose : Display tournament teams
+   Layout  : Responsive card grid
+
+   Structure:
+   .teams-grid-section
+   ├── .container
+   │   ├── .teams-grid-section-heading
+   │   │   ├── .teams-grid-section-title
+   │   │   └── .teams-grid-section-subtitle
+   │   └── .teams-grid-section-grid
+========================================================= */
+
+/* =========================================================
    IMPORTS
 ========================================================= */
+
 @use "../../abstracts/breakpoints" as *;
 
 /* =========================================================
-   TEAMS PAGE WRAPPER
-   - Full page theme layout
-   - Premium sports UI feel
-========================================================= */
-
-.teams-page {
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-
-  padding-bottom: 60px;
-}
-
-/* =========================================================
-   PAGE HEADER
-   - Hero-style title section
-========================================================= */
-
-.page-header {
-  padding: 60px 0;
-  text-align: center;
-
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--skin-color) 8%, transparent),
-    transparent
-  );
-
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-
-  h1 {
-    font-size: 42px;
-    font-weight: 900;
-    letter-spacing: 1px;
-  }
-
-  p {
-    margin-top: 10px;
-    font-size: 14px;
-    color: var(--muted);
-  }
-}
-
-/* =========================================================
-   TEAM STATS SECTION
-========================================================= */
-
-.team-stats {
-  padding: 40px 0;
-}
-
-.team-stats .stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
-
-/* STAT CARD */
-.stat-card {
-  background: var(--card-bg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
-  padding: 20px;
-  border-radius: 16px;
-
-  text-align: center;
-
-  transition: 0.3s ease;
-
-  h3 {
-    font-size: 28px;
-    font-weight: 900;
-    color: var(--skin-color);
-  }
-
-  p {
-    margin-top: 6px;
-    font-size: 13px;
-    color: var(--muted);
-  }
-
-  &:hover {
-    transform: translateY(-5px);
-    border-color: var(--skin-color);
-    box-shadow: 0 10px 30px rgba(0, 245, 255, 0.1);
-  }
-}
-
-/* =========================================================
-   TEAM GRID SECTION
+   COMPONENT
 ========================================================= */
 
 .teams-grid-section {
-  padding: 40px 0;
-}
+  position: relative;
+  padding-block: 80px;
+  background: var(--bg);
+  color: var(--text);
 
-.teams-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
-}
+  /* =======================================================
+     CONTAINER
+  ======================================================== */
 
-/* TEAM CARD */
-.team-card {
-  background: var(--card-bg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
-  border-radius: 18px;
-  padding: 20px;
-
-  text-align: center;
-
-  transition: 0.3s ease;
-
-  .team-logo {
-    font-size: 34px;
-    margin-bottom: 10px;
+  .container {
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 24px;
   }
 
-  h3 {
-    font-size: 16px;
-    font-weight: 700;
+  /* =======================================================
+     HEADING
+  ======================================================== */
+
+  .teams-grid-section-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    margin-bottom: 48px;
   }
 
-  &:hover {
-    transform: translateY(-6px);
-    border-color: var(--skin-color);
-    box-shadow: 0 12px 30px rgba(0, 245, 255, 0.12);
+  .teams-grid-section-title {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    color: var(--text);
+
+    &::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 4px;
+      margin: 14px auto 0;
+      border-radius: 999px;
+      background: var(--skin-color);
+    }
+  }
+
+  .teams-grid-section-subtitle {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--muted);
+  }
+
+  /* =======================================================
+     GRID
+  ======================================================== */
+
+  .teams-grid-section-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    max-width: 1100px;
+    margin-inline: auto;
   }
 }
 
 /* =========================================================
-   RESPONSIVE BREAKPOINT SYSTEM
+   XXL
+   ---------------------------------------------------------
+   Large desktop screens
 ========================================================= */
 
-/* ================= 1400px (XXL) ================= */
 @include xxl {
-  .teams-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .team-stats .stats-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
 }
 
-/* ================= 1200px (XL) ================= */
+/* =========================================================
+   XL
+   ---------------------------------------------------------
+   Standard desktop screens
+========================================================= */
+
 @include xl {
-  .teams-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .team-stats .stats-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
 }
 
-/* ================= 992px (LG) ================= */
+/* =========================================================
+   LG
+   ---------------------------------------------------------
+   Small desktops / large tablets
+   - Grid reduces to 3 columns
+========================================================= */
+
 @include lg {
-  .teams-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .teams-grid-section {
+    padding-block: 64px;
 
-  .team-stats .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
+    .teams-grid-section-title {
+      font-size: 2.1rem;
+    }
+
+    .teams-grid-section-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
   }
 }
 
-/* ================= 768px (MD) ================= */
+/* =========================================================
+   MD
+   ---------------------------------------------------------
+   Tablets
+   - Grid reduces to 2 columns
+   - Reduced heading size and spacing
+========================================================= */
+
 @include md {
-  .page-header h1 {
-    font-size: 34px;
-  }
+  .teams-grid-section {
+    padding-block: 56px;
 
-  .teams-grid {
-    grid-template-columns: 1fr;
-  }
+    .teams-grid-section-heading {
+      margin-bottom: 36px;
+    }
 
-  .team-stats .stats-grid {
-    grid-template-columns: 1fr 1fr;
+    .teams-grid-section-title {
+      font-size: 1.8rem;
+    }
+
+    .teams-grid-section-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
   }
 }
 
-/* ================= 576px (SM) ================= */
+/* =========================================================
+   SM
+   ---------------------------------------------------------
+   Large mobile devices
+   - Container padding reduced
+   - Grid stays at 2 columns with tighter gap
+========================================================= */
+
 @include sm {
-  .page-header {
-    padding: 40px 0;
-  }
+  .teams-grid-section {
+    padding-block: 48px;
 
-  .team-stats .stats-grid {
-    grid-template-columns: 1fr;
+    .container {
+      padding-inline: 16px;
+    }
+
+    .teams-grid-section-title {
+      font-size: 1.6rem;
+    }
+
+    .teams-grid-section-subtitle {
+      font-size: 0.9rem;
+    }
+
+    .teams-grid-section-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
   }
 }
 
-/* ================= 420px (XS) ================= */
+/* =========================================================
+   XS
+   ---------------------------------------------------------
+   Small mobile devices
+   - Grid collapses to single column
+========================================================= */
+
 @include xs {
-  .page-header h1 {
-    font-size: 28px;
+  .teams-grid-section {
+    .teams-grid-section-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
   }
 }
 
-/* ================= 360px (XXS) ================= */
-@include xxs {
-  .stat-card {
-    padding: 16px;
-  }
+/* =========================================================
+   XXS
+   ---------------------------------------------------------
+   Extra small mobile devices
+   - Tighter vertical padding
+   - Smallest heading size
+========================================================= */
 
-  .team-card {
-    padding: 16px;
+@include xxs {
+  .teams-grid-section {
+    padding-block: 40px;
+
+    .teams-grid-section-title {
+      font-size: 1.4rem;
+    }
   }
 }

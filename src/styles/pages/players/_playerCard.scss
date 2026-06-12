@@ -1,261 +1,361 @@
 /* =========================================================
-   IMPORTS
-========================================================= */
+   PLAYER CARD
+   Scope   : .player-card
+   Purpose : Individual player tile — photo dominant (80%),
+             info strip compact (20%), stats on hover overlay.
+             Premium glassmorphism, role-color coded.
+   ========================================================= */
+
 @use "../../abstracts/breakpoints" as *;
 
 /* =========================================================
-   PLAYER CARD
-   ---------------------------------------------------------
-   Premium BPL Player Card
-   - Glass UI
-   - Hover animation
-   - Responsive image
-   - Stats footer
-========================================================= */
-
+   PLAYER CARD — BASE
+   Fixed height card. Image fills 80%, info strip 20%.
+   ========================================================= */
 .player-card {
   position: relative;
-
-  overflow: hidden;
-
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
   background: var(--card-bg);
-
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
-  border-radius: 20px;
-
-  transition: all 0.3s ease;
-
-  cursor: pointer;
-
-  &:hover {
-    transform: translateY(-6px);
-
-    border-color: var(--skin-color);
-
-    box-shadow: 0 12px 30px
-      color-mix(
-        in srgb,
-        var(--skin-color) 18%,
-        transparent
-      );
-  }
-}
-
-/* =========================================================
-   PLAYER IMAGE
-========================================================= */
-
-.player-image {
-  position: relative;
-
-  width: 100%;
-  height: 280px;
-
+  border: 1px solid rgba(255, 255, 255, 0.07);
   overflow: hidden;
+  height: 300px; /* Fixed total card height */
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  cursor: default;
 
-  img {
-    width: 100%;
-    height: 100%;
+  /* ── Hover lift ── */
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
 
-    object-fit: cover;
+    /* Reveal stats overlay */
+    .player-card-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-    transition: transform 0.4s ease;
+    /* Dim info strip */
+    .player-card-info {
+      opacity: 0.3;
+    }
+
+    /* Subtle zoom on photo */
+    .player-card-image-photo {
+      transform: scale(1.05);
+    }
+  }
+
+  /* ── Role modifier — Batsman ── */
+  &--batsman {
+    border-color: rgba(251, 60, 60, 0.2);
+
+    .player-card-role {
+      background: rgba(251, 60, 60, 0.15);
+      border-color: rgba(251, 60, 60, 0.35);
+      color: #fb3c3c;
+    }
+
+    &:hover {
+      border-color: rgba(251, 60, 60, 0.668);
+      box-shadow: 0 16px 40px rgba(251, 60, 60, 0.3);
+    }
+  }
+
+  /* ── Role modifier — Bowler ── */
+  &--bowler {
+    border-color: rgba(167, 139, 250, 0.2);
+
+    .player-card-role {
+      background: rgba(167, 139, 250, 0.15);
+      border-color: rgba(167, 139, 250, 0.35);
+      color: #a78bfa;
+    }
+
+    &:hover {
+      border-color: rgba(167, 139, 250, 0.581);
+      box-shadow: 0 16px 40px rgba(167, 139, 250, 0.453);
+    }
+  }
+
+  /* ── Role modifier — All Rounder ── */
+  &--allrounder {
+    border-color: rgba(52, 211, 153, 0.2);
+
+    .player-card-role {
+      background: rgba(52, 211, 153, 0.15);
+      border-color: rgba(52, 211, 153, 0.35);
+      color: #34d399;
+    }
+
+    &:hover {
+      border-color: rgba(52, 211, 153, 0.5);
+      box-shadow: 0 16px 40px rgba(52, 211, 153, 0.379);
+    }
+  }
+
+  /* ── Role modifier — Wicket Keeper ── */
+  &--keeper {
+    border-color: rgba(251, 191, 36, 0.2);
+
+    .player-card-role {
+      background: rgba(251, 191, 36, 0.15);
+      border-color: rgba(251, 191, 36, 0.35);
+      color: #fbbf24;
+    }
+
+    &:hover {
+      border-color: rgba(251, 191, 36, 0.5);
+      box-shadow: 0 16px 40px rgba(251, 190, 36, 0.388);
+    }
   }
 }
 
-.player-card:hover .player-image img {
-  transform: scale(1.05);
+/* =========================================================
+   PLAYER CARD IMAGE
+   80% of fixed card height = 240px of 300px total.
+   Contains photo + role badge + jersey badge.
+   ========================================================= */
+.player-card-image {
+  position: relative;
+  width: 100%;
+  height: 80%; /* 80% of 300px = 240px */
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.03);
+  overflow: hidden;
 }
 
 /* =========================================================
-   PLAYER CONTENT
-========================================================= */
-
-.player-content {
-  padding: 18px;
+   PLAYER CARD IMAGE PHOTO
+   Next/Image fill — covers the image container.
+   Slight zoom applied on card hover.
+   ========================================================= */
+.player-card-image-photo {
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.4s ease;
 }
 
-.player-role {
+/* =========================================================
+   PLAYER CARD ROLE
+   Pill badge — bottom-left of the image area.
+   Color driven by parent modifier class.
+   ========================================================= */
+.player-card-role {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
   display: inline-flex;
+  align-items: center;
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 1px solid;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  backdrop-filter: blur(6px);
+  z-index: 1;
+}
 
+/* =========================================================
+   PLAYER CARD JERSEY
+   Jersey number badge — top-right of image area.
+   ========================================================= */
+.player-card-jersey {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--skin-color);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.05em;
+  z-index: 1;
+}
+
+/* =========================================================
+   PLAYER CARD INFO
+   Bottom strip — 20% of card height = 60px.
+   Compact: name + village only. Dims on hover.
+   ========================================================= */
+.player-card-info {
+  height: 20%; /* 20% of 300px = 60px */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  padding: 0 12px;
+  transition: opacity 0.3s ease;
+  background: var(--card-bg);
+}
+
+/* =========================================================
+   PLAYER CARD NAME
+   Single-line truncated player name.
+   ========================================================= */
+.player-card-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--skin-color);
+  margin: 0;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* =========================================================
+   PLAYER CARD VILLAGE
+   Muted village label — one line only.
+   ========================================================= */
+.player-card-village {
+  font-size: 0.7rem;
+  color: var(--text);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* =========================================================
+   PLAYER CARD OVERLAY
+   Full-card glass overlay — slides up on hover.
+   Covers entire card including image + info strip.
+   ========================================================= */
+.player-card-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
   align-items: center;
   justify-content: center;
-
-  padding: 6px 12px;
-
-  border-radius: 999px;
-
-  font-size: 11px;
-  font-weight: 700;
-
-  text-transform: uppercase;
-
-  background: color-mix(
-    in srgb,
-    var(--skin-color) 15%,
-    transparent
-  );
-
-  color: var(--skin-color);
-}
-
-.player-content h3 {
-  margin-top: 12px;
-
-  font-size: 18px;
-  font-weight: 800;
-
-  color: var(--text);
-}
-
-.player-content p {
-  margin-top: 6px;
-
-  font-size: 14px;
-
-  color: var(--muted);
+  background: rgba(8, 10, 18, 0.9);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  padding: 16px;
+  border-radius: 14px;
+  z-index: 10;
 }
 
 /* =========================================================
-   PLAYER STATS FOOTER
-========================================================= */
-
-.player-overlay {
+   PLAYER CARD OVERLAY STATS
+   2×3 grid of stat blocks centered in overlay.
+   ========================================================= */
+.player-card-overlay-stats {
   display: grid;
-
   grid-template-columns: repeat(3, 1fr);
-
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 14px 8px;
+  width: 100%;
+  margin: 0;
 }
 
-.player-overlay div {
-  padding: 14px 10px;
-
-  text-align: center;
+/* =========================================================
+   PLAYER CARD OVERLAY STAT
+   Single stat block — label above value, centered.
+   ========================================================= */
+.player-card-overlay-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
 }
 
-.player-overlay strong {
-  display: block;
-
-  font-size: 18px;
-  font-weight: 800;
-
-  color: var(--skin-color);
-}
-
-.player-overlay span {
-  display: block;
-
-  margin-top: 4px;
-
-  font-size: 12px;
-
+/* =========================================================
+   PLAYER CARD OVERLAY STAT LABEL
+   Muted uppercase descriptor — <dt>
+   ========================================================= */
+.player-card-overlay-stat-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--muted);
 }
 
 /* =========================================================
-   XXL BREAKPOINT (>= 1400px)
-========================================================= */
-
-@include xxl {
-  .player-image {
-    height: 300px;
-  }
-
-  .player-content h3 {
-    font-size: 20px;
-  }
+   PLAYER CARD OVERLAY STAT VALUE
+   Large bold number — <dd>
+   ========================================================= */
+.player-card-overlay-stat-value {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--skin-color);
+  margin: 0;
+  line-height: 1;
 }
 
 /* =========================================================
-   XL BREAKPOINT (<= 1200px)
-========================================================= */
+   RESPONSIVE
+   ========================================================= */
 
-@include xl {
-  .player-image {
-    height: 260px;
-  }
-}
-
-/* =========================================================
-   LG BREAKPOINT (<= 992px)
-========================================================= */
-
+/* =======================================================
+   LG (<= 992px)
+   ======================================================= */
 @include lg {
-  .player-image {
-    height: 240px;
-  }
-
-  .player-content h3 {
-    font-size: 17px;
+  .player-card {
+    height: 280px;
   }
 }
 
-/* =========================================================
-   MD BREAKPOINT (<= 768px)
-========================================================= */
-
+/* =======================================================
+   MD (<= 768px)
+   ======================================================= */
 @include md {
-  .player-image {
+  .player-card {
     height: 260px;
   }
 
-  .player-content {
-    padding: 16px;
+  .player-card-name {
+    font-size: 0.82rem;
+  }
+
+  .player-card-overlay-stat-value {
+    font-size: 1.1rem;
   }
 }
 
-/* =========================================================
-   SM BREAKPOINT (<= 576px)
-========================================================= */
-
-@include sm {
-  .player-image {
-    height: 240px;
-  }
-
-  .player-overlay strong {
-    font-size: 16px;
-  }
-}
-
-/* =========================================================
-   XS BREAKPOINT (<= 420px)
-========================================================= */
-
+/* =======================================================
+   XS (<= 420px)
+   ======================================================= */
 @include xs {
-  .player-image {
-    height: 220px;
+  .player-card {
+    height: 250px;
   }
 
-  .player-content h3 {
-    font-size: 16px;
+  .player-card-overlay-stats {
+    gap: 10px 6px;
   }
 
-  .player-role {
-    font-size: 10px;
+  .player-card-overlay-stat-value {
+    font-size: 1rem;
   }
 }
 
-/* =========================================================
-   XXS BREAKPOINT (<= 360px)
-========================================================= */
-
+/* =======================================================
+   XXS (<= 360px)
+   ======================================================= */
 @include xxs {
-  .player-content {
-    padding: 14px;
+  .player-card {
+    height: 230px;
+    border-radius: 12px;
   }
 
-  .player-overlay div {
-    padding: 12px 6px;
+  .player-card-info {
+    padding: 0 10px;
   }
 
-  .player-overlay strong {
-    font-size: 15px;
-  }
-
-  .player-overlay span {
-    font-size: 11px;
+  .player-card-name {
+    font-size: 0.78rem;
   }
 }

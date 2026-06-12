@@ -1,297 +1,355 @@
 /* =========================================================
    IMPORTS
+   ---------------------------------------------------------
+   Breakpoint mixins only
 ========================================================= */
 @use "../../abstracts/breakpoints" as *;
 
 /* =========================================================
-   ANNOUNCEMENT WRAPPER
+   ANNOUNCEMENTS COMPONENT
+   ---------------------------------------------------------
+   Scope    : .announcements
+   Purpose  : League updates marquee section
+   Location : Home Page
+
+   Architecture:
+   - No generic selectors
+   - Fully component scoped
+   - Future safe
+   - Theme aware
 ========================================================= */
 
-.announcements-wrapper {
-  padding: 80px 0;
-}
+.announcements {
 
-/* =========================================================
-   SECTION TITLE
-========================================================= */
+  /* =======================================================
+     ROOT SECTION
+  ======================================================= */
 
-.section-title {
-  text-align: center;
+  position: relative;
 
-  margin-bottom: 30px;
+  width: 100%;
 
-  h2 {
-    font-size: 42px;
-    font-weight: 900;
+  background: transparent;
 
-    color: var(--text);
+  /* =======================================================
+     SECTION HEADING
+  ======================================================= */
+
+  .announcements-heading {
+    text-align: center;
+
+    margin-bottom: 30px;
+
+    h2 {
+      font-size: 42px;
+      font-weight: 900;
+
+      color: var(--text);
+    }
+
+    p {
+      margin-top: 10px;
+
+      font-size: 15px;
+
+      color: var(--muted);
+    }
   }
 
-  p {
-    margin-top: 10px;
+  /* =======================================================
+     ANNOUNCEMENT BAR
+  ======================================================= */
 
-    font-size: 15px;
+  .announcements-bar {
+    width: 100%;
 
-    color: var(--muted);
-  }
-}
+    display: flex;
+    align-items: center;
 
-/* =========================================================
-   ANNOUNCEMENT SECTION
-========================================================= */
+    overflow: hidden;
 
-.announcements-section {
-  display: flex;
+    border-radius: 18px;
 
-  align-items: center;
+    background: var(--card-bg);
 
-  overflow: hidden;
+    border: 1px solid
+      color-mix(
+        in srgb,
+        var(--skin-color) 12%,
+        transparent
+      );
 
-  border-radius: 18px;
-
-  background: var(--card-bg);
-
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
-  box-shadow:
-    0 12px 35px
+    box-shadow:
+      0 12px 35px
       color-mix(
         in srgb,
         var(--skin-color) 10%,
         transparent
       );
-}
-
-/* =========================================================
-   BADGE
-========================================================= */
-
-.announcement-badge {
-  flex-shrink: 0;
-
-  padding: 18px 24px;
-
-  font-size: 14px;
-  font-weight: 800;
-
-  letter-spacing: 1px;
-
-  color: #fff;
-
-  background: linear-gradient(
-    135deg,
-    var(--skin-color),
-    color-mix(
-      in srgb,
-      var(--skin-color) 70%,
-      black
-    )
-  );
-}
-
-/* =========================================================
-   MARQUEE
-========================================================= */
-
-.announcement-marquee {
-  flex: 1;
-
-  overflow: hidden;
-
-  padding: 0 20px;
-}
-
-/* =========================================================
-   TRACK
-========================================================= */
-
-.announcement-track {
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 18px;
-
-  white-space: nowrap;
-
-  min-width: max-content;
-
-  animation:
-    announcement-scroll
-    30s
-    linear
-    infinite;
-}
-
-/* =========================================================
-   ITEMS
-========================================================= */
-
-.announcement-item {
-  font-size: 15px;
-
-  font-weight: 600;
-
-  color: var(--text);
-}
-
-.announcement-separator {
-  color: var(--skin-color);
-
-  font-size: 20px;
-
-  font-weight: 900;
-}
-
-/* =========================================================
-   HOVER PAUSE
-========================================================= */
-
-.announcements-section:hover
-.announcement-track {
-  animation-play-state: paused;
-}
-
-/* =========================================================
-   ANIMATION
-   Starts near right side immediately
-========================================================= */
-
-@keyframes announcement-scroll {
-
-  0% {
-    transform: translateX(15%);
   }
 
-  100% {
-    transform: translateX(-100%);
-  }
-}
+  /* =======================================================
+     OFFICIAL BADGE
+  ======================================================= */
 
-/* =========================================================
-   XXL (>= 1400px)
-========================================================= */
+  .announcements-badge {
+    flex-shrink: 0;
 
-@include xxl {
-  .section-title h2 {
-    font-size: 46px;
-  }
-}
+    padding: 18px 24px;
 
-/* =========================================================
-   XL (<= 1200px)
-========================================================= */
-
-@include xl {
-  .section-title h2 {
-    font-size: 40px;
-  }
-}
-
-/* =========================================================
-   LG (<= 992px)
-========================================================= */
-
-@include lg {
-  .section-title h2 {
-    font-size: 36px;
-  }
-
-  .announcement-item {
     font-size: 14px;
-  }
-}
+    font-weight: 800;
 
-/* =========================================================
-   MD (<= 768px)
-========================================================= */
+    letter-spacing: 1px;
 
-@include md {
+    color: #fff;
 
-  .announcements-wrapper {
-    padding: 60px 0;
-  }
-
-  .section-title h2 {
-    font-size: 32px;
-  }
-
-  .announcement-badge {
-    padding: 15px 18px;
-
-    font-size: 12px;
+    background:
+      linear-gradient(
+        135deg,
+        var(--skin-color),
+        color-mix(
+          in srgb,
+          var(--skin-color) 70%,
+          black
+        )
+      );
   }
 
-  .announcement-track {
-    animation-duration: 25s;
-  }
-}
+  /* =======================================================
+     MARQUEE WRAPPER
+  ======================================================= */
 
-/* =========================================================
-   SM (<= 576px)
-========================================================= */
+  .announcements-marquee {
+    flex: 1;
 
-@include sm {
+    overflow: hidden;
 
-  .announcements-section {
-    flex-direction: column;
+    padding: 0 20px;
   }
 
-  .announcement-badge {
-    width: 100%;
+  /* =======================================================
+     TRACK
+  ======================================================= */
 
-    text-align: center;
+  .announcements-track {
+    display: inline-flex;
+
+    align-items: center;
+
+    white-space: nowrap;
+
+    gap: 18px;
+
+    min-width: max-content;
+
+    animation:
+      announcements-scroll
+      30s
+      linear
+      infinite;
   }
 
-  .announcement-marquee {
-    width: 100%;
+  .announcements-track-item {
+    display: flex;
 
-    padding: 12px;
+    align-items: center;
+
+    gap: 18px;
   }
 
-  .announcement-item {
-    font-size: 13px;
+  /* =======================================================
+     TEXT ITEM
+  ======================================================= */
+
+  .announcements-item {
+    font-size: 15px;
+
+    font-weight: 600;
+
+    color: var(--text);
   }
 
-  .announcement-track {
-    animation-duration: 22s;
-  }
-}
+  /* =======================================================
+     SEPARATOR
+  ======================================================= */
 
-/* =========================================================
-   XS (<= 420px)
-========================================================= */
+  .announcements-separator {
+    color: var(--skin-color);
 
-@include xs {
+    font-size: 20px;
 
-  .section-title h2 {
-    font-size: 26px;
+    font-weight: 900;
   }
 
-  .section-title p {
-    font-size: 13px;
+  /* =======================================================
+     PAUSE ON HOVER
+  ======================================================= */
+
+  .announcements-bar:hover {
+    .announcements-track {
+      animation-play-state: paused;
+    }
   }
 
-  .announcement-item {
-    font-size: 12px;
-  }
-}
+  /* =======================================================
+     SCROLL ANIMATION
+  ======================================================= */
 
-/* =========================================================
-   XXS (<= 360px)
-========================================================= */
+  @keyframes announcements-scroll {
 
-@include xxs {
+    0% {
+      transform: translateX(10%);
+    }
 
-  .section-title h2 {
-    font-size: 22px;
-  }
-
-  .announcement-item {
-    font-size: 11px;
+    100% {
+      transform: translateX(-100%);
+    }
   }
 
-  .announcement-badge {
-    font-size: 11px;
+  /* =======================================================
+     RESPONSIVE DESIGN
+  ======================================================= */
+
+  /* =======================================================
+     XXL (>= 1400px)
+  ======================================================= */
+
+  @include xxl {
+
+    .announcements-heading {
+      h2 {
+        font-size: 46px;
+      }
+    }
+  }
+
+  /* =======================================================
+     XL (<= 1200px)
+  ======================================================= */
+
+  @include xl {
+
+    .announcements-heading {
+      h2 {
+        font-size: 40px;
+      }
+    }
+  }
+
+  /* =======================================================
+     LG (<= 992px)
+  ======================================================= */
+
+  @include lg {
+
+    .announcements-heading {
+      h2 {
+        font-size: 36px;
+      }
+    }
+
+    .announcements-item {
+      font-size: 14px;
+    }
+  }
+
+  /* =======================================================
+     MD (<= 768px)
+  ======================================================= */
+
+  @include md {
+
+    .announcements-heading {
+
+      h2 {
+        font-size: 32px;
+      }
+    }
+
+    .announcements-badge {
+      padding: 15px 18px;
+
+      font-size: 12px;
+    }
+
+    .announcements-track {
+      animation-duration: 25s;
+    }
+  }
+
+  /* =======================================================
+     SM (<= 576px)
+  ======================================================= */
+
+  @include sm {
+
+    .announcements-bar {
+      flex-direction: column;
+    }
+
+    .announcements-badge {
+      width: 100%;
+
+      text-align: center;
+    }
+
+    .announcements-marquee {
+      width: 100%;
+
+      padding: 12px;
+    }
+
+    .announcements-item {
+      font-size: 13px;
+    }
+
+    .announcements-track {
+      animation-duration: 22s;
+    }
+  }
+
+  /* =======================================================
+     XS (<= 420px)
+  ======================================================= */
+
+  @include xs {
+
+    .announcements-heading {
+
+      h2 {
+        font-size: 26px;
+      }
+
+      p {
+        font-size: 13px;
+      }
+    }
+
+    .announcements-item {
+      font-size: 12px;
+    }
+  }
+
+  /* =======================================================
+     XXS (<= 360px)
+  ======================================================= */
+
+  @include xxs {
+
+    .announcements-heading {
+
+      h2 {
+        font-size: 22px;
+      }
+    }
+
+    .announcements-item {
+      font-size: 11px;
+    }
+
+    .announcements-badge {
+      font-size: 11px;
+    }
   }
 }

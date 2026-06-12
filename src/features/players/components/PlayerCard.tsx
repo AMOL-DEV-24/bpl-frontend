@@ -1,50 +1,112 @@
+import Image from "next/image";
 import { Player } from "../types";
 
-interface Props {
+/* =========================================================
+   PLAYER CARD
+   Purpose : Individual player tile — photo, role badge,
+             name, village, and on-hover stats overlay.
+             Premium glassmorphism IPL-style card.
+             Fields match API shape exactly.
+   ========================================================= */
+
+interface PlayerCardProps {
   player: Player;
 }
 
-export default function PlayerCard({
-  player,
-}: Props) {
+/* ── Role → display label ── */
+function formatRole(role: string): string {
+  return role; // API already returns human-readable: "All Rounder", "Wicket Keeper"
+}
+
+/* ── Role → BEM modifier class for accent colors ── */
+function roleModifier(role: string): string {
+  const map: Record<string, string> = {
+    "Batsman":       "player-card--batsman",
+    "Bowler":        "player-card--bowler",
+    "All Rounder":   "player-card--allrounder",
+    "Wicket Keeper": "player-card--keeper",
+  };
+  return map[role] ?? "";
+}
+
+/* ── Null-safe stat display ── */
+function statValue(value: number | null): string {
+  if (value === null || value === undefined) return "—";
+  return String(value);
+}
+
+export default function PlayerCard({ player }: PlayerCardProps) {
   return (
-    <article className="player-card">
+    <article className={`player-card ${roleModifier(player?.role)}`}>
 
-      <div className="player-image">
-        <img
-          src={player.image}
-          alt={player.name}
+      {/* ── Player Photo ── */}
+      <div className="player-card-image">
+        <Image
+          src={player?.imageUrl}
+          alt={`${player?.firstName} ${player?.lastName}`}
+          fill
+          sizes="(max-width: 768px) 50vw, 25vw"
+          className="player-card-image-photo"
         />
+
+        {/* ── Role Badge overlaid on image ── */}
+        <span className="player-card-role">{formatRole(player?.role)}</span>
+
+        {/* ── Jersey Number Badge ── */}
+        <span className="player-card-jersey">#{player?.jerseyNumber}</span>
       </div>
 
-      <div className="player-content">
-
-        <span className="player-role">
-          {player.role.replace("_", " ")}
-        </span>
-
-        <h3>{player.name}</h3>
-
-        <p>{player.village}</p>
-
+      {/* ── Player Info ── */}
+      <div className="player-card-info">
+        <h3 className="player-card-name">
+          {player?.firstName} {player?.lastName}
+        </h3>
+        <p className="player-card-village">{player?.village}</p>
       </div>
 
-      <div className="player-overlay">
+      {/* ── Stats Overlay — revealed on hover ── */}
+      <div className="player-card-overlay">
 
-        <div>
-          <strong>{player.runs}</strong>
-          <span>Runs</span>
-        </div>
+        <dl className="player-card-overlay-stats">
 
-        <div>
-          <strong>{player.wickets}</strong>
-          <span>Wickets</span>
-        </div>
+          <div className="player-card-overlay-stat">
+            <dt className="player-card-overlay-stat-label">Runs</dt>
+            <dd className="player-card-overlay-stat-value">
+              {statValue(player?.stats?.runs)}
+            </dd>
+          </div>
 
-        <div>
-          <strong>{player.matches}</strong>
-          <span>Matches</span>
-        </div>
+          <div className="player-card-overlay-stat">
+            <dt className="player-card-overlay-stat-label">Wkts</dt>
+            <dd className="player-card-overlay-stat-value">
+              {statValue(player?.stats?.wickets)}
+            </dd>
+          </div>
+
+          <div className="player-card-overlay-stat">
+            <dt className="player-card-overlay-stat-label">Mat</dt>
+            <dd className="player-card-overlay-stat-value">
+              {statValue(player?.stats?.matches)}
+            </dd>
+          </div>
+
+          <div className="player-card-overlay-stat">
+            <dt className="player-card-overlay-stat-label">SR</dt>
+            <dd className="player-card-overlay-stat-value">
+              {statValue(player?.stats?.strikeRate)}
+            </dd>
+          </div>
+
+          {player?.stats?.economy > 0 && (
+            <div className="player-card-overlay-stat">
+              <dt className="player-card-overlay-stat-label">Eco</dt>
+              <dd className="player-card-overlay-stat-value">
+                {player?.stats?.economy}
+              </dd>
+            </div>
+          )}
+
+        </dl>
 
       </div>
 

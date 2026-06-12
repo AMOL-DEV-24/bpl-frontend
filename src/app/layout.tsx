@@ -5,7 +5,7 @@ import "@/styles/main.scss";
 
 import ThemeSwitcher from "@/components/theme/index.themeSwitcher";
 import Navbar from "@/components/layout/Navbar/index.navbar";
-import TopBar from "@/components/layout/Navbar/components/TopBar";
+import TopBar from "@/components/layout/TopBar/TopBar";
 import Footer from "@/components/layout/Footer/Footer";
 
 export const metadata = {

@@ -1,40 +1,66 @@
+/* =========================================================
+   LIVE MATCH SECTION
+   ---------------------------------------------------------
+   Component : LiveMatch
+   Scope     : .live-match
+
+   Contains:
+   - Section Heading
+   - Scoreboard Card
+   - Live Badge
+   - Match Information
+   - Match Meta Stats
+
+   Notes:
+   - All class names are prefixed with live-match-
+   - No generic classes
+   - Future-safe architecture
+========================================================= */
+
 export default function LiveMatch() {
   return (
     <section className="live-match">
 
       <div className="container">
 
-        {/* ================= SECTION TITLE ================= */}
-        <div className="section-heading">
+        {/* ===================================================
+            SECTION HEADING
+        =================================================== */}
+        <div className="live-match-heading">
           <h2>Live Match</h2>
-          <p className="section-subtitle">
+
+          <p className="live-match-subtitle">
             Watch real-time action from Bhalawani Premier League
           </p>
         </div>
 
-        {/* ================= SCOREBOARD CARD ================= */}
-        <div className="live-card">
+        {/* ===================================================
+            SCOREBOARD CARD
+        =================================================== */}
+        <div className="live-match-card">
 
           {/* LEFT TEAM */}
-          <div className="team team--left">
+          <div className="live-match-team live-match-team-left">
+
             <h3>BPL Warriors</h3>
 
-            <div className="score">
+            <div className="live-match-score">
               128 <span>/ 4</span>
             </div>
 
             <small>Overs: 14.2</small>
+
           </div>
 
-          {/* CENTER LIVE STATUS */}
-          <div className="match-center">
+          {/* CENTER */}
+          <div className="live-match-center">
 
-            <div className="live-badge">
-              <span className="dot" />
+            <div className="live-match-badge">
+              <span className="live-match-badge-dot" />
               LIVE
             </div>
 
-            <div className="match-info">
+            <div className="live-match-info">
               <p>1st Innings</p>
               <span>Stadium Ground, Pandharpur</span>
             </div>
@@ -42,32 +68,36 @@ export default function LiveMatch() {
           </div>
 
           {/* RIGHT TEAM */}
-          <div className="team team--right">
+          <div className="live-match-team live-match-team-right">
+
             <h3>BPL Kings</h3>
 
-            <div className="score">
+            <div className="live-match-score">
               <span>Yet to Bat</span>
             </div>
 
             <small>Target: 129</small>
+
           </div>
 
         </div>
 
-        {/* ================= EXTRA MATCH INFO ================= */}
-        <div className="live-meta">
+        {/* ===================================================
+            MATCH META
+        =================================================== */}
+        <div className="live-match-meta">
 
-          <div className="meta-item">
+          <div className="live-match-meta-card">
             <span>Run Rate</span>
             <strong>9.1</strong>
           </div>
 
-          <div className="meta-item">
+          <div className="live-match-meta-card">
             <span>Current Over</span>
             <strong>14.2</strong>
           </div>
 
-          <div className="meta-item">
+          <div className="live-match-meta-card">
             <span>Match Status</span>
             <strong>Exciting Chase</strong>
           </div>

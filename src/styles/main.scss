@@ -31,8 +31,7 @@
 ========================================================= */
 
 
-@use "./components/navbar/navbar";
-@use "./components/navbar/topbar";
+@use "./components/navbar/navbar.index";
 @use "./components/navbar/mobileMenu";
 @use "./components/theme/themeSwitcher";
 
@@ -53,6 +52,9 @@
 // 3. Matches page styles
 @use "./pages/matches/matches.index";
 
+// 4. PointsTable Oage styles
+@use "./pages/pointsTable/pointsTable.index";
+
 // 4. Players page styles
 @use "./pages/players/players.index";
 
@@ -61,7 +63,7 @@
 
 @use "./pages/auction";
 @use "./pages/gallery";
-@use "./pages/pointsTable";
+
 @use "./pages/admin";
 
 /* =========================================================

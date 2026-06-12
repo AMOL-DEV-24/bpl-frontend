@@ -1,205 +1,103 @@
 /* =========================================================
-   IMPORTS
-========================================================= */
-@use "../../abstracts/breakpoints" as *;
+   PLAYERS PAGE — INDEX
+   Scope   : .players-page
+   Purpose : Page-level shell. Imports all partials.
+             Only page wrapper and header styles live here.
+             Component styles stay in their own files.
+   ========================================================= */
 
-/* =========================================================
-   FORWARD MODULE STYLES
-========================================================= */
+@use "../../abstracts/breakpoints" as *;
 
 @forward "./playerStats";
 @forward "./playerFilters";
-@forward "./playerRegistration";
+@forward "./playerRegistrationButton";
 @forward "./playerGrid";
 @forward "./playerCard";
 
 /* =========================================================
-   PLAYERS PAGE
-   ---------------------------------------------------------
-   Features:
-   - Premium Sports UI
-   - Theme Aware
-   - Hero Header
-   - Responsive Layout
-========================================================= */
-
+   PLAYERS PAGE WRAPPER
+   Full viewport shell. Theme-controlled bg and color.
+   ========================================================= */
 .players-page {
-  position: relative;
-
   min-height: 100vh;
-
   background: var(--bg);
   color: var(--text);
-
-  transition: all 0.3s ease;
 }
 
 /* =========================================================
-   PLAYERS HEADER
-========================================================= */
-
-.players-header {
-  position: relative;
-
-  padding: 80px 0 50px;
-
-  text-align: center;
-
-  background:
-    radial-gradient(
-      circle at top,
-      color-mix(
-        in srgb,
-        var(--skin-color) 10%,
-        transparent
-      ),
-      transparent 60%
-    );
-
+   PLAYERS PAGE HEADER
+   Slim hero strip with title and subtitle.
+   ========================================================= */
+.players-page-header {
+  padding: 32px 0 24px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 /* =========================================================
-   HEADER TITLE
-========================================================= */
+   PLAYERS PAGE CONTAINER
+   Shared max-width wrapper used across all sections.
+   ========================================================= */
+.players-page-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
 
-.players-header h1 {
-  font-size: 52px;
-  font-weight: 900;
-
-  letter-spacing: 1px;
-
+/* =========================================================
+   PLAYERS PAGE TITLE
+   Primary H1 display heading.
+   ========================================================= */
+.players-page-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  margin: 0 0 6px;
   color: var(--text);
-
-  span {
-    color: var(--skin-color);
-  }
 }
 
 /* =========================================================
-   HEADER DESCRIPTION
-========================================================= */
-
-.players-header p {
-  margin-top: 12px;
-
-  max-width: 650px;
-
-  margin-left: auto;
-  margin-right: auto;
-
-  font-size: 16px;
-  line-height: 1.7;
-
+   PLAYERS PAGE SUBTITLE
+   Supporting descriptor below page title.
+   ========================================================= */
+.players-page-subtitle {
+  font-size: 0.9rem;
   color: var(--muted);
+  margin: 0;
+  line-height: 1.5;
 }
 
 /* =========================================================
-   SECTION SPACING
-========================================================= */
+   RESPONSIVE — PLAYERS PAGE
+   ========================================================= */
 
-.players-page section {
-  position: relative;
-}
-
-/* =========================================================
-   XXL BREAKPOINT (>= 1400px)
-========================================================= */
-
-@include xxl {
-  .players-header h1 {
-    font-size: 56px;
-  }
-}
-
-/* =========================================================
-   XL BREAKPOINT (<= 1200px)
-========================================================= */
-
-@include xl {
-  .players-header h1 {
-    font-size: 48px;
-  }
-}
-
-/* =========================================================
-   LG BREAKPOINT (<= 992px)
-========================================================= */
-
-@include lg {
-  .players-header h1 {
-    font-size: 42px;
-  }
-
-  .players-header p {
-    font-size: 15px;
-  }
-}
-
-/* =========================================================
-   MD BREAKPOINT (<= 768px)
-========================================================= */
-
+/* =======================================================
+   MD (<= 768px)
+   ======================================================= */
 @include md {
-  .players-header {
-    padding: 70px 0 40px;
+  .players-page-header {
+    padding: 24px 0 18px;
   }
 
-  .players-header h1 {
-    font-size: 36px;
-  }
-
-  .players-header p {
-    font-size: 14px;
+  .players-page-title {
+    font-size: 1.6rem;
   }
 }
 
-/* =========================================================
-   SM BREAKPOINT (<= 576px)
-========================================================= */
-
+/* =======================================================
+   SM (<= 576px)
+   ======================================================= */
 @include sm {
-  .players-header {
-    padding: 60px 0 35px;
-  }
-
-  .players-header h1 {
-    font-size: 32px;
-  }
-
-  .players-header p {
-    font-size: 13px;
+  .players-page-header {
+    padding: 18px 0 14px;
   }
 }
 
-/* =========================================================
-   XS BREAKPOINT (<= 420px)
-========================================================= */
-
-@include xs {
-  .players-header h1 {
-    font-size: 28px;
-  }
-
-  .players-header p {
-    max-width: 100%;
-  }
-}
-
-/* =========================================================
-   XXS BREAKPOINT (<= 360px)
-========================================================= */
-
+/* =======================================================
+   XXS (<= 360px)
+   ======================================================= */
 @include xxs {
-  .players-header {
-    padding: 50px 0 30px;
-  }
-
-  .players-header h1 {
-    font-size: 24px;
-  }
-
-  .players-header p {
-    font-size: 12px;
+  .players-page-subtitle {
+    font-size: 0.8rem;
   }
 }

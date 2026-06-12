@@ -1,12 +1,30 @@
 /* =========================================================
    IMPORTS
+   ---------------------------------------------------------
+   Abstracts only.
+   Breakpoint mixins do not generate CSS themselves.
 ========================================================= */
 @use "../../abstracts/breakpoints" as *;
 
 /* =========================================================
-   FORWARD HOME MODULES
-========================================================= */
+   HOME PAGE MODULES
+   ---------------------------------------------------------
+   Each module owns its own styles.
 
+   Rules:
+   - No component styles inside home.scss
+   - No global selectors
+   - Every component must scope itself
+
+   Components:
+   - Hero
+   - Announcements
+   - Live Match
+   - Tournament Stats
+   - Teams Preview
+   - Banners
+   - Sponsors
+========================================================= */
 @forward "./hero";
 @forward "./announcements";
 @forward "./liveMatch";
@@ -16,12 +34,18 @@
 @forward "./sponsors";
 
 /* =========================================================
-   HOME PAGE
+   HOME PAGE ROOT
    ---------------------------------------------------------
-   Features:
-   - Global Homepage Layout
-   - Theme Aware
-   - Premium Sports UI
+   Scope:
+   <main className="home-page">
+
+   Purpose:
+   - Page wrapper
+   - Shared section spacing
+   - Prevent horizontal overflow
+
+   IMPORTANT:
+   Never place component-specific styles here.
 ========================================================= */
 
 .home-page {
@@ -34,145 +58,60 @@
 
   overflow-x: hidden;
 
-  transition: all 0.3s ease;
-}
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 
-/* =========================================================
-   COMMON SECTION SPACING
-========================================================= */
+  /* =======================================================
+     GLOBAL HOME SECTION SPACING
+     -------------------------------------------------------
+     Applies ONLY to sections inside home page.
 
-.home-page section {
-  position: relative;
+     Components can override if required.
+  ======================================================= */
+  section {
+    position: relative;
 
-  padding: 80px 0;
-}
-
-/* =========================================================
-   SECTION TITLES
-========================================================= */
-
-.section-title {
-  margin-bottom: 50px;
-
-  text-align: center;
-}
-
-.section-title h2 {
-  font-size: 42px;
-  font-weight: 900;
-
-  color: var(--text);
-}
-
-.section-title p {
-  margin-top: 10px;
-
-  color: var(--muted);
-
-  max-width: 650px;
-
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* =========================================================
-   XXL BREAKPOINT (>= 1400px)
-========================================================= */
-
-@include xxl {
-  .section-title h2 {
-    font-size: 46px;
-  }
-}
-
-/* =========================================================
-   XL BREAKPOINT (<= 1200px)
-========================================================= */
-
-@include xl {
-  .section-title h2 {
-    font-size: 40px;
-  }
-}
-
-/* =========================================================
-   LG BREAKPOINT (<= 992px)
-========================================================= */
-
-@include lg {
-  .home-page section {
-    padding: 70px 0;
+    padding: 80px 0;
   }
 
-  .section-title h2 {
-    font-size: 36px;
-  }
-}
-
-/* =========================================================
-   MD BREAKPOINT (<= 768px)
-========================================================= */
-
-@include md {
-  .home-page section {
-    padding: 60px 0;
+  /* =======================================================
+     LARGE DESKTOP
+     <= 992px
+  ======================================================= */
+  @include lg {
+    section {
+      padding: 70px 0;
+    }
   }
 
-  .section-title {
-    margin-bottom: 40px;
+  /* =======================================================
+     TABLET
+     <= 768px
+  ======================================================= */
+  @include md {
+    section {
+      padding: 60px 0;
+    }
   }
 
-  .section-title h2 {
-    font-size: 32px;
-  }
-}
-
-/* =========================================================
-   SM BREAKPOINT (<= 576px)
-========================================================= */
-
-@include sm {
-  .home-page section {
-    padding: 50px 0;
+  /* =======================================================
+     MOBILE
+     <= 576px
+  ======================================================= */
+  @include sm {
+    section {
+      padding: 50px 0;
+    }
   }
 
-  .section-title h2 {
-    font-size: 28px;
-  }
-
-  .section-title p {
-    font-size: 14px;
-  }
-}
-
-/* =========================================================
-   XS BREAKPOINT (<= 420px)
-========================================================= */
-
-@include xs {
-  .section-title h2 {
-    font-size: 24px;
-  }
-
-  .section-title p {
-    font-size: 13px;
-  }
-}
-
-/* =========================================================
-   XXS BREAKPOINT (<= 360px)
-========================================================= */
-
-@include xxs {
-  .home-page section {
-    padding: 40px 0;
-  }
-
-  .section-title h2 {
-    font-size: 22px;
-  }
-
-  .section-title p {
-    font-size: 12px;
+  /* =======================================================
+     EXTRA SMALL
+     <= 360px
+  ======================================================= */
+  @include xxs {
+    section {
+      padding: 40px 0;
+    }
   }
 }

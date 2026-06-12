@@ -1,33 +1,47 @@
+/* =========================================================
+   TEAM STATS SECTION
+   ---------------------------------------------------------
+   Scope   : .team-stats
+   Purpose : Quick tournament statistics overview
+
+   Structure:
+   - team-stats
+     - team-stats-grid
+       - team-stats-card
+========================================================= */
+
 export default function TeamStats() {
   return (
     <section className="team-stats">
+
       <div className="container">
 
-        <div className="stats-grid">
+        <div className="team-stats-grid">
 
-          <div className="stat-card">
-            <h3>8</h3>
+          <div className="team-stats-card">
+            <h3>7</h3>
             <p>Total Teams</p>
           </div>
 
-          <div className="stat-card">
-            <h3>120</h3>
+          <div className="team-stats-card">
+            <h3>77</h3>
             <p>Total Players</p>
           </div>
 
-          <div className="stat-card">
-            <h3>32</h3>
-            <p>Total Matches</p>
+          <div className="team-stats-card">
+            <h3>21</h3>
+            <p>League Matches</p>
           </div>
 
-          <div className="stat-card">
+          <div className="team-stats-card">
             <h3>1</h3>
-            <p>Champion</p>
+            <p>Champion Team</p>
           </div>
 
         </div>
 
       </div>
+
     </section>
   );
 }

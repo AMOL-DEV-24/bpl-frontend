@@ -1,88 +1,112 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { Player } from "./types";
+import { usePlayers } from "@/redux/modules/player/usePlayers";
 
-import PlayerStats from "./components/PlayerStats";
-import PlayerFilters from "./components/PlayerFilters";
-import PlayerGrid from "./components/PlayerGrid";
+import PlayerStats              from "./components/PlayerStats";
+import PlayerFilters            from "./components/PlayerFilters";
+import PlayerGrid               from "./components/PlayerGrid";
 import PlayerRegistrationButton from "./components/PlayerRegistrationButton";
 
-const players: Player[] = [
-  {
-    id: 1,
-    name: "Amol Pawar",
-    image: "/players/player-1.jpg",
-    role: "BATSMAN",
-    matches: 12,
-    runs: 356,
-    wickets: 0,
-    strikeRate: 148.5,
-    economy: 0,
-    village: "Bhalawani",
-  },
-  {
-    id: 2,
-    name: "Rohit",
-    image: "/players/player-2.jpg",
-    role: "BOWLER",
-    matches: 10,
-    runs: 50,
-    wickets: 15,
-    strikeRate: 110,
-    economy: 6.2,
-    village: "Bhalawani",
-  },
-  {
-    id: 3,
-    name: "Sagar",
-    image: "/players/player-3.jpg",
-    role: "ALL_ROUNDER",
-    matches: 11,
-    runs: 210,
-    wickets: 9,
-    strikeRate: 142,
-    economy: 7.1,
-    village: "Bhalawani",
-  },
-];
+/* =========================================================
+   PLAYERS PAGE
+   Route   : /players
+   Purpose : Root page shell — stats summary, role filters,
+             registration CTA, and full player grid.
+             Data fetched via usePlayers() RTK Query hook.
+   ========================================================= */
 
 export default function PlayersPage() {
-  const [activeRole, setActiveRole] = useState("ALL");
+  const {
+    filteredPlayers,
+    stats,
+    activeRole,
+    setActiveRole,
+    page,
+    totalPages,
+    goToNextPage,
+    goToPrevPage,
+    isLoading,
+    isError,
+  } = usePlayers();
 
-  const filteredPlayers = useMemo(() => {
-    if (activeRole === "ALL") return players;
-    return players.filter((player) => player.role === activeRole);
-  }, [activeRole]);
+  /* ── Loading State ── */
+  if (isLoading) {
+    return (
+      <main className="players-page">
+        <div className="players-page-container">
+          <div className="players-page-loader">Loading players...</div>
+        </div>
+      </main>
+    );
+  }
+
+  /* ── Error State ── */
+  if (isError) {
+    return (
+      <main className="players-page">
+        <div className="players-page-container">
+          <div className="players-page-error">Failed to load players. Please try again.</div>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="players-page">
 
-      <section className="page-header">
-        <div className="container">
-          <h1>Players</h1>
-          <p>BPL Official Players Directory</p>
+      {/* ── Page Header ── */}
+      <section className="players-page-header">
+        <div className="players-page-container">
+          <h1 className="players-page-title">Players</h1>
+          <p className="players-page-subtitle">BPL Official Players Directory</p>
         </div>
       </section>
 
-      <div className="container">
+      {/* ── Page Body ── */}
+      <div className="players-page-container">
 
+        {/* ── Role Stats Summary ── */}
         <PlayerStats
-          total={players.length}
-          batsmen={players.filter((p) => p.role === "BATSMAN").length}
-          bowlers={players.filter((p) => p.role === "BOWLER").length}
-          keepers={players.filter((p) => p.role === "WICKET_KEEPER").length}
-          allRounders={players.filter((p) => p.role === "ALL_ROUNDER").length}
+          total={stats?.total}
+          batsmen={stats?.batsmen}
+          bowlers={stats?.bowlers}
+          keepers={stats?.keepers}
+          allRounders={stats?.allRounders}
         />
 
-        <PlayerFilters
-          active={activeRole}
-          onChange={setActiveRole}
-        />
+        {/* ── Role Filter Tabs ── */}
+        <PlayerFilters active={activeRole} onChange={setActiveRole} />
 
+        {/* ── Registration CTA ── */}
         <PlayerRegistrationButton />
 
+        {/* ── Player Grid ── */}
         <PlayerGrid players={filteredPlayers} />
+
+        {/* ── Pagination (only when more than one page exists) ── */}
+        {totalPages > 1 && (
+          <nav className="players-page-pagination">
+            <button
+              className="players-page-pagination-btn"
+              disabled={page === 1}
+              onClick={goToPrevPage}
+            >
+              Prev
+            </button>
+
+            <span className="players-page-pagination-info">
+              {page} / {totalPages}
+            </span>
+
+            <button
+              className="players-page-pagination-btn"
+              disabled={page === totalPages}
+              onClick={goToNextPage}
+            >
+              Next
+            </button>
+          </nav>
+        )}
 
       </div>
 

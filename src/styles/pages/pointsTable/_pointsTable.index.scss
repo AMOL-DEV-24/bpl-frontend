@@ -1,43 +1,41 @@
 /* =========================================================
-   MATCHES PAGE — INDEX
-   Scope   : .matches-page
+   POINTS TABLE PAGE — INDEX
+   Scope   : .points-page
    Purpose : Page-level shell. Imports all partials.
-             Only page wrapper styles live here.
+             Only page wrapper and header styles live here.
              Component styles stay in their own files.
    ========================================================= */
 
 @use "../../abstracts/breakpoints" as *;
 
-@forward "./liveScoreCard";
-@forward "./matchCard";
-@forward "./matchList";
+@forward "./components/pointsTable";
+@forward "./components/topBatters";
+@forward "./components/topBowlers";
 
 /* =========================================================
-   MATCHES PAGE WRAPPER
-   Full viewport shell. Background and color driven
-   by CSS custom properties (theme controlled).
+   POINTS PAGE WRAPPER
+   Full viewport shell. Theme-controlled bg and color.
    ========================================================= */
-.matches-page {
+.points-page {
   min-height: 100vh;
   background: var(--bg);
   color: var(--text);
 }
 
 /* =========================================================
-   MATCHES PAGE HEADER
-   Slim section above live score. Contains title
-   and subtitle descriptor.
+   POINTS PAGE HEADER
+   Slim hero strip with title and subtitle.
    ========================================================= */
-.matches-page-header {
+.points-page-header {
   padding: 32px 0 24px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 /* =========================================================
-   MATCHES PAGE CONTAINER
-   Shared max-width wrapper used across page sections.
+   POINTS PAGE CONTAINER
+   Shared max-width wrapper used across all sections.
    ========================================================= */
-.matches-page-container {
+.points-page-container {
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
@@ -45,10 +43,10 @@
 }
 
 /* =========================================================
-   MATCHES PAGE TITLE
+   POINTS PAGE TITLE
    Primary H1 display heading.
    ========================================================= */
-.matches-page-title {
+.points-page-title {
   font-size: clamp(1.6rem, 3.5vw, 2.4rem);
   font-weight: 800;
   letter-spacing: 0.02em;
@@ -57,10 +55,10 @@
 }
 
 /* =========================================================
-   MATCHES PAGE SUBTITLE
-   Supporting descriptor below the page title.
+   POINTS PAGE SUBTITLE
+   Supporting descriptor below page title.
    ========================================================= */
-.matches-page-subtitle {
+.points-page-subtitle {
   font-size: 0.9rem;
   color: var(--muted);
   margin: 0;
@@ -68,38 +66,59 @@
 }
 
 /* =========================================================
-   RESPONSIVE — MATCHES PAGE
+   POINTS PAGE STATS SECTION
+   Wrapper section around the two leaderboard cards.
+   ========================================================= */
+.points-page-stats {
+  padding: 32px 0 72px;
+}
+
+/* =========================================================
+   POINTS PAGE STATS GRID
+   Two-column grid — TopBatters + TopBowlers side by side.
+   ========================================================= */
+.points-page-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* =========================================================
+   RESPONSIVE — POINTS PAGE
    ========================================================= */
 
-/* ======================================================= 
-   MD (<= 768px) 
+/* =======================================================
+   MD (<= 768px)
    ======================================================= */
 @include md {
-  /* Stack header with reduced padding on tablets */
-  .matches-page-header {
+  /* Stack leaderboards vertically on tablet */
+  .points-page-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .points-page-header {
     padding: 24px 0 18px;
   }
-
-  .matches-page-title {
-    font-size: 1.6rem;
-  }
 }
 
-/* ======================================================= 
-   SM (<= 576px) 
+/* =======================================================
+   SM (<= 576px)
    ======================================================= */
 @include sm {
-  /* Tighter padding on small phones */
-  .matches-page-header {
+  .points-page-header {
     padding: 18px 0 14px;
+  }
+
+  .points-page-stats {
+    padding: 24px 0 48px;
   }
 }
 
-/* ======================================================= 
-   XXS (<= 360px) 
+/* =======================================================
+   XXS (<= 360px)
    ======================================================= */
 @include xxs {
-  .matches-page-subtitle {
+  .points-page-subtitle {
     font-size: 0.8rem;
   }
 }

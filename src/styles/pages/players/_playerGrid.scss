@@ -1,193 +1,145 @@
 /* =========================================================
-   IMPORTS
-========================================================= */
+   PLAYER GRID
+   Scope   : .player-grid, .player-grid-empty
+   Purpose : Responsive grid shell for PlayerCard tiles.
+             Handles empty state UI when no results match.
+   ========================================================= */
+
 @use "../../abstracts/breakpoints" as *;
 
 /* =========================================================
-   PLAYERS GRID SECTION
-   ---------------------------------------------------------
-   Features:
-   - Responsive Grid Layout
-   - Premium Card Spacing
-   - Empty State Support
-   - Theme Aware Design
-========================================================= */
-
-.players-grid-section {
-  position: relative;
-
-  padding: 20px 0 50px;
+   PLAYER GRID SECTION
+   Outer wrapper with top/bottom spacing.
+   ========================================================= */
+.player-grid {
+  padding: 24px 0 72px;
 }
 
 /* =========================================================
-   PLAYERS GRID
-========================================================= */
-
-.players-grid {
+   PLAYER GRID LIST
+   4-column responsive card grid.
+   Resets UL default styles.
+   ========================================================= */
+.player-grid-list {
   display: grid;
-
   grid-template-columns: repeat(4, 1fr);
-
-  gap: 24px;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 /* =========================================================
-   EMPTY STATE
-========================================================= */
-
-.players-empty {
+   PLAYER GRID LIST ITEM
+   Individual grid cell — fills full card height.
+   ========================================================= */
+.player-grid-list-item {
   display: flex;
-
   flex-direction: column;
+}
 
+/* =========================================================
+   PLAYER GRID EMPTY
+   Centered empty state — shown when no players match filter.
+   ========================================================= */
+.player-grid-empty {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-
+  gap: 10px;
+  padding: 64px 20px;
   text-align: center;
-
-  min-height: 320px;
-
-  padding: 40px 20px;
-
-  margin: 40px 0;
-
-  border-radius: 20px;
-
-  background: color-mix(
-    in srgb,
-    var(--card-bg) 85%,
-    transparent
-  );
-
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
-  backdrop-filter: blur(10px);
-
-  transition: all 0.3s ease;
-}
-
-.players-empty h3 {
-  font-size: 26px;
-  font-weight: 800;
-
-  color: var(--text);
-}
-
-.players-empty p {
-  margin-top: 10px;
-
-  max-width: 500px;
-
-  font-size: 14px;
-  line-height: 1.7;
-
-  color: var(--muted);
 }
 
 /* =========================================================
-   XXL BREAKPOINT (>= 1400px)
-========================================================= */
+   PLAYER GRID EMPTY ICON
+   Large decorative emoji icon.
+   ========================================================= */
+.player-grid-empty-icon {
+  font-size: 2.8rem;
+  line-height: 1;
+  opacity: 0.5;
+}
 
+/* =========================================================
+   PLAYER GRID EMPTY TITLE
+   "No Players Found" heading.
+   ========================================================= */
+.player-grid-empty-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+/* =========================================================
+   PLAYER GRID EMPTY TEXT
+   Supporting descriptor below empty title.
+   ========================================================= */
+.player-grid-empty-text {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0;
+  max-width: 280px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   RESPONSIVE — PLAYER GRID
+   ========================================================= */
+
+/* =======================================================
+   XXL (<= 1400px)
+   ======================================================= */
 @include xxl {
-  .players-grid {
+  /* 4 columns maintained at xxl */
+  .player-grid-list {
     grid-template-columns: repeat(4, 1fr);
-
-    gap: 28px;
   }
 }
 
-/* =========================================================
-   XL BREAKPOINT (<= 1200px)
-========================================================= */
-
-@include xl {
-  .players-grid {
+/* =======================================================
+   LG (<= 992px)
+   ======================================================= */
+@include lg {
+  /* 3 columns on smaller desktops */
+  .player-grid-list {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* =========================================================
-   LG BREAKPOINT (<= 992px)
-========================================================= */
-
-@include lg {
-  .players-grid {
-    grid-template-columns: repeat(2, 1fr);
-
-    gap: 20px;
-  }
-}
-
-/* =========================================================
-   MD BREAKPOINT (<= 768px)
-========================================================= */
-
+/* =======================================================
+   MD (<= 768px)
+   ======================================================= */
 @include md {
-  .players-grid {
+  /* 2 columns on tablets */
+  .player-grid-list {
     grid-template-columns: repeat(2, 1fr);
-
-    gap: 18px;
-  }
-
-  .players-empty {
-    min-height: 280px;
-  }
-}
-
-/* =========================================================
-   SM BREAKPOINT (<= 576px)
-========================================================= */
-
-@include sm {
-  .players-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .players-grid-section {
-    padding: 10px 0 40px;
-  }
-
-  .players-empty {
-    min-height: 250px;
-  }
-}
-
-/* =========================================================
-   XS BREAKPOINT (<= 420px)
-========================================================= */
-
-@include xs {
-  .players-empty {
-    padding: 30px 15px;
-  }
-
-  .players-empty h3 {
-    font-size: 22px;
-  }
-
-  .players-empty p {
-    font-size: 13px;
-  }
-}
-
-/* =========================================================
-   XXS BREAKPOINT (<= 360px)
-========================================================= */
-
-@include xxs {
-  .players-grid {
     gap: 16px;
   }
 
-  .players-empty {
-    min-height: 220px;
+  .player-grid {
+    padding: 20px 0 48px;
   }
+}
 
-  .players-empty h3 {
-    font-size: 20px;
+/* =======================================================
+   XS (<= 420px)
+   ======================================================= */
+@include xs {
+  /* Stay 2 columns but tighter gap */
+  .player-grid-list {
+    gap: 12px;
   }
+}
 
-  .players-empty p {
-    font-size: 12px;
+/* =======================================================
+   XXS (<= 360px)
+   ======================================================= */
+@include xxs {
+  /* Single column on very small phones */
+  .player-grid-list {
+    grid-template-columns: 1fr;
   }
 }

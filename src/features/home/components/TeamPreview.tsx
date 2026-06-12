@@ -1,3 +1,17 @@
+/* =========================================================
+   TEAMS PREVIEW SECTION
+   ---------------------------------------------------------
+   Scope   : .teams-preview
+   Purpose : Homepage participating teams showcase
+   Layout  : Responsive team card grid
+
+   Structure:
+   - teams-preview
+     - teams-preview-heading
+     - teams-preview-grid
+       - teams-preview-card
+========================================================= */
+
 import Image from "next/image";
 
 const teams = [
@@ -34,8 +48,8 @@ const teams = [
   {
     id: 7,
     name: "Mahalaxmi Warriors",
-    image: "/assets/images/teams/Mahalaxmi Warriors.png"
-  }
+    image: "/assets/images/teams/Mahalaxmi Warriors.png",
+  },
 ];
 
 export default function TeamsPreview() {
@@ -43,7 +57,7 @@ export default function TeamsPreview() {
     <section className="teams-preview">
       <div className="container">
 
-        <div className="section-heading">
+        <div className="teams-preview-heading">
           <h2>Participating Teams</h2>
 
           <p>
@@ -52,23 +66,23 @@ export default function TeamsPreview() {
           </p>
         </div>
 
-        <div className="teams-grid">
+        <div className="teams-preview-grid">
 
           {teams.map((team) => (
             <article
               key={team.id}
-              className="team-card"
+              className="teams-preview-card"
             >
-              <div className="team-image">
+              <div className="teams-preview-image">
                 <Image
                   src={team.image}
                   alt={team.name}
                   fill
-                  className="team-img"
+                  className="teams-preview-img"
                 />
               </div>
 
-              <div className="team-content">
+              <div className="teams-preview-content">
                 <h3>{team.name}</h3>
               </div>
             </article>

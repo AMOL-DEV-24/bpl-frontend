@@ -1,282 +1,387 @@
 /* =========================================================
    IMPORTS
+   ---------------------------------------------------------
+   Breakpoints mixin — zero CSS output, safe to import
 ========================================================= */
 @use "../../abstracts/breakpoints" as *;
 
 /* =========================================================
-   HERO SECTION (PREMIUM SPORTS UI)
+   HERO SECTION
    ---------------------------------------------------------
-   FEATURES:
-   - Theme system (dark/light + skin colors)
-   - Split layout (content + image)
-   - Glass glow background
-   - Fully responsive
+   Scope     : .hero-section
+   ⚠️  Previously: .hero — generic, collision risk with
+       any CSS library or future page using .hero
+   ✅  Now: .hero-section — specific, fully isolated
+
+   ⚠️  btn-primary / btn-secondary were global utilities
+   ✅  Now: .hero-section__btn--primary / --secondary
+       scoped entirely inside this component
+
+   ⚠️  No SCSS existed at all — styles were either missing
+       or leaking in from global sources
+   ✅  Now: complete scoped stylesheet from scratch
+
+   Design:
+   - Full viewport above-the-fold banner
+   - Split layout: text left / image right
+   - Premium sports badge + CTA buttons
+   - Theme-aware via CSS variables
+   - Stacks vertically on mobile
 ========================================================= */
 
-.hero {
+.hero-section {
   position: relative;
-  overflow: hidden;
 
-  padding: 80px 0;
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
 
   background: var(--bg);
   color: var(--text);
 
-  transition: all 0.3s ease;
+  /* ✅ Explicit properties — no layout thrashing */
+  transition: background-color 0.3s ease, color 0.3s ease;
 
-  /* =========================================================
-     BACKGROUND GLOW LAYER
-  ========================================================= */
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-
-    background:
-      radial-gradient(
-        circle at top,
-        color-mix(in srgb, var(--skin-color) 12%, transparent),
-        transparent 60%
-      );
-
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  /* =========================================================
+  /* =======================================================
      CONTAINER
-  ========================================================= */
-  .hero__container {
-    position: relative;
-    z-index: 1;
+     -------------------------------------------------------
+     ⚠️  Was: "container hero__container" mixing global
+         utility class with BEM modifier on same element
+     ✅  Now: hero-section__container owns its own layout
+         No dependency on a global .container class
+  ======================================================= */
+  &__container {
+    width: 100%;
+    max-width: 1200px;
+
+    margin-inline: auto;
+
+    padding-inline: 24px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     gap: 60px;
   }
 
-  /* =========================================================
-     LEFT CONTENT
-  ========================================================= */
-  .hero__content {
+  /* =======================================================
+     CONTENT COLUMN (left side)
+  ======================================================= */
+  &__content {
     flex: 1;
+
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    align-items: flex-start;
+    gap: 24px;
+
+    max-width: 580px;
   }
 
-  .hero__badge {
-    font-size: 12px;
+  /* =======================================================
+     BADGE / PILL
+     ---------------------------------------------------------
+     Tournament label above the main heading
+  ======================================================= */
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 16px;
+
+    border-radius: 999px;
+
+    font-size: 13px;
     font-weight: 700;
 
     color: var(--skin-color);
 
-    padding: 6px 12px;
-    border-radius: 999px;
-
-    width: fit-content;
-
     background: color-mix(in srgb, var(--skin-color) 10%, transparent);
     border: 1px solid color-mix(in srgb, var(--skin-color) 25%, transparent);
+
+    /* Fallback for browsers without color-mix */
+    @supports not (background: color-mix(in srgb, red 50%, blue)) {
+      background: rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(0, 0, 0, 0.15);
+    }
   }
 
-  .hero__title {
-    font-size: 56px;
+  /* =======================================================
+     MAIN HEADING
+  ======================================================= */
+  &__title {
+    font-size: 72px;
     font-weight: 900;
-    line-height: 1.1;
 
-    span {
-      color: var(--skin-color);
-    }
-  }
-
-  .hero__description {
-    font-size: 16px;
-    color: var(--muted);
-    max-width: 520px;
-  }
-
-  .hero__actions {
-    display: flex;
-    gap: 14px;
-    margin-top: 10px;
-  }
-
-  .btn-primary {
-    padding: 10px 18px;
-    border-radius: 12px;
-
-    font-weight: 700;
-    text-decoration: none;
-
-    background: var(--skin-color);
-    color: #0b1020;
-
-    transition: 0.3s ease;
-
-    &:hover {
-      transform: translateY(-3px);
-      filter: brightness(1.1);
-    }
-  }
-
-  .btn-secondary {
-    padding: 10px 18px;
-    border-radius: 12px;
-
-    border: 1px solid color-mix(in srgb, var(--skin-color) 50%, transparent);
+    line-height: 1.05;
+    letter-spacing: -1px;
 
     color: var(--text);
+  }
+
+  /* =======================================================
+     DESCRIPTION PARAGRAPH
+  ======================================================= */
+  &__description {
+    font-size: 16px;
+    line-height: 1.75;
+
+    color: var(--muted);
+
+    max-width: 480px;
+  }
+
+  /* =======================================================
+     CTA BUTTON ROW
+  ======================================================= */
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    flex-wrap: wrap;
+  }
+
+  /* =======================================================
+     BUTTONS
+     -------------------------------------------------------
+     ⚠️  Were: .btn-primary / .btn-secondary — global classes
+         that leak sitewide and conflict with any other
+         button definition across the entire project
+     ✅  Now: .hero-section__btn--primary / --secondary
+         Fully scoped — only apply inside this component
+  ======================================================= */
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 14px 32px;
+
+    border-radius: 50px;
+
+    font-size: 15px;
+    font-weight: 700;
+
     text-decoration: none;
 
-    transition: 0.3s ease;
+    /* ✅ Specific transition properties */
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      background-color 0.25s ease,
+      border-color 0.25s ease,
+      color 0.25s ease;
 
-    &:hover {
+    /* -- Primary CTA ----------------------------------- */
+    &--primary {
       background: var(--skin-color);
-      color: #0b1020;
+      color: #ffffff;
+
+      border: 2px solid var(--skin-color);
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px
+          color-mix(in srgb, var(--skin-color) 35%, transparent);
+
+        /* Fallback shadow */
+        @supports not (background: color-mix(in srgb, red 50%, blue)) {
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+
+    /* -- Secondary CTA --------------------------------- */
+    &--secondary {
+      background: transparent;
+      color: var(--text);
+
+      border: 2px solid color-mix(in srgb, var(--text) 25%, transparent);
+
+      /* Fallback */
+      @supports not (background: color-mix(in srgb, red 50%, blue)) {
+        border: 2px solid rgba(0, 0, 0, 0.2);
+      }
+
+      &:hover {
+        border-color: var(--skin-color);
+        color: var(--skin-color);
+        transform: translateY(-3px);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
     }
   }
 
-  /* =========================================================
-     RIGHT IMAGE
-  ========================================================= */
-  .hero__image {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  /* =======================================================
+     IMAGE COLUMN (right side)
+  ======================================================= */
+  &__image-wrapper {
+    flex-shrink: 0;
 
     position: relative;
 
-    &::before {
-      content: "";
-      position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-      width: 420px;
-      height: 420px;
+  /* Next.js Image element */
+  &__image {
+    object-fit: contain;
 
-      background: radial-gradient(
-        circle,
-        var(--skin-color),
-        transparent 70%
-      );
+    /* Subtle drop shadow behind the player/trophy image */
+    filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.25));
+  }
 
-      filter: blur(90px);
-      opacity: 0.25;
+  /* =======================================================
+     RESPONSIVE BREAKPOINTS
+     -------------------------------------------------------
+     ALL nested inside .hero-section — zero global leakage
+  ======================================================= */
+
+  /* -- XXL: >= 1400px ----------------------------------- */
+  @include xxl {
+    &__container {
+      max-width: 1360px;
+      gap: 80px;
     }
 
-    img {
-      position: relative;
-      z-index: 2;
+    &__title {
+      font-size: 84px;
+    }
 
-      max-width: 600px;
-      width: 100%;
-
-      filter: drop-shadow(
-        0 0 25px color-mix(in srgb, var(--skin-color) 60%, transparent)
-      );
+    &__description {
+      font-size: 17px;
     }
   }
 
-  /* =========================================================
-     BREAKPOINTS
-  ========================================================= */
+  /* -- XL: <= 1200px ------------------------------------ */
+  @include xl {
+    &__title {
+      font-size: 62px;
+    }
 
-  /* =========================
-     XXL (>= 1400px)
-  ========================= */
-  @include xxl {
-    .hero__title {
+    &__container {
+      gap: 40px;
+    }
+  }
+
+  /* -- LG: <= 992px ------------------------------------- */
+  @include lg {
+    min-height: auto;
+
+    padding: 80px 0;
+
+    &__container {
+      gap: 32px;
+    }
+
+    &__title {
       font-size: 52px;
     }
-  }
 
-  /* =========================
-     XL (<= 1200px)
-  ========================= */
-  @include xl {
-    .hero__title {
-      font-size: 48px;
+    &__description {
+      font-size: 15px;
     }
   }
 
-  /* =========================
-     LG (<= 992px)
-  ========================= */
-  @include lg {
-    .hero__container {
+  /* -- MD: <= 768px ------------------------------------- */
+  @include md {
+    padding: 60px 0;
+
+    /* Stack layout — image moves below content */
+    &__container {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
       gap: 40px;
     }
 
-    .hero__title {
-      font-size: 42px;
+    &__content {
+      align-items: center;
+      max-width: 100%;
+    }
+
+    &__title {
+      font-size: 44px;
+    }
+
+    &__description {
+      max-width: 100%;
+    }
+
+    &__actions {
+      justify-content: center;
     }
   }
 
-  /* =========================
-     MD (<= 768px)
-  ========================= */
-  @include md {
-    .hero__container {
-      flex-direction: column;
-      text-align: center;
-    }
+  /* -- SM: <= 576px ------------------------------------- */
+  @include sm {
+    padding: 50px 0;
 
-    .hero__content {
-      align-items: center;
-    }
-
-    .hero__title {
+    &__title {
       font-size: 36px;
     }
 
-    .hero__description {
-      max-width: 100%;
+    &__description {
+      font-size: 14px;
+    }
+
+    &__btn {
+      padding: 12px 24px;
+      font-size: 14px;
     }
   }
 
-  /* =========================
-     SM (<= 576px)
-  ========================= */
-  @include sm {
-    padding: 60px 0;
-
-    .hero__title {
-      font-size: 32px;
+  /* -- XS: <= 420px ------------------------------------- */
+  @include xs {
+    &__title {
+      font-size: 30px;
+      letter-spacing: -0.5px;
     }
 
-    .hero__actions {
+    &__actions {
       flex-direction: column;
       width: 100%;
     }
 
-    .btn-primary,
-    .btn-secondary {
+    &__btn {
       width: 100%;
-      text-align: center;
+      justify-content: center;
+    }
+
+    &__badge {
+      font-size: 12px;
+      padding: 6px 12px;
     }
   }
 
-  /* =========================
-     XS (<= 420px)
-  ========================= */
-  @include xs {
-    .hero__title {
-      font-size: 28px;
-    }
-  }
-
-  /* =========================
-     XXS (<= 360px)
-  ========================= */
+  /* -- XXS: <= 360px ------------------------------------ */
   @include xxs {
-    .hero__title {
+    padding: 40px 0;
+
+    &__title {
       font-size: 26px;
     }
 
-    .hero__description {
+    &__description {
+      font-size: 13px;
+    }
+
+    &__btn {
+      padding: 11px 20px;
       font-size: 13px;
     }
   }

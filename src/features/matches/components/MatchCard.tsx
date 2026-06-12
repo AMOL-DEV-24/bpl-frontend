@@ -1,3 +1,9 @@
+/* =========================================================
+   MATCH CARD
+   Purpose : Displays a single match fixture with teams,
+             date, venue, status badge, and CTA button.
+   ========================================================= */
+
 interface MatchCardProps {
   teamA: string;
   teamB: string;
@@ -14,22 +20,35 @@ export default function MatchCard({
   status,
 }: MatchCardProps) {
   return (
-    <div className="match-card">
-      <div className="match-status">
-        {status}
+    <article className="match-card">
+
+      {/* ── Status Badge ── */}
+      <span className="match-card-status">{status}</span>
+
+      {/* ── Teams Block ── */}
+      <div className="match-card-teams">
+        <span className="match-card-team">{teamA}</span>
+        <span className="match-card-vs">VS</span>
+        <span className="match-card-team">{teamB}</span>
       </div>
 
-      <h3>
-        {teamA} vs {teamB}
-      </h3>
+      {/* ── Match Details ── */}
+      <dl className="match-card-details">
+        <div className="match-card-detail">
+          <dt className="match-card-detail-label">Date</dt>
+          <dd className="match-card-detail-value">{date}</dd>
+        </div>
+        <div className="match-card-detail">
+          <dt className="match-card-detail-label">Venue</dt>
+          <dd className="match-card-detail-value">{venue}</dd>
+        </div>
+      </dl>
 
-      <p>{date}</p>
-
-      <p>{venue}</p>
-
-      <button className="btn-primary">
+      {/* ── CTA Button ── */}
+      <button className="match-card-button" type="button">
         Match Center
       </button>
-    </div>
+
+    </article>
   );
 }

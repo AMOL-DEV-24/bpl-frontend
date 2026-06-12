@@ -23,25 +23,31 @@ export default function TopBar() {
 
   return (
     <div className="topbar">
-      <div className="topbar__inner">
 
-        {/* LIVE indicator */}
-        <div className="topbar__live">
-          <span className="dot" />
-          LIVE
-        </div>
+      <div className="container">
 
-        {/* Animated message */}
-        <div className="topbar__message">
-          {messages[index]}
-        </div>
+        <div className="topbar-inner">
 
-        {/* Right badge */}
-        <div className="topbar__badge">
-          BPL 2026
+          {/* Live Status */}
+          <div className="topbar-live">
+            <span className="topbar-live-dot" />
+            <span>LIVE</span>
+          </div>
+
+          {/* Rotating Message */}
+          <div className="topbar-message">
+            {messages[index]}
+          </div>
+
+          {/* Season Badge */}
+          <div className="topbar-badge">
+            Season 2026
+          </div>
+
         </div>
 
       </div>
+
     </div>
   );
 }

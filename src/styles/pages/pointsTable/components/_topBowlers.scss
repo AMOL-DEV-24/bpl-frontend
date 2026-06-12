@@ -1,0 +1,192 @@
+/* =========================================================
+   TOP BOWLERS
+   Scope   : .top-bowlers
+   Purpose : Purple Cap leaderboard card — ranked list
+             of top wicket takers. Premium glass card style.
+   ========================================================= */
+
+@use "../../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   TOP BOWLERS CARD
+   Glass surface card wrapping the full leaderboard.
+   ========================================================= */
+.top-bowlers {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-radius: 16px;
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: rgba(167, 139, 250, 0.4);
+  }
+}
+
+/* =========================================================
+   TOP BOWLERS HEADER
+   Card title row with purple cap emoji and heading.
+   ========================================================= */
+.top-bowlers-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(167, 139, 250, 0.06);
+}
+
+/* =========================================================
+   TOP BOWLERS CAP
+   Purple cap emoji — decorative icon.
+   ========================================================= */
+.top-bowlers-cap {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+/* =========================================================
+   TOP BOWLERS TITLE
+   "Purple Cap" section heading.
+   ========================================================= */
+.top-bowlers-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #a78bfa;
+  margin: 0;
+  letter-spacing: 0.03em;
+}
+
+/* =========================================================
+   TOP BOWLERS LABELS
+   Column header row — Bowler / Wickets labels.
+   ========================================================= */
+.top-bowlers-labels {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* =========================================================
+   TOP BOWLERS LABEL
+   Individual column header label text.
+   ========================================================= */
+.top-bowlers-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* =========================================================
+   TOP BOWLERS LIST
+   Ordered list — resets default OL styles.
+   ========================================================= */
+.top-bowlers-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================================================
+   TOP BOWLERS ITEM
+   Single player row — rank, name, wicket count.
+   ========================================================= */
+.top-bowlers-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  transition: background 0.2s ease;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: rgba(167, 139, 250, 0.05);
+  }
+}
+
+/* =========================================================
+   TOP BOWLERS ITEM RANK
+   Small numbered rank badge.
+   ========================================================= */
+.top-bowlers-item-rank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   TOP BOWLERS ITEM NAME
+   Player name — takes up remaining space.
+   ========================================================= */
+.top-bowlers-item-name {
+  flex: 1;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* =========================================================
+   TOP BOWLERS ITEM WICKETS
+   Wicket count — purple accent bold number.
+   ========================================================= */
+.top-bowlers-item-wickets {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #a78bfa;
+  letter-spacing: 0.02em;
+}
+
+/* =========================================================
+   RESPONSIVE — TOP BOWLERS
+   ========================================================= */
+
+/* =======================================================
+   SM (<= 576px)
+   ======================================================= */
+@include sm {
+  .top-bowlers-header {
+    padding: 14px 16px 12px;
+  }
+
+  .top-bowlers-item {
+    padding: 11px 16px;
+  }
+
+  .top-bowlers-labels {
+    padding: 7px 16px;
+  }
+}
+
+/* =======================================================
+   XXS (<= 360px)
+   ======================================================= */
+@include xxs {
+  .top-bowlers-item-name {
+    font-size: 0.82rem;
+  }
+
+  .top-bowlers-item-wickets {
+    font-size: 0.88rem;
+  }
+}

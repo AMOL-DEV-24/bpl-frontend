@@ -1,250 +1,249 @@
 /* =========================================================
-   IMPORTS
-========================================================= */
+   MATCH CARD
+   Scope   : .match-card
+   Purpose : Display a single cricket match fixture.
+             Shows status badge, teams, date, venue, CTA.
+             Premium glassmorphism — compact IPL style.
+   ========================================================= */
+
 @use "../../abstracts/breakpoints" as *;
 
 /* =========================================================
-   MATCH CARD (PREMIUM SPORTS UI)
-=========================================================
-   Features:
-   - Glassmorphism (dark mode)
-   - Solid clean UI (light mode)
-   - IPL-style hover glow
-   - Responsive design system
-========================================================= */
-
+   MATCH CARD — BASE
+   Glass card with hover lift and accent glow effect.
+   ========================================================= */
 .match-card {
-  position: relative;
-  overflow: hidden;
-
-  padding: 24px;
-  border-radius: 20px;
-
   display: flex;
   flex-direction: column;
-  gap: 10px;
-
-  color: var(--text);
-
-  transition: all 0.3s ease;
-
-  /* =========================================================
-     THEME BASE
-  ========================================================= */
-
+  gap: 12px;
+  padding: 20px;
+  border-radius: 16px;
   background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
 
-  /* =========================================================
-     DARK MODE GLASS EFFECT
-  ========================================================= */
-
-  [data-theme="dark"] & {
-    backdrop-filter: blur(14px);
-    background: rgba(20, 20, 28, 0.55);
-  }
-
-  /* =========================================================
-     LIGHT MODE CLEAN CARD
-  ========================================================= */
-
-  [data-theme="light"] & {
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
-  }
-
-  /* =========================================================
-     HOVER EFFECT (PREMIUM LIFT + GLOW)
-  ========================================================= */
-
+  /* Ambient glow overlay — revealed on hover */
   &::before {
     content: "";
     position: absolute;
     inset: 0;
-    z-index: 0;
-
     background: radial-gradient(
-      circle at top,
-      color-mix(in srgb, var(--skin-color) 18%, transparent),
-      transparent 60%
+      circle at top left,
+      color-mix(in srgb, var(--skin-color) 10%, transparent),
+      transparent 65%
     );
-
     opacity: 0;
-    transition: 0.35s ease;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
   }
 
+  /* Hover lift + glow */
   &:hover {
-    transform: translateY(-6px) scale(1.01);
-
+    transform: translateY(-6px);
     border-color: var(--skin-color);
-
-    box-shadow:
-      0 18px 45px rgba(0, 0, 0, 0.12),
-      0 0 0 1px rgba(0, 245, 255, 0.08);
+    box-shadow: 0 14px 36px rgba(0, 245, 255, 0.1);
 
     &::before {
       opacity: 1;
     }
   }
-
-  /* =========================================================
-     CONTENT LAYER FIX
-  ========================================================= */
-
-  * {
-    position: relative;
-    z-index: 1;
-  }
-
-  /* =========================================================
-     MATCH TITLE
-  ========================================================= */
-
-  h3 {
-    font-size: 18px;
-    font-weight: 800;
-
-    margin: 6px 0;
-
-    color: var(--text);
-    letter-spacing: 0.2px;
-  }
-
-  /* =========================================================
-     MATCH DETAILS TEXT
-  ========================================================= */
-
-  p {
-    font-size: 13px;
-    line-height: 1.4;
-
-    color: var(--muted);
-    margin: 0;
-  }
-
-  /* =========================================================
-     BUTTON INSIDE CARD
-  ========================================================= */
-
-  .btn-primary {
-    margin-top: 12px;
-    width: 100%;
-  }
 }
 
 /* =========================================================
-   MATCH STATUS BADGE
-========================================================= */
-
-.match-status {
+   MATCH CARD STATUS
+   Pill badge — Upcoming / Live / Completed.
+   ========================================================= */
+.match-card-status {
   display: inline-flex;
-  align-items: center;
-
-  padding: 6px 10px;
-  border-radius: 999px;
-
-  font-size: 12px;
-  font-weight: 700;
-
-  background: var(--badge-bg);
-  color: var(--badge-text);
-  border: 1px solid var(--badge-border);
-
   align-self: flex-start;
-}
-
-/* LIVE STATE */
-.match-status.live {
-  color: #ff3b3b;
-  background: rgba(255, 59, 59, 0.12);
-  border-color: rgba(255, 59, 59, 0.3);
-  animation: pulseLive 1.6s infinite;
-}
-
-/* =========================================================
-   LIVE PULSE ANIMATION
-========================================================= */
-
-@keyframes pulseLive {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  50% {
-    transform: scale(1.08);
-    opacity: 0.6;
-  }
-
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--skin-color);
 }
 
 /* =========================================================
-   RESPONSIVE DESIGN SYSTEM
-========================================================= */
+   MATCH CARD TEAMS
+   Row containing teamA name, VS divider, teamB name.
+   ========================================================= */
+.match-card-teams {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
 
-/* ================= XXL (1400px+) ================= */
-@include xxl {
-  .match-card {
-    padding: 26px;
+/* =========================================================
+   MATCH CARD TEAM
+   Individual team name label.
+   ========================================================= */
+.match-card-team {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  flex: 1;
+  line-height: 1.2;
+
+  /* First team aligns left, second aligns right */
+  &:first-child {
+    text-align: left;
+  }
+
+  &:last-child {
+    text-align: right;
   }
 }
 
-/* ================= XL (1200px - 1399px) ================= */
-@include xl {
-  .match-card h3 {
-    font-size: 17px;
+/* =========================================================
+   MATCH CARD VS
+   Central VS divider between team names.
+   ========================================================= */
+.match-card-vs {
+  font-size: 0.7rem;
+  font-weight: 900;
+  color: var(--skin-color);
+  opacity: 0.55;
+  flex-shrink: 0;
+  letter-spacing: 0.06em;
+}
+
+/* =========================================================
+   MATCH CARD DETAILS
+   Definition list for date and venue metadata rows.
+   Resets browser DL/DT/DD default margins.
+   ========================================================= */
+.match-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 10px;
+}
+
+/* =========================================================
+   MATCH CARD DETAIL
+   Single metadata row — label + value inline.
+   ========================================================= */
+.match-card-detail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* =========================================================
+   MATCH CARD DETAIL LABEL
+   Muted small label (Date / Venue).
+   ========================================================= */
+.match-card-detail-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* =========================================================
+   MATCH CARD DETAIL VALUE
+   Actual metadata value text.
+   ========================================================= */
+.match-card-detail-value {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text);
+  text-align: right;
+  margin: 0;
+}
+
+/* =========================================================
+   MATCH CARD BUTTON
+   Full-width CTA — "Match Center" action.
+   ========================================================= */
+.match-card-button {
+  margin-top: auto;
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--skin-color);
+  color: var(--skin-color);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+
+  /* Filled accent on hover */
+  &:hover {
+    background: var(--skin-color);
+    color: #000;
+    box-shadow: 0 4px 18px rgba(0, 245, 255, 0.2);
+  }
+
+  /* Active press feel */
+  &:active {
+    transform: scale(0.98);
   }
 }
 
-/* ================= LG (992px - 1199px) ================= */
-@include lg {
-  .match-card {
-    padding: 22px;
-  }
-}
+/* =========================================================
+   RESPONSIVE — MATCH CARD
+   ========================================================= */
 
-/* ================= MD (768px - 991px) ================= */
+/* ======================================================= 
+   MD (<= 768px) 
+   ======================================================= */
 @include md {
-  .match-card {
-    padding: 20px;
-  }
-}
-
-/* ================= SM (576px - 767px) ================= */
-@include sm {
+  /* Slightly more padding comfort on full-width cards */
   .match-card {
     padding: 18px;
   }
-
-  .match-card h3 {
-    font-size: 16px;
-  }
 }
 
-/* ================= XS (420px - 575px) ================= */
+/* ======================================================= 
+   XS (<= 420px) 
+   ======================================================= */
 @include xs {
+  /* Compact padding on small phones */
   .match-card {
     padding: 16px;
+    gap: 10px;
+    border-radius: 14px;
   }
 
-  .match-card p {
-    font-size: 12px;
+  .match-card-team {
+    font-size: 0.88rem;
+  }
+
+  .match-card-button {
+    padding: 9px 14px;
+    font-size: 0.78rem;
   }
 }
 
-/* ================= XXS (360px and below) ================= */
+/* ======================================================= 
+   XXS (<= 360px) 
+   ======================================================= */
 @include xxs {
+  /* Minimal padding on very small devices */
   .match-card {
     padding: 14px;
   }
 
-  .match-card h3 {
-    font-size: 15px;
+  .match-card-status {
+    font-size: 0.65rem;
+    padding: 3px 10px;
   }
 }

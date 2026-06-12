@@ -1,7 +1,7 @@
 // hooks/usePlayerRegistration.ts
 
 import { useState } from "react";
-import { useRegisterPlayerMutation } from "./playerApi";
+import { useRegisterPlayerMutation } from "./registerApi";
 import { uploadToCloudinary } from "@/lib/cloudinary";
 import { CLOUDINARY_PRESETS } from "@/constants/cloudinary.presets";
 
@@ -67,31 +67,31 @@ export function usePlayerRegistration(): UsePlayerRegistrationReturn {
       setStepMessage("Submitting registration...");
 
       await registerPlayer({
-        firstName: values.firstName,
-        lastName: values.lastName,
-        email: values.email,
-        mobile: values.mobile,
-        village: values.village,
-        age: Number(values.age),
-        jerseyNumber: Number(values.jerseyNumber),
-        role: values.role,
-        battingStyle: values.battingStyle,
-        bowlingStyle: values.bowlingStyle,
-        experience: Number(values.experience),
+        firstName: values?.firstName,
+        lastName: values?.lastName,
+        email: values?.email,
+        mobile: values?.mobile,
+        village: values?.village,
+        age: Number(values?.age),
+        jerseyNumber: Number(values?.jerseyNumber),
+        role: values?.role,
+        battingStyle: values?.battingStyle,
+        bowlingStyle: values?.bowlingStyle,
+        experience: Number(values?.experience),
 
         stats: {
-          matches: Number(values.matches),
-          runs: Number(values.runs),
-          wickets: Number(values.wickets),
-          strikeRate: Number(values.strikeRate),
+          matches: Number(values?.matches),
+          runs: Number(values?.runs),
+          wickets: Number(values?.wickets),
+          strikeRate: Number(values?.strikeRate),
           economy: 0,
           catches: 0,
         },
 
         imageUrl,
         orderId,
-        about: values.about,
-      }).unwrap();
+        about: values?.about,
+      })?.unwrap();
 
       setStepMessage("");
     } catch (err: any) {

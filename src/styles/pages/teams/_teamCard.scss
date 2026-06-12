@@ -1,202 +1,346 @@
 /* =========================================================
    IMPORTS
+   ---------------------------------------------------------
+   Breakpoint mixins only
 ========================================================= */
 @use "../../abstracts/breakpoints" as *;
 
 /* =========================================================
-   TEAM CARD (PREMIUM SPORTS UI)
-   - Glass card design
-   - IPL-style glow hover
-   - Theme-aware styling
+   TEAM CARD
+   ---------------------------------------------------------
+   Scope   : .team-card
+   Purpose : Premium IPL-style team card
+
+   Features:
+   ✅ Compact card height
+   ✅ Large logo visibility
+   ✅ Modern sports design
+   ✅ Fully responsive
+   ✅ No style leakage
 ========================================================= */
 
 .team-card {
-  background: var(--card-bg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
-  border-radius: 18px;
-  padding: 22px;
-
-  text-align: center;
-
   position: relative;
+
+  display: flex;
+  flex-direction: column;
+
   overflow: hidden;
 
-  transition: all 0.3s ease;
+  height: 280px;
 
-  /* =========================================================
-     TOP GLOW EFFECT
-  ========================================================= */
+  border-radius: 22px;
 
-  &::before {
-    content: "";
-    position: absolute;
+  background: var(--card-bg);
 
-    inset: 0;
-
-    background: radial-gradient(
-      circle at top,
-      color-mix(in srgb, var(--skin-color) 15%, transparent),
-      transparent 60%
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--skin-color) 12%,
+      transparent
     );
 
-    opacity: 0;
-    transition: 0.3s ease;
-    z-index: 0;
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+
+  /* =======================================================
+     TOP ACCENT BAR
+  ======================================================= */
+  &::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 3px;
+
+    background:
+      linear-gradient(
+        90deg,
+        var(--skin-color),
+        transparent
+      );
+
+    z-index: 5;
   }
 
-  /* =========================================================
-     LOGO
-  ========================================================= */
+  /* =======================================================
+     HOVER
+  ======================================================= */
+  &:hover {
+    transform: translateY(-8px);
 
-  .team-card__logo {
-    font-size: 42px;
-    margin-bottom: 12px;
+    border-color: var(--skin-color);
 
-    position: relative;
-    z-index: 1;
-  }
+    box-shadow:
+      0 20px 40px
+      color-mix(
+        in srgb,
+        var(--skin-color) 18%,
+        transparent
+      );
 
-  /* =========================================================
-     TEXT CONTENT
-  ========================================================= */
-
-  h3 {
-    font-size: 18px;
-    font-weight: 800;
-
-    color: var(--text);
-
-    margin-bottom: 10px;
-
-    position: relative;
-    z-index: 1;
-  }
-
-  p {
-    font-size: 13px;
-    color: var(--muted);
-
-    margin: 4px 0;
-
-    position: relative;
-    z-index: 1;
-
-    strong {
-      color: var(--text);
-      font-weight: 600;
+    .team-card-img {
+      transform: scale(1.08);
     }
   }
 
-  /* =========================================================
+  /* =======================================================
+     IMAGE AREA
+     -------------------------------------------------------
+     Logo gets maximum visibility
+  ======================================================= */
+  .team-card-image {
+    position: relative;
+
+    height: 210px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at center,
+        color-mix(
+          in srgb,
+          var(--skin-color) 10%,
+          transparent
+        ),
+        transparent 75%
+      );
+  }
+
+  .team-card-img {
+    object-fit: contain;
+
+    padding: 0px;
+
+    transition: transform 0.45s ease;
+  }
+
+  /* =======================================================
+     CONTENT
+     -------------------------------------------------------
+     Smaller content height
+  ======================================================= */
+  .team-card-content {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    padding: 5px;
+  }
+
+  /* =======================================================
+     TEAM NAME
+  ======================================================= */
+  .team-card-title {
+    margin: 0;
+
+    text-align: center;
+
+    font-size: 16px;
+    font-weight: 800;
+
+    color: var(--skin-color);
+
+    line-height: 1.3;
+  }
+
+  /* =======================================================
+     META SECTION
+  ======================================================= */
+  .team-card-meta {
+    display: flex;
+
+    margin-top: 8px;
+
+    padding-top: 8px;
+
+    border-top: 1px solid
+      color-mix(
+        in srgb,
+        var(--skin-color) 10%,
+        transparent
+      );
+  }
+
+  .team-card-meta-item {
+    flex: 1;
+
+    text-align: center;
+
+    &:first-child {
+      border-right: 1px solid
+        color-mix(
+          in srgb,
+          var(--skin-color) 10%,
+          transparent
+        );
+    }
+
+    span {
+      display: block;
+
+      font-size: 9px;
+      font-weight: 600;
+
+      text-transform: uppercase;
+
+      letter-spacing: 1px;
+
+      color: var(--muted);
+    }
+
+    strong {
+      display: block;
+
+      margin-top: 2px;
+
+      font-size: 13px;
+      font-weight: 700;
+
+      color: var(--text);
+    }
+  }
+
+  /* =======================================================
      BUTTON
-  ========================================================= */
+  ======================================================= */
+  .team-card-button {
+    margin-top: 10px;
 
-  .btn-primary {
-    margin-top: 14px;
-
-    padding: 10px 14px;
-    width: 100%;
+    height: 34px;
 
     border: none;
-    border-radius: 12px;
+
+    border-radius: 999px;
 
     background: var(--skin-color);
-    color: #0b1020;
 
+    color: #fff;
+
+    font-size: 12px;
     font-weight: 700;
-    font-size: 13px;
 
     cursor: pointer;
 
-    transition: 0.3s ease;
-
-    position: relative;
-    z-index: 1;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
 
     &:hover {
-      transform: translateY(-3px);
-      filter: brightness(1.1);
-      box-shadow: 0 10px 25px rgba(0, 245, 255, 0.2);
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 0 18px
+        color-mix(
+          in srgb,
+          var(--skin-color) 35%,
+          transparent
+        );
     }
   }
 
-  /* =========================================================
-     HOVER EFFECT (PREMIUM LIFT)
-  ========================================================= */
-
-  &:hover {
-    transform: translateY(-6px);
-    border-color: var(--skin-color);
-
-    box-shadow: 0 15px 40px rgba(0, 245, 255, 0.12);
-
-    &::before {
-      opacity: 1;
-    }
-  }
-
-  /* =========================================================
-     RESPONSIVE DESIGN
-  ========================================================= */
-
-  /* ================= 1400px (XXL) ================= */
-  @include xxl {
-    padding: 24px;
-
-    h3 {
-      font-size: 19px;
-    }
-  }
-
-  /* ================= 1200px (XL) ================= */
+  /* =======================================================
+     XL (<=1200px)
+  ======================================================= */
   @include xl {
-    padding: 22px;
+    height: 270px;
+
+    .team-card-image {
+      height: 175px;
+    }
   }
 
-  /* ================= 992px (LG) ================= */
+  /* =======================================================
+     LG (<=992px)
+  ======================================================= */
   @include lg {
-    padding: 20px;
+    height: 260px;
 
-    .team-card__logo {
-      font-size: 38px;
+    .team-card-image {
+      height: 165px;
     }
   }
 
-  /* ================= 768px (MD) ================= */
+  /* =======================================================
+     MD (<=768px)
+  ======================================================= */
   @include md {
-    padding: 18px;
+    height: 250px;
 
-    h3 {
-      font-size: 17px;
+    border-radius: 18px;
+
+    .team-card-image {
+      height: 155px;
+    }
+
+    .team-card-content {
+      padding: 10px;
     }
   }
 
-  /* ================= 576px (SM) ================= */
+  /* =======================================================
+     SM (<=576px)
+  ======================================================= */
   @include sm {
-    padding: 16px;
+    height: 240px;
 
-    .team-card__logo {
-      font-size: 34px;
+    border-radius: 16px;
+
+    .team-card-image {
+      height: 145px;
+    }
+
+    .team-card-title {
+      font-size: 15px;
+    }
+
+    .team-card-button {
+      height: 32px;
     }
   }
 
-  /* ================= 420px (XS) ================= */
+  /* =======================================================
+     XS (<=420px)
+  ======================================================= */
   @include xs {
-    padding: 14px;
+    height: 230px;
 
-    h3 {
-      font-size: 16px;
+    .team-card-image {
+      height: 135px;
+    }
+
+    .team-card-title {
+      font-size: 14px;
+    }
+
+    .team-card-button {
+      font-size: 11px;
     }
   }
 
-  /* ================= 360px (XXS) ================= */
+  /* =======================================================
+     XXS (<=360px)
+  ======================================================= */
   @include xxs {
-    padding: 12px;
+    height: 220px;
 
-    .btn-primary {
-      font-size: 12px;
-      padding: 9px 12px;
+    border-radius: 14px;
+
+    .team-card-image {
+      height: 130px;
     }
   }
 }

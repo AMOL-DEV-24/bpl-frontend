@@ -1,228 +1,288 @@
 /* =========================================================
    IMPORTS
-   ---------------------------------------------------------
-   - Breakpoint mixins for responsive design
 ========================================================= */
 @use "../../abstracts/breakpoints" as *;
 
 /* =========================================================
-   FOOTER (MODERN PREMIUM THEME SYSTEM)
-   =========================================================
-   STYLE:
-   - Glass dark/light adaptive UI
-   - Clean grid structure
-   - IPL-inspired premium footer
+   FOOTER
+   ---------------------------------------------------------
+   Scope   : .footer
+   Purpose : Website footer
+
+   Future Safe:
+   ✅ Fully Scoped
+   ✅ No Global Selectors
+   ✅ Theme Aware
+   ✅ No Class Leakage
 ========================================================= */
 
 .footer {
   position: relative;
 
-  /* ✅ Theme aware background */
-  background: var(--bg);
+  padding: 70px 0 30px;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      color-mix(
+        in srgb,
+        var(--skin-color) 4%,
+        var(--bg)
+      )
+    );
+
+  border-top: 1px solid
+    color-mix(
+      in srgb,
+      var(--skin-color) 12%,
+      transparent
+    );
+
   color: var(--text);
 
-  border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
-
-  padding: 60px 0 20px;
-
-  transition: all 0.3s ease;
-
-  /* =========================================================
-     MAIN CONTENT
-  ========================================================= */
-
-  .footer__content {
+  /* =======================================================
+     CONTENT
+  ======================================================= */
+  .footer-content {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
 
-    gap: 40px;
-    flex-wrap: wrap;
+    gap: 60px;
+
+    margin-bottom: 50px;
   }
 
-  /* =========================================================
-     BRAND SECTION
-  ========================================================= */
-
-  .footer__brand {
-    max-width: 320px;
-
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-
-    img {
-      border-radius: 10px;
-    }
+  /* =======================================================
+     BRAND
+  ======================================================= */
+  .footer-brand {
+    max-width: 360px;
 
     h3 {
-      font-size: 18px;
-      font-weight: 800;
+      margin-top: 16px;
+
+      font-size: 24px;
+      font-weight: 900;
+
       color: var(--text);
     }
 
     p {
-      font-size: 13px;
-      line-height: 1.6;
+      margin-top: 10px;
+
+      line-height: 1.7;
+
       color: var(--muted);
     }
   }
 
-  /* =========================================================
-     QUICK LINKS
-  ========================================================= */
+  .footer-brand-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-  .footer__links {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    padding: 10px;
 
+    border-radius: 18px;
+
+    background:
+      color-mix(
+        in srgb,
+        var(--skin-color) 8%,
+        transparent
+      );
+
+    border: 1px solid
+      color-mix(
+        in srgb,
+        var(--skin-color) 15%,
+        transparent
+      );
+  }
+
+  /* =======================================================
+     LINKS
+  ======================================================= */
+  .footer-links {
     h4 {
-      font-size: 14px;
-      font-weight: 700;
+      margin-bottom: 18px;
+
+      font-size: 18px;
+      font-weight: 800;
+
       color: var(--text);
-      margin-bottom: 8px;
     }
 
     ul {
+      display: flex;
+      flex-direction: column;
+
+      gap: 12px;
+
       list-style: none;
       padding: 0;
       margin: 0;
-
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
     }
 
     li {
-      font-size: 13px;
       color: var(--muted);
 
       cursor: pointer;
-      transition: 0.25s ease;
+
+      transition: 0.3s ease;
 
       &:hover {
         color: var(--skin-color);
+
         transform: translateX(4px);
       }
     }
   }
 
-  /* =========================================================
+  /* =======================================================
      DEVELOPER CREDIT
-  ========================================================= */
+  ======================================================= */
+  .footer-dev {
+    padding-top: 25px;
 
-  .footer__dev {
-    margin-top: 25px;
     text-align: center;
 
-    font-size: 12px;
+    border-top: 1px solid
+      color-mix(
+        in srgb,
+        var(--skin-color) 10%,
+        transparent
+      );
+
     color: var(--muted);
-
-    padding: 10px 0;
-
-    border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
   }
 
-  .footer__devLink {
+  .footer-dev-link {
     color: var(--skin-color);
+
     font-weight: 700;
+
     text-decoration: none;
 
-    margin-left: 4px;
-
-    transition: 0.25s ease;
+    transition: 0.3s ease;
 
     &:hover {
-      color: var(--skin-secondary);
-      text-shadow: 0 0 10px color-mix(in srgb, var(--skin-color) 40%, transparent);
+      opacity: 0.8;
     }
   }
 
-  /* =========================================================
-     BOTTOM COPYRIGHT
-  ========================================================= */
-
-  .footer__bottom {
-    margin-top: 15px;
-    padding-top: 15px;
+  /* =======================================================
+     COPYRIGHT
+  ======================================================= */
+  .footer-bottom {
+    margin-top: 16px;
 
     text-align: center;
 
-    font-size: 12px;
-    color: var(--muted);
+    font-size: 14px;
 
-    border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+    color: var(--muted);
   }
 
-  /* =========================================================
-     RESPONSIVE DESIGN
-  ========================================================= */
-
-  /* ================= XXL ================= */
+  /* =======================================================
+     XXL (>= 1400px)
+  ======================================================= */
   @include xxl {
-    .footer__content {
+    .footer-brand h3 {
+      font-size: 26px;
+    }
+  }
+
+  /* =======================================================
+     XL (<= 1200px)
+  ======================================================= */
+  @include xl {
+    .footer-content {
       gap: 40px;
     }
   }
 
-  /* ================= XL ================= */
-  @include xl {
-    .footer__content {
-      gap: 30px;
-      padding: 20px;
-    }
-  }
-
-  /* ================= LG ================= */
+  /* =======================================================
+     LG (<= 992px)
+  ======================================================= */
   @include lg {
-    .footer__brand {
-      max-width: 260px;
+    .footer-content {
+      gap: 30px;
     }
   }
 
-  /* ================= MD ================= */
+  /* =======================================================
+     MD (<= 768px)
+  ======================================================= */
   @include md {
-    .footer__content {
+    padding: 60px 0 30px;
+
+    .footer-content {
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
+
+      text-align: center;
+
+      gap: 40px;
     }
 
-    .footer__brand {
+    .footer-brand {
       max-width: 100%;
     }
   }
 
-  /* ================= SM ================= */
+  /* =======================================================
+     SM (<= 576px)
+  ======================================================= */
   @include sm {
-    padding: 50px 0 20px;
+    .footer-brand {
+      h3 {
+        font-size: 22px;
+      }
 
-    .footer__brand h3 {
-      font-size: 16px;
+      p {
+        font-size: 14px;
+      }
     }
 
-    .footer__links h4 {
+    .footer-links {
+      h4 {
+        font-size: 16px;
+      }
+    }
+  }
+
+  /* =======================================================
+     XS (<= 420px)
+  ======================================================= */
+  @include xs {
+    .footer-bottom {
+      font-size: 13px;
+    }
+
+    .footer-dev {
       font-size: 13px;
     }
   }
 
-  /* ================= XS ================= */
-  @include xs {
-    .footer__content {
-      gap: 20px;
-    }
-
-    .footer__brand p {
-      font-size: 12px;
-    }
-  }
-
-  /* ================= XXS ================= */
+  /* =======================================================
+     XXS (<= 360px)
+  ======================================================= */
   @include xxs {
-    padding: 40px 0 15px;
+    padding: 50px 0 25px;
 
-    .footer__bottom {
-      font-size: 11px;
+    .footer-brand {
+      h3 {
+        font-size: 20px;
+      }
+    }
+
+    .footer-links {
+      li {
+        font-size: 13px;
+      }
     }
   }
 }

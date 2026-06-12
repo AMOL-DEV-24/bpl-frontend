@@ -2,24 +2,39 @@ import PointsTable from "./components/PointsTable";
 import TopBatters from "./components/TopBatters";
 import TopBowlers from "./components/TopBowlers";
 
+/* =========================================================
+   POINTS TABLE PAGE
+   Route   : /points-table
+   Purpose : Root page shell — renders page header,
+             standings table, and top performers leaderboards.
+   ========================================================= */
 export default function PointsTablePage() {
   return (
     <main className="points-page">
-      <section className="page-header">
-        <div className="container">
-          <h1>Points Table</h1>
-          <p>
+
+      {/* ── Page Header ── */}
+      <section className="points-page-header">
+        <div className="points-page-container">
+          <h1 className="points-page-title">Points Table</h1>
+          <p className="points-page-subtitle">
             Team standings, top batters and top bowlers.
           </p>
         </div>
       </section>
 
+      {/* ── Standings Table ── */}
       <PointsTable />
 
-      <div className="container stats-wrapper">
-        <TopBatters />
-        <TopBowlers />
-      </div>
+      {/* ── Leaderboards Row ── */}
+      <section className="points-page-stats">
+        <div className="points-page-container">
+          <div className="points-page-stats-grid">
+            <TopBatters />
+            <TopBowlers />
+          </div>
+        </div>
+      </section>
+
     </main>
   );
 }
