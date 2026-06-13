@@ -61,8 +61,10 @@
 // 5. Player registration page styles
 @use "./pages/register/register";
 
+// 6. Gallery page styles
+@use "./pages/gallery/_index.gallery.scss";
+
 @use "./pages/auction";
-@use "./pages/gallery";
 
 @use "./pages/admin";
 

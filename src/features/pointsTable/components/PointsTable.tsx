@@ -1,66 +1,90 @@
 /* =========================================================
    POINTS TABLE
    Purpose : Full standings table — team rank, played,
-             won, lost, points, NRR. IPL broadcast style.
-   ========================================================= */
+             won, lost, tied, NR, points, NRR. BPL 2026.
+========================================================= */
 
 interface TeamStanding {
   team: string;
   played: number;
   won: number;
   lost: number;
+  tied: number;
+  nr: number;
   points: number;
   nrr: string;
 }
 
 const teams: TeamStanding[] = [
   {
-    team: "BPL Warriors",
-    played: 5,
-    won: 4,
-    lost: 1,
-    points: 8,
-    nrr: "+1.42",
-  },
-  {
-    team: "BPL Kings",
-    played: 5,
+    team: "Gajanan Riders",
+    played: 4,
     won: 3,
-    lost: 2,
+    lost: 1,
+    tied: 0,
+    nr: 0,
     points: 6,
-    nrr: "+0.65",
+    nrr: "+1.868",
   },
   {
-    team: "BPL Titans",
-    played: 5,
+    team: "Sadguru Lions",
+    played: 3,
     won: 2,
-    lost: 3,
+    lost: 1,
+    tied: 0,
+    nr: 0,
     points: 4,
-    nrr: "-0.25",
+    nrr: "+3.655",
   },
   {
-    team: "BPL Strikers",
-    played: 5,
+    team: "Mahalaxmi Warriors",
+    played: 3,
     won: 2,
-    lost: 3,
+    lost: 1,
+    tied: 0,
+    nr: 0,
     points: 4,
-    nrr: "-0.88",
+    nrr: "+2.790",
   },
   {
-    team: "BPL Royals",
-    played: 5,
-    won: 1,
-    lost: 4,
-    points: 2,
-    nrr: "-1.10",
+    team: "Linge Super Kings",
+    played: 3,
+    won: 2,
+    lost: 1,
+    tied: 0,
+    nr: 0,
+    points: 4,
+    nrr: "+2.200",
   },
   {
-    team: "BPL Challengers",
-    played: 5,
+    team: "Samrat Yodha",
+    played: 3,
     won: 1,
-    lost: 4,
+    lost: 2,
+    tied: 0,
+    nr: 0,
     points: 2,
-    nrr: "-1.34",
+    nrr: "-2.190",
+  },
+  {
+    team: "Dayavan 11",
+    played: 3,
+    won: 1,
+    lost: 2,
+    tied: 0,
+    nr: 0,
+    points: 2,
+    nrr: "-4.883",
+  },
+  {
+    team: "Irfan Fighters",
+    played: 3,
+    won: 0,
+    lost: 3,
+    tied: 0,
+    nr: 0,
+    points: 0,
+    nrr: "-3.986",
   },
 ];
 
@@ -83,9 +107,11 @@ export default function PointsTable() {
               <tr className="points-table-head-row">
                 <th className="points-table-head-cell points-table-head-cell--rank">#</th>
                 <th className="points-table-head-cell points-table-head-cell--team">Team</th>
-                <th className="points-table-head-cell">P</th>
+                <th className="points-table-head-cell">M</th>
                 <th className="points-table-head-cell">W</th>
                 <th className="points-table-head-cell">L</th>
+                <th className="points-table-head-cell">T</th>
+                <th className="points-table-head-cell">NR</th>
                 <th className="points-table-head-cell points-table-head-cell--pts">Pts</th>
                 <th className="points-table-head-cell">NRR</th>
               </tr>
@@ -109,8 +135,14 @@ export default function PointsTable() {
                   <td className="points-table-cell">{team.played}</td>
                   <td className="points-table-cell points-table-cell--won">{team.won}</td>
                   <td className="points-table-cell points-table-cell--lost">{team.lost}</td>
+                  <td className="points-table-cell">{team.tied}</td>
+                  <td className="points-table-cell">{team.nr}</td>
                   <td className="points-table-cell points-table-cell--pts">{team.points}</td>
-                  <td className={`points-table-cell points-table-cell--nrr ${team.nrr.startsWith("+") ? "points-table-cell--nrr-pos" : "points-table-cell--nrr-neg"}`}>
+                  <td className={`points-table-cell points-table-cell--nrr ${
+                    team.nrr.startsWith("+")
+                      ? "points-table-cell--nrr-pos"
+                      : "points-table-cell--nrr-neg"
+                  }`}>
                     {team.nrr}
                   </td>
                 </tr>

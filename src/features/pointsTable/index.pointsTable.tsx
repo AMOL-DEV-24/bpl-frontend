@@ -1,3 +1,4 @@
+import ManOfTheMatch from "./components/ManOfTheMatch";
 import PointsTable from "./components/PointsTable";
 import TopBatters from "./components/TopBatters";
 import TopBowlers from "./components/TopBowlers";
@@ -34,6 +35,8 @@ export default function PointsTablePage() {
           </div>
         </div>
       </section>
+
+      <ManOfTheMatch/>
 
     </main>
   );

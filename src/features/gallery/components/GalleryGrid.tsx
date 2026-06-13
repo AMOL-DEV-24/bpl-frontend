@@ -1,44 +1,93 @@
+/* =========================================================
+   GALLERY GRID COMPONENT
+   ---------------------------------------------------------
+   Scope    : .gallery-grid-section
+   Purpose  : Modern premium photo gallery grid
+   Layout   : Featured first image + masonry-style grid
+   Location : Gallery page — section 1
+========================================================= */
 import GalleryCard from "./GalleryCard";
 
-const images = [
+/* ---------------------------------------------------------
+   Types
+--------------------------------------------------------- */
+interface GalleryImage {
+  id: number;
+  image: string;
+  title: string;
+  /* featured card spans more columns/rows */
+  featured?: boolean;
+}
+
+/* ---------------------------------------------------------
+   Static Data
+   ---------------------------------------------------------
+   First item marked featured — renders larger in grid
+   giving a modern editorial magazine layout feel.
+--------------------------------------------------------- */
+const GALLERY_IMAGES: GalleryImage[] = [
   {
-    image: "/gallery/gallery-1.jpg",
-    title: "Opening Ceremony",
+    id: 1,
+    image: "/assets/images/gallery/BPL Trophies.jpeg",
+    title: "BPL 2026 Trophies",
+    featured: true,
   },
   {
-    image: "/gallery/gallery-2.jpg",
-    title: "Match Day",
+    id: 2,
+    image: "/assets/images/gallery/Kazi Ground Pitch 1.jpeg",
+    title: "Pitch View 1",
   },
   {
-    image: "/gallery/gallery-3.jpg",
-    title: "Winning Moment",
+    id: 3,
+    image: "/assets/images/gallery/Kazi Ground Pitch 2.jpeg",
+    title: "Pitch View 2",
   },
   {
-    image: "/gallery/gallery-4.jpg",
-    title: "Award Ceremony",
+    id: 4,
+    image: "/assets/images/gallery/Kazi Ground Pitch 3.jpeg",
+    title: "Pitch View 3",
   },
   {
-    image: "/gallery/gallery-5.jpg",
-    title: "Team Celebration",
+    id: 5,
+    image: "/assets/images/gallery/Kazi Ground 1.jpeg",
+    title: "Ground View 1",
   },
   {
-    image: "/gallery/gallery-6.jpg",
-    title: "Crowd Support",
+    id: 6,
+    image: "/assets/images/gallery/Kazi Ground 2.jpeg",
+    title: "Ground View 2",
   },
 ];
 
 export default function GalleryGrid() {
   return (
-    <section className="gallery-section">
+    <section
+      className="gallery-grid-section"
+      aria-label="Photo Gallery"
+    >
       <div className="container">
-        <div className="gallery-grid">
-          {images.map((item) => (
+
+        {/* Section heading */}
+        <div className="gallery-grid-section__heading">
+          <span className="gallery-grid-section__heading-tag">
+            📸 Tournament Moments
+          </span>
+          <h2>Photo Gallery</h2>
+          <p>Ground, trophies and match moments from BPL 2026</p>
+        </div>
+
+        {/* Modern editorial grid */}
+        <div className="gallery-grid-section__grid">
+          {GALLERY_IMAGES.map((item) => (
             <GalleryCard
-              key={item.title}
-              {...item}
+              key={item.id}
+              image={item.image}
+              title={item.title}
+              featured={item.featured}
             />
           ))}
         </div>
+
       </div>
     </section>
   );

@@ -1,52 +1,92 @@
 /* =========================================================
    MATCH CARD
-   Purpose : Displays a single match fixture with teams,
-             date, venue, status badge, and CTA button.
-   ========================================================= */
+   Purpose : Displays a single match fixture with team
+             logos, names, venue, status badge, CTA.
+========================================================= */
+
+type MatchStatus = "Completed" | "Live" | "Upcoming";
 
 interface MatchCardProps {
+  matchNo: number;
   teamA: string;
   teamB: string;
-  date: string;
+  logoA: string;
+  logoB: string;
   venue: string;
-  status: string;
+  status: MatchStatus;
 }
 
 export default function MatchCard({
+  matchNo,
   teamA,
   teamB,
-  date,
+  logoA,
+  logoB,
   venue,
   status,
 }: MatchCardProps) {
   return (
-    <article className="match-card">
+    <article className={`match-card match-card--${status.toLowerCase()}`}>
 
-      {/* ── Status Badge ── */}
-      <span className="match-card-status">{status}</span>
-
-      {/* ── Teams Block ── */}
-      <div className="match-card-teams">
-        <span className="match-card-team">{teamA}</span>
-        <span className="match-card-vs">VS</span>
-        <span className="match-card-team">{teamB}</span>
+      {/* ── Match Number + Status Badge ── */}
+      <div className="match-card__header">
+        <span className="match-card__match-no">Match {matchNo}</span>
+        <span className={`match-card__status match-card__status--${status.toLowerCase()}`}>
+          {status === "Live" && <span className="match-card__live-dot" />}
+          {status}
+        </span>
       </div>
 
-      {/* ── Match Details ── */}
-      <dl className="match-card-details">
-        <div className="match-card-detail">
-          <dt className="match-card-detail-label">Date</dt>
-          <dd className="match-card-detail-value">{date}</dd>
+      {/* ── Teams Block ── */}
+      <div className="match-card__teams">
+
+        {/* Team A */}
+        <div className="match-card__team">
+          <div className="match-card__team-logo-wrap">
+            <img
+              src={logoA}
+              alt={teamA}
+              className="match-card__team-logo"
+            />
+          </div>
+          <span className="match-card__team-name">{teamA}</span>
         </div>
-        <div className="match-card-detail">
-          <dt className="match-card-detail-label">Venue</dt>
-          <dd className="match-card-detail-value">{venue}</dd>
+
+        {/* VS */}
+        <div className="match-card__vs">
+          <span>VS</span>
+        </div>
+
+        {/* Team B */}
+        <div className="match-card__team">
+          <div className="match-card__team-logo-wrap">
+            <img
+              src={logoB}
+              alt={teamB}
+              className="match-card__team-logo"
+            />
+          </div>
+          <span className="match-card__team-name">{teamB}</span>
+        </div>
+
+      </div>
+
+      {/* ── Divider ── */}
+      <div className="match-card__divider" />
+
+      {/* ── Match Details ── */}
+      <dl className="match-card__details">
+        <div className="match-card__detail">
+          <dt className="match-card__detail-label">📍 Venue</dt>
+          <dd className="match-card__detail-value">{venue}</dd>
         </div>
       </dl>
 
       {/* ── CTA Button ── */}
-      <button className="match-card-button" type="button">
-        Match Center
+      <button className="match-card__btn" type="button">
+        {status === "Live"      && "Watch Live →"}
+        {status === "Upcoming"  && "Match Info →"}
+        {status === "Completed" && "View Result →"}
       </button>
 
     </article>

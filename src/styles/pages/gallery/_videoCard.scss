@@ -1,0 +1,412 @@
+/* =========================================================
+   IMPORTS
+========================================================= */
+@use "../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   VIDEO CARD
+   ---------------------------------------------------------
+   Scope  : .video-card
+   Purpose: Native HTML5 video player with custom controls
+            Play/pause overlay, mute, fullscreen button
+            Title + description below player
+========================================================= */
+
+.video-card {
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  background: var(--card-bg);
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+
+    border-color: var(--skin-color);
+
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+
+    @supports (background: color-mix(in srgb, red 50%, blue)) {
+      box-shadow: 0 16px 48px
+        color-mix(in srgb, var(--skin-color) 18%, transparent);
+    }
+  }
+
+  /* =======================================================
+     PLAYER WRAPPER
+     -------------------------------------------------------
+     position:relative — anchors overlay + controls.
+     padding-top: 56.25% = 16:9 aspect ratio.
+     Video fills this container absolutely.
+  ======================================================= */
+&__player-wrapper {
+  position: relative;
+
+  width: 100%;
+
+  /* 16:9 landscape — default */
+  padding-top: 56.25%;
+
+  background: #000;
+
+  overflow: hidden;
+
+  /* 9:16 portrait — vertical videos */
+  &--portrait {
+    padding-top: 177.78%;
+  }
+}
+
+  /* =======================================================
+     VIDEO ELEMENT
+  ======================================================= */
+  &__video {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+  }
+
+  /* =======================================================
+     PLAY OVERLAY
+     -------------------------------------------------------
+     Full card overlay shown when video is paused.
+     Click anywhere to play.
+     Fades out when video starts playing.
+  ======================================================= */
+  &__play-overlay {
+    position: absolute;
+    inset: 0;
+
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    /* Dark gradient for premium cinematic feel */
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.25) 100%
+    );
+
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.65) 0%,
+        rgba(0, 0, 0, 0.35) 100%
+      );
+    }
+  }
+
+  /* =======================================================
+     BIG PLAY BUTTON CIRCLE
+  ======================================================= */
+  &__play-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 72px;
+    height: 72px;
+
+    border-radius: 50%;
+
+    color: #ffffff;
+
+    /* Glass button */
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+
+    backdrop-filter: blur(8px);
+
+    transition:
+      transform 0.25s ease,
+      background 0.25s ease,
+      border-color 0.25s ease;
+
+    svg {
+      width: 30px;
+      height: 30px;
+
+      /* Optical centering for play triangle */
+      margin-left: 4px;
+    }
+
+    .video-card__play-overlay:hover & {
+      transform: scale(1.1);
+
+      background: var(--skin-color);
+      border-color: var(--skin-color);
+    }
+  }
+
+  /* =======================================================
+     CONTROLS BAR
+     -------------------------------------------------------
+     Fixed at bottom of video player.
+     Glass blur background for legibility on any video.
+  ======================================================= */
+  &__controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 3;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 14px;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    backdrop-filter: blur(8px);
+
+    /* Slide up on hover */
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+
+    .video-card:hover & {
+      transform: translateY(0);
+    }
+  }
+
+  /* =======================================================
+     CONTROL BUTTONS (play/pause, mute, fullscreen)
+  ======================================================= */
+  &__control-btn {
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    height: 32px;
+
+    border-radius: 6px;
+
+    color: #ffffff;
+
+    background: transparent;
+    border: none;
+
+    cursor: pointer;
+
+    transition:
+      background 0.2s ease,
+      color 0.2s ease;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--skin-color);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--skin-color);
+      outline-offset: 2px;
+    }
+  }
+
+  /* =======================================================
+     TITLE IN CONTROLS BAR
+  ======================================================= */
+  &__control-title {
+    flex: 1;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: rgba(255, 255, 255, 0.85);
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    /* Push fullscreen to the right */
+    margin-inline: 4px;
+  }
+
+  /* =======================================================
+     CARD INFO BELOW PLAYER
+  ======================================================= */
+  &__info {
+    padding: 20px 22px 24px;
+  }
+
+  &__info-title {
+    font-size: 17px;
+    font-weight: 800;
+
+    color: var(--text);
+
+    margin-bottom: 8px;
+  }
+
+  &__info-description {
+    font-size: 14px;
+    line-height: 1.6;
+
+    color: var(--muted);
+  }
+
+  /* =======================================================
+     RESPONSIVE BREAKPOINTS
+  ======================================================= */
+
+  /* -- XXL: >= 1400px ----------------------------------- */
+  @include xxl {
+    border-radius: 22px;
+
+    &__play-btn {
+      width: 80px;
+      height: 80px;
+
+      svg {
+        width: 34px;
+        height: 34px;
+      }
+    }
+
+    &__info-title {
+      font-size: 18px;
+    }
+  }
+
+  /* -- XL: <= 1200px ------------------------------------ */
+  @include xl {
+    border-radius: 18px;
+  }
+
+  /* -- LG: <= 992px ------------------------------------- */
+  @include lg {
+    border-radius: 16px;
+
+    &__play-btn {
+      width: 64px;
+      height: 64px;
+
+      svg {
+        width: 26px;
+        height: 26px;
+      }
+    }
+
+    &__info {
+      padding: 18px 20px 22px;
+    }
+  }
+
+  /* -- MD: <= 768px ------------------------------------- */
+  @include md {
+    /* Controls always visible on tablet */
+    &__controls {
+      transform: translateY(0);
+    }
+
+    &__info-title {
+      font-size: 16px;
+    }
+
+    &__info-description {
+      font-size: 13px;
+    }
+  }
+
+  /* -- SM: <= 576px ------------------------------------- */
+  @include sm {
+    border-radius: 14px;
+
+    &__play-btn {
+      width: 56px;
+      height: 56px;
+
+      svg {
+        width: 22px;
+        height: 22px;
+      }
+    }
+
+    &__info {
+      padding: 14px 16px 18px;
+    }
+
+    &__info-title {
+      font-size: 15px;
+    }
+  }
+
+  /* -- XS: <= 420px ------------------------------------- */
+  @include xs {
+    border-radius: 12px;
+
+    &__play-btn {
+      width: 50px;
+      height: 50px;
+    }
+
+    &__control-btn {
+      width: 28px;
+      height: 28px;
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    &__control-title {
+      font-size: 11px;
+    }
+  }
+
+  /* -- XXS: <= 360px ------------------------------------ */
+  @include xxs {
+    border-radius: 10px;
+
+    &__play-btn {
+      width: 44px;
+      height: 44px;
+
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    &__info {
+      padding: 12px 14px 16px;
+    }
+
+    &__info-title {
+      font-size: 14px;
+    }
+
+    &__info-description {
+      font-size: 12px;
+    }
+  }
+}
