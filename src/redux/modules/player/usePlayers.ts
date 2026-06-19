@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { useGetPlayersQuery } from "./playerApi";
-import type { Player, PlayerRole } from "@/features/players/types";
+import { Player, PlayerRole } from "@/types/players/player.types";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 

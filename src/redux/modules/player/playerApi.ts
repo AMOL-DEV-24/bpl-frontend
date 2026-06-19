@@ -1,5 +1,6 @@
 import { baseApi } from "../../api/baseApi";
-import type { PlayersApiResponse, PlayerRole } from "@/features/players/types";
+import { PlayersApiResponse, PlayerRole } from "@/types/players/player.types";
+
 
 export interface GetPlayersParams {
   page?: number;
