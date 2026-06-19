@@ -1,0 +1,355 @@
+/* =========================================================
+   IMPORTS
+   ---------------------------------------------------------
+   Breakpoint mixins only
+========================================================= */
+@use "../../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   ANNOUNCEMENTS COMPONENT
+   ---------------------------------------------------------
+   Scope    : .announcements
+   Purpose  : League updates marquee section
+   Location : Home Page
+
+   Architecture:
+   - No generic selectors
+   - Fully component scoped
+   - Future safe
+   - Theme aware
+========================================================= */
+
+.announcements {
+
+  /* =======================================================
+     ROOT SECTION
+  ======================================================= */
+
+  position: relative;
+
+  width: 100%;
+
+  background: transparent;
+
+  /* =======================================================
+     SECTION HEADING
+  ======================================================= */
+
+  .announcements-heading {
+    text-align: center;
+
+    margin-bottom: 30px;
+
+    h2 {
+      font-size: 42px;
+      font-weight: 900;
+
+      color: var(--text);
+    }
+
+    p {
+      margin-top: 10px;
+
+      font-size: 15px;
+
+      color: var(--muted);
+    }
+  }
+
+  /* =======================================================
+     ANNOUNCEMENT BAR
+  ======================================================= */
+
+  .announcements-bar {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    border-radius: 18px;
+
+    background: var(--card-bg);
+
+    border: 1px solid
+      color-mix(
+        in srgb,
+        var(--skin-color) 12%,
+        transparent
+      );
+
+    box-shadow:
+      0 12px 35px
+      color-mix(
+        in srgb,
+        var(--skin-color) 10%,
+        transparent
+      );
+  }
+
+  /* =======================================================
+     OFFICIAL BADGE
+  ======================================================= */
+
+  .announcements-badge {
+    flex-shrink: 0;
+
+    padding: 18px 24px;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    color: #fff;
+
+    background:
+      linear-gradient(
+        135deg,
+        var(--skin-color),
+        color-mix(
+          in srgb,
+          var(--skin-color) 70%,
+          black
+        )
+      );
+  }
+
+  /* =======================================================
+     MARQUEE WRAPPER
+  ======================================================= */
+
+  .announcements-marquee {
+    flex: 1;
+
+    overflow: hidden;
+
+    padding: 0 20px;
+  }
+
+  /* =======================================================
+     TRACK
+  ======================================================= */
+
+  .announcements-track {
+    display: inline-flex;
+
+    align-items: center;
+
+    white-space: nowrap;
+
+    gap: 18px;
+
+    min-width: max-content;
+
+    animation:
+      announcements-scroll
+      30s
+      linear
+      infinite;
+  }
+
+  .announcements-track-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+  }
+
+  /* =======================================================
+     TEXT ITEM
+  ======================================================= */
+
+  .announcements-item {
+    font-size: 15px;
+
+    font-weight: 600;
+
+    color: var(--text);
+  }
+
+  /* =======================================================
+     SEPARATOR
+  ======================================================= */
+
+  .announcements-separator {
+    color: var(--skin-color);
+
+    font-size: 20px;
+
+    font-weight: 900;
+  }
+
+  /* =======================================================
+     PAUSE ON HOVER
+  ======================================================= */
+
+  .announcements-bar:hover {
+    .announcements-track {
+      animation-play-state: paused;
+    }
+  }
+
+  /* =======================================================
+     SCROLL ANIMATION
+  ======================================================= */
+
+  @keyframes announcements-scroll {
+
+    0% {
+      transform: translateX(10%);
+    }
+
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  /* =======================================================
+     RESPONSIVE DESIGN
+  ======================================================= */
+
+  /* =======================================================
+     XXL (>= 1400px)
+  ======================================================= */
+
+  @include xxl {
+
+    .announcements-heading {
+      h2 {
+        font-size: 46px;
+      }
+    }
+  }
+
+  /* =======================================================
+     XL (<= 1200px)
+  ======================================================= */
+
+  @include xl {
+
+    .announcements-heading {
+      h2 {
+        font-size: 40px;
+      }
+    }
+  }
+
+  /* =======================================================
+     LG (<= 992px)
+  ======================================================= */
+
+  @include lg {
+
+    .announcements-heading {
+      h2 {
+        font-size: 36px;
+      }
+    }
+
+    .announcements-item {
+      font-size: 14px;
+    }
+  }
+
+  /* =======================================================
+     MD (<= 768px)
+  ======================================================= */
+
+  @include md {
+
+    .announcements-heading {
+
+      h2 {
+        font-size: 32px;
+      }
+    }
+
+    .announcements-badge {
+      padding: 15px 18px;
+
+      font-size: 12px;
+    }
+
+    .announcements-track {
+      animation-duration: 25s;
+    }
+  }
+
+  /* =======================================================
+     SM (<= 576px)
+  ======================================================= */
+
+  @include sm {
+
+    .announcements-bar {
+      flex-direction: column;
+    }
+
+    .announcements-badge {
+      width: 100%;
+
+      text-align: center;
+    }
+
+    .announcements-marquee {
+      width: 100%;
+
+      padding: 12px;
+    }
+
+    .announcements-item {
+      font-size: 13px;
+    }
+
+    .announcements-track {
+      animation-duration: 22s;
+    }
+  }
+
+  /* =======================================================
+     XS (<= 420px)
+  ======================================================= */
+
+  @include xs {
+
+    .announcements-heading {
+
+      h2 {
+        font-size: 26px;
+      }
+
+      p {
+        font-size: 13px;
+      }
+    }
+
+    .announcements-item {
+      font-size: 12px;
+    }
+  }
+
+  /* =======================================================
+     XXS (<= 360px)
+  ======================================================= */
+
+  @include xxs {
+
+    .announcements-heading {
+
+      h2 {
+        font-size: 22px;
+      }
+    }
+
+    .announcements-item {
+      font-size: 11px;
+    }
+
+    .announcements-badge {
+      font-size: 11px;
+    }
+  }
+}

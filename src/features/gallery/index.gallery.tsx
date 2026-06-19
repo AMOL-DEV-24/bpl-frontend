@@ -5,9 +5,9 @@
    Purpose  : Photo gallery + video highlights page
    Route    : /gallery
 ========================================================= */
-import GalleryGrid from "./components/GalleryGrid";
-import VideosPage from "./components/VideoPage";
-import VideoHighlights from "./components/VideoHighlights";
+import GalleryGrid from "./components/TournamentGallery";
+import VideosPage from "./components/TournamentVideos";
+import VideoHighlights from "./components/MatchHighlights";
 
 export default function GalleryPage() {
   return (

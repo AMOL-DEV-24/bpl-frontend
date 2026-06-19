@@ -17,7 +17,7 @@
        └── ViewSquadPlayerCard
 ========================================================= */
 
-import { Player } from "../../../../../types/teams/viewSquad.types";
+import { Player } from "../../../../../types/teams/viewSquad/viewSquad.types";
 import PlayerCard from "./ViewSquadPlayerCard";
 
 interface SquadRoleGroupProps {

@@ -1,5 +1,5 @@
 import PlayerCard from "./PlayerCard";
-import { Player } from "../types";
+import { Player } from "@/types/players/player.types";
 
 /* =========================================================
    PLAYER GRID

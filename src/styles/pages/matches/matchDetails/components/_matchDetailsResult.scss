@@ -1,0 +1,277 @@
+/* =========================================================
+   IMPORTS
+========================================================= */
+@use "../../../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   MATCH DETAILS RESULT
+   ---------------------------------------------------------
+   Scope   : .match-details-result
+   Purpose : Winner, Margin, POTM & Match Summary
+   Notes   :
+   - Fully isolated styles
+   - No global selectors
+   - Future safe architecture
+   - Responsive from XXS → XXL
+========================================================= */
+
+.match-details-result {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  margin-top: 24px;
+
+  padding: 24px;
+
+  border-radius: 20px;
+
+  background: var(--card-bg);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  overflow: hidden;
+
+  /* =======================================================
+     HEADER
+  ======================================================= */
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &-title {
+    margin: 0;
+
+    font-size: 24px;
+    font-weight: 800;
+
+    color: var(--text);
+  }
+
+  /* =======================================================
+     RESULT GRID
+  ======================================================= */
+  &-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  /* =======================================================
+     RESULT CARD
+  ======================================================= */
+  &-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    padding: 18px;
+
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.03);
+
+    border: 1px solid rgba(255, 255, 255, 0.06);
+
+    transition:
+      transform 0.3s ease,
+      border-color 0.3s ease;
+
+    &:hover {
+      transform: translateY(-3px);
+      border-color: var(--skin-color);
+    }
+  }
+
+  &-label {
+    font-size: 12px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+
+    color: var(--muted);
+  }
+
+  &-value {
+    font-size: 18px;
+    font-weight: 800;
+
+    color: var(--text);
+
+    line-height: 1.4;
+
+    word-break: break-word;
+  }
+
+  /* =======================================================
+     SUMMARY
+  ======================================================= */
+  &-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    padding: 20px;
+
+    border-radius: 16px;
+
+    background: rgba(255, 255, 255, 0.03);
+
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  &-summary-title {
+    margin: 0;
+
+    font-size: 18px;
+    font-weight: 800;
+
+    color: var(--text);
+  }
+
+  &-summary-text {
+    margin: 0;
+
+    font-size: 15px;
+    line-height: 1.8;
+
+    color: var(--muted);
+  }
+
+  /* =======================================================
+     XXL BREAKPOINT (1400px+)
+  ======================================================= */
+  @include xxl {
+    padding: 28px;
+
+    &-title {
+      font-size: 28px;
+    }
+
+    &-value {
+      font-size: 20px;
+    }
+  }
+
+  /* =======================================================
+     XL BREAKPOINT (1200px and below)
+  ======================================================= */
+  @include xl {
+    &-grid {
+      gap: 14px;
+    }
+  }
+
+  /* =======================================================
+     LG BREAKPOINT (992px and below)
+  ======================================================= */
+  @include lg {
+    &-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &-title {
+      font-size: 22px;
+    }
+  }
+
+  /* =======================================================
+     MD BREAKPOINT (768px and below)
+  ======================================================= */
+  @include md {
+    padding: 20px;
+
+    &-grid {
+      grid-template-columns: 1fr;
+    }
+
+    &-card {
+      padding: 16px;
+    }
+
+    &-summary {
+      padding: 18px;
+    }
+  }
+
+  /* =======================================================
+     SM BREAKPOINT (576px and below)
+  ======================================================= */
+  @include sm {
+    gap: 20px;
+
+    padding: 18px;
+
+    &-title {
+      font-size: 20px;
+    }
+
+    &-value {
+      font-size: 16px;
+    }
+
+    &-summary-title {
+      font-size: 16px;
+    }
+
+    &-summary-text {
+      font-size: 14px;
+    }
+  }
+
+  /* =======================================================
+     XS BREAKPOINT (420px and below)
+  ======================================================= */
+  @include xs {
+    padding: 16px;
+
+    &-card {
+      padding: 14px;
+    }
+
+    &-label {
+      font-size: 11px;
+    }
+
+    &-value {
+      font-size: 15px;
+    }
+  }
+
+  /* =======================================================
+     XXS BREAKPOINT (360px and below)
+  ======================================================= */
+  @include xxs {
+    gap: 16px;
+
+    padding: 14px;
+
+    &-title {
+      font-size: 18px;
+    }
+
+    &-card {
+      padding: 12px;
+    }
+
+    &-summary {
+      padding: 14px;
+    }
+
+    &-summary-title {
+      font-size: 15px;
+    }
+
+    &-summary-text {
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    &-value {
+      font-size: 14px;
+    }
+  }
+}

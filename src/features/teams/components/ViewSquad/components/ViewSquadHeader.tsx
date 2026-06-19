@@ -7,7 +7,7 @@
 import Image from "next/image";
 import { FaTrophy } from "react-icons/fa";
 
-import { TeamSquad } from "../../../../../types/teams/viewSquad.types";
+import { TeamSquad } from "../../../../../types/teams/viewSquad/viewSquad.types";
 
 interface SquadHeaderProps {
   squad: TeamSquad;

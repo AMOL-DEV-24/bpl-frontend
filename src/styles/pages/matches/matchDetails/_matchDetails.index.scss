@@ -1,0 +1,191 @@
+/* =========================================================
+   MATCH DETAILS PAGE
+   FILE : _matchDetailsPage.scss
+
+   PURPOSE
+   ---------------------------------------------------------
+   Root wrapper for Match Details feature.
+
+   CONTAINS
+   ---------------------------------------------------------
+   • Page Container
+   • Not Found State
+   • Global Page Spacing
+
+   SAFE SCSS RULES
+   ---------------------------------------------------------
+   • Scoped under .match-details-page
+   • No style leakage
+   • Future-safe nesting
+   • Responsive from XXS → XXL
+========================================================= */
+
+@use "../../../abstracts/breakpoints" as *;
+
+/*==========================================================
+    Forward SCSS
+=============================================================*/
+@forward "./components/matchDetailsHeader";
+@forward "./components/matchDetailsInfo";
+@forward "./components/matchDetailsPlayingXI";
+@forward "./components/matchDetailsScorecard";
+@forward "./components/matchDetailsResult";
+
+/* =========================================================
+   ROOT PAGE
+========================================================= */
+
+.match-details-page {
+  width: 100%;
+
+  min-height: 100vh;
+
+  padding: 32px 0;
+
+  /* =======================================================
+     PAGE CONTAINER
+  ======================================================= */
+
+  &-container {
+    width: 100%;
+
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding: 0 24px;
+  }
+
+  /* =======================================================
+     NOT FOUND STATE
+  ======================================================= */
+
+  &-not-found {
+    text-align: center;
+
+    font-size: 32px;
+
+    font-weight: 800;
+
+    color: var(--text);
+
+    padding: 120px 0;
+  }
+
+  /* =======================================================
+     XXL BREAKPOINT
+     1400px+
+  ======================================================= */
+
+  @include xxl {
+    padding: 40px 0;
+
+    &-container {
+      max-width: 1500px;
+    }
+  }
+
+  /* =======================================================
+     XL BREAKPOINT
+     <= 1200px
+  ======================================================= */
+
+  @include xl {
+    &-container {
+      padding: 0 20px;
+    }
+  }
+
+  /* =======================================================
+     LG BREAKPOINT
+     <= 992px
+  ======================================================= */
+
+  @include lg {
+    padding: 28px 0;
+
+    &-container {
+      padding: 0 18px;
+    }
+
+    &-not-found {
+      font-size: 28px;
+    }
+  }
+
+  /* =======================================================
+     MD BREAKPOINT
+     <= 768px
+  ======================================================= */
+
+  @include md {
+    padding: 24px 0;
+
+    &-container {
+      padding: 0 16px;
+    }
+
+    &-not-found {
+      font-size: 24px;
+
+      padding: 90px 0;
+    }
+  }
+
+  /* =======================================================
+     SM BREAKPOINT
+     <= 576px
+  ======================================================= */
+
+  @include sm {
+    padding: 20px 0;
+
+    &-container {
+      padding: 0 14px;
+    }
+
+    &-not-found {
+      font-size: 22px;
+
+      padding: 70px 0;
+    }
+  }
+
+  /* =======================================================
+     XS BREAKPOINT
+     <= 420px
+  ======================================================= */
+
+  @include xs {
+    padding: 18px 0;
+
+    &-container {
+      padding: 0 12px;
+    }
+
+    &-not-found {
+      font-size: 20px;
+
+      padding: 60px 0;
+    }
+  }
+
+  /* =======================================================
+     XXS BREAKPOINT
+     <= 360px
+  ======================================================= */
+
+  @include xxs {
+    padding: 16px 0;
+
+    &-container {
+      padding: 0 10px;
+    }
+
+    &-not-found {
+      font-size: 18px;
+
+      padding: 50px 0;
+    }
+  }
+}

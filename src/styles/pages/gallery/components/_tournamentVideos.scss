@@ -1,0 +1,286 @@
+/* =========================================================
+   IMPORTS
+========================================================= */
+@use "../../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   TOURNAMENT VIDEOS
+========================================================= */
+
+.tournament-videos {
+  position: relative;
+
+  padding: 80px 0;
+
+  background: var(--bg);
+
+  color: var(--text);
+
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.tournament-videos-header {
+  text-align: center;
+
+  margin-bottom: 48px;
+}
+
+.tournament-videos-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 6px 16px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+
+  color: var(--skin-color);
+
+  background: rgba(0, 0, 0, 0.06);
+
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+@supports (
+  background: color-mix(
+    in srgb,
+    red 50%,
+    blue
+  )
+) {
+  .tournament-videos-tag {
+    background: color-mix(
+      in srgb,
+      var(--skin-color) 10%,
+      transparent
+    );
+
+    border: 1px solid
+      color-mix(
+        in srgb,
+        var(--skin-color) 20%,
+        transparent
+      );
+  }
+}
+
+.tournament-videos-title {
+  margin-top: 16px;
+
+  font-size: 48px;
+  font-weight: 900;
+
+  color: var(--text);
+
+  letter-spacing: -1px;
+}
+
+.tournament-videos-subtitle {
+  margin-top: 14px;
+
+  max-width: 620px;
+
+  margin-inline: auto;
+
+  font-size: 16px;
+
+  line-height: 1.7;
+
+  color: var(--muted);
+}
+
+/* =========================================================
+   GRID SECTION
+========================================================= */
+
+.tournament-videos-grid {
+  width: 100%;
+
+  max-width: 1200px;
+
+  margin-inline: auto;
+
+  padding-inline: 24px;
+
+  display: grid;
+
+  grid-template-columns: repeat(
+    2,
+    minmax(0, 1fr)
+  );
+
+  gap: 24px;
+}
+
+/* =========================================================
+   XXL ≥ 1400px
+========================================================= */
+
+@include xxl {
+  .tournament-videos-title {
+    font-size: 56px;
+  }
+
+  .tournament-videos-grid {
+    max-width: 1280px;
+
+    padding-inline: 32px;
+
+    gap: 28px;
+  }
+}
+
+/* =========================================================
+   XL ≤ 1200px
+========================================================= */
+
+@include xl {
+  .tournament-videos-title {
+    font-size: 44px;
+  }
+
+  .tournament-videos-grid {
+    gap: 22px;
+  }
+}
+
+/* =========================================================
+   LG ≤ 992px
+========================================================= */
+
+@include lg {
+  .tournament-videos {
+    padding: 60px 0;
+  }
+
+  .tournament-videos-title {
+    font-size: 38px;
+  }
+
+  .tournament-videos-grid {
+    gap: 20px;
+
+    padding-inline: 20px;
+  }
+}
+
+/* =========================================================
+   MD ≤ 768px
+========================================================= */
+
+@include md {
+  .tournament-videos {
+    padding: 50px 0;
+  }
+
+  .tournament-videos-title {
+    font-size: 32px;
+  }
+
+  .tournament-videos-subtitle {
+    font-size: 15px;
+  }
+
+  .tournament-videos-grid {
+    grid-template-columns: 1fr;
+
+    max-width: 760px;
+
+    gap: 20px;
+
+    padding-inline: 16px;
+  }
+}
+
+/* =========================================================
+   SM ≤ 576px
+========================================================= */
+
+@include sm {
+  .tournament-videos {
+    padding: 40px 0;
+  }
+
+  .tournament-videos-header {
+    margin-bottom: 36px;
+  }
+
+  .tournament-videos-title {
+    font-size: 28px;
+  }
+
+  .tournament-videos-subtitle {
+    font-size: 14px;
+  }
+
+  .tournament-videos-grid {
+    gap: 16px;
+
+    padding-inline: 14px;
+  }
+}
+
+/* =========================================================
+   XS ≤ 420px
+========================================================= */
+
+@include xs {
+  .tournament-videos-title {
+    font-size: 24px;
+
+    letter-spacing: -0.5px;
+  }
+
+  .tournament-videos-tag {
+    font-size: 11px;
+
+    padding: 5px 12px;
+  }
+
+  .tournament-videos-subtitle {
+    font-size: 13px;
+  }
+
+  .tournament-videos-grid {
+    padding-inline: 12px;
+  }
+}
+
+/* =========================================================
+   XXS ≤ 360px
+========================================================= */
+
+@include xxs {
+  .tournament-videos {
+    padding: 32px 0;
+  }
+
+  .tournament-videos-title {
+    font-size: 22px;
+  }
+
+  .tournament-videos-subtitle {
+    font-size: 12px;
+  }
+
+  .tournament-videos-tag {
+    font-size: 10px;
+
+    padding: 4px 10px;
+  }
+
+  .tournament-videos-grid {
+    padding-inline: 10px;
+  }
+}

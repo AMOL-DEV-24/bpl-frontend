@@ -25,13 +25,13 @@
    - Banners
    - Sponsors
 ========================================================= */
-@forward "./hero";
-@forward "./announcements";
-@forward "./liveMatch";
-@forward "./tournamentStats";
-@forward "./teamsPreview";
-@forward "./banners";
-@forward "./sponsors";
+@forward "./components/hero";
+@forward "./components/announcements";
+@forward "./components/liveMatch";
+@forward "./components/tournamentStats";
+@forward "./components/teamsPreview";
+@forward "./components/banners";
+@forward "./components/sponsors";
 
 /* =========================================================
    HOME PAGE ROOT

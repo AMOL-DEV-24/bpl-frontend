@@ -21,7 +21,7 @@ import {
 
 import { FaBaseballBall } from "react-icons/fa";
 
-import { Player } from "../../../../../types/teams/viewSquad.types";
+import { Player } from "../../../../../types/teams/viewSquad/viewSquad.types";
 
 interface PlayerCardProps {
   player: Player;

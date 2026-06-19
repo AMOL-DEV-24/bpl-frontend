@@ -1,745 +1,471 @@
 /* =========================================================
    IMPORTS
 ========================================================= */
+
 @use "../../../abstracts/breakpoints" as *;
 
 /* =========================================================
    MAN OF THE MATCH
-   ---------------------------------------------------------
-   Scope  : .motm
-   Purpose: BPL 2026 compact square card grid
+   Purpose : Match Wise Award Winners
+   Scope   : Fully Scoped Under .man-of-the-match
 ========================================================= */
 
-.motm {
-  padding: 80px 0;
+.man-of-the-match {
+  padding: 60px 0;
 
-  background: var(--bg);
+  /* ======================================================
+     CONTAINER
+  ====================================================== */
 
-  transition: background-color 0.3s ease, color 0.3s ease;
-
-  /* =======================================================
-     HEADER
-  ======================================================= */
-  &__header {
-    text-align: center;
-
-    margin-bottom: 48px;
+  &-container {
+    width: 100%;
   }
 
-  &__tag {
+  /* ======================================================
+     HEADER
+  ====================================================== */
+
+  &-header {
+    margin-bottom: 40px;
+
+    text-align: center;
+  }
+
+  &-tag {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    justify-content: center;
 
-    padding: 5px 16px;
+    padding: 8px 18px;
 
     border-radius: 999px;
 
-    font-size: 12px;
+    background: var(--skin-color);
+    color: #ffffff;
+
+    font-size: 0.75rem;
     font-weight: 700;
 
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
 
+  &-title {
+    margin-top: 16px;
+
+    color: #111827;
+
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  &-title-star {
     color: var(--skin-color);
-
-    @supports (background: color-mix(in srgb, red 50%, blue)) {
-      background: color-mix(in srgb, var(--skin-color) 10%, transparent);
-      border: 1px solid color-mix(in srgb, var(--skin-color) 25%, transparent);
-    }
-
-    @supports not (background: color-mix(in srgb, red 50%, blue)) {
-      background: rgba(0, 0, 0, 0.06);
-      border: 1px solid rgba(0, 0, 0, 0.12);
-    }
   }
 
-  &__title {
-    margin-top: 14px;
-
-    font-size: 42px;
-    font-weight: 900;
-
-    color: var(--text);
-
-    letter-spacing: -0.5px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-  }
-
-  &__title-star {
-    color: var(--skin-color);
-
-    font-size: 28px;
-  }
-
-  &__sub {
+  &-subtitle {
     margin-top: 10px;
 
-    font-size: 15px;
+    color: #6b7280;
 
-    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.6;
   }
 
-  /* =======================================================
+  /* ======================================================
      GRID
-     xxl → 5 cols
-     xl  → 4 cols
-     lg  → 3 cols
-     md  → 3 cols
-     sm  → 2 cols
-     xs  → 2 cols
-     xxs → 1 col
-  ======================================================= */
-  &__grid {
+  ====================================================== */
+
+  &-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 16px;
+
+    justify-content: center;
+
+    gap: 24px;
+
+    grid-template-columns:
+      repeat(
+        auto-fit,
+        minmax(220px, 220px)
+      );
   }
 
-  /* =======================================================
-     CARD — square enforced via aspect-ratio
-  ======================================================= */
-  &__card {
-    background: var(--card-bg);
+  /* ======================================================
+     CARD
+  ====================================================== */
 
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 18px;
+  &-card {
+    width: 220px;
+    height: 320px;
 
     overflow: hidden;
 
-    display: flex;
-    flex-direction: column;
+    border: 2px solid var(--skin-color);
+    border-radius: 22px;
 
-    /* Force square */
-    aspect-ratio: 1 / 1;
+    background: #ffffff;
 
-    position: relative;
+    box-shadow:
+      0 12px 24px rgba(0, 0, 0, 0.08);
 
     transition:
       transform 0.3s ease,
-      box-shadow 0.3s ease,
-      border-color 0.3s ease;
-
-    &:hover {
-      transform: translateY(-6px) scale(1.02);
-
-      border-color: var(--skin-color);
-
-      @supports (background: color-mix(in srgb, red 50%, blue)) {
-        box-shadow: 0 12px 40px
-          color-mix(in srgb, var(--skin-color) 20%, transparent);
-      }
-
-      @supports not (background: color-mix(in srgb, red 50%, blue)) {
-        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
-      }
-    }
+      box-shadow 0.3s ease;
   }
 
-  /* =======================================================
-     CARD — TOP PANEL (takes ~65% of card height)
-  ======================================================= */
-  &__card-top {
+  &-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  /* ======================================================
+     IMAGE SECTION
+     70%
+  ====================================================== */
+
+  &-card-top {
     position: relative;
 
-    flex: 1;
-
-    background: linear-gradient(145deg, #0d0d1a 0%, #1a1a3e 50%, #0f2060 100%);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
+    height: 70%;
 
     overflow: hidden;
 
-    /* Subtle radial glow behind avatar */
-    &::after {
-      content: "";
-
-      position: absolute;
-      inset: 0;
-
-      background: radial-gradient(
-        circle at 50% 60%,
-        rgba(255, 255, 255, 0.04) 0%,
-        transparent 70%
-      );
-
-      pointer-events: none;
-    }
+    background: #f3f4f6;
   }
 
-  /* Sr No — top left */
-  &__card-srno {
-    position: absolute;
-    top: 9px;
-    left: 11px;
+  /* ======================================================
+     MATCH NUMBER
+  ====================================================== */
 
-    font-size: 10px;
+  &-match-no {
+    position: absolute;
+
+    top: 12px;
+    left: 12px;
+
+    z-index: 5;
+
+    padding: 6px 10px;
+
+    border-radius: 999px;
+
+    background:
+      rgba(0, 0, 0, 0.55);
+
+    color: #ffffff;
+
+    font-size: 0.75rem;
     font-weight: 700;
-
-    letter-spacing: 0.4px;
-
-    color: rgba(255, 255, 255, 0.35);
   }
 
-  /* Trophy — top right */
-  &__card-trophy {
+  /* ======================================================
+     TROPHY
+  ====================================================== */
+
+  &-trophy {
     position: absolute;
-    top: 6px;
-    right: 9px;
 
-    font-size: 14px;
+    top: 12px;
+    right: 12px;
 
-    line-height: 1;
+    z-index: 5;
 
-    opacity: 0.55;
-
-    transition: opacity 0.3s ease, transform 0.3s ease;
-
-    .motm__card:hover & {
-      opacity: 1;
-      transform: scale(1.25) rotate(-8deg);
-    }
+    font-size: 1.4rem;
   }
 
-  /* =======================================================
-     AVATAR — fills most of the top panel
-  ======================================================= */
-  &__avatar {
-    width: 180px;
-    height: 180px;
+  /* ======================================================
+     AVATAR
+  ====================================================== */
 
-    border-radius: 50%;
-
-    border: 2.5px solid rgba(255, 255, 255, 0.18);
-
-    background: rgba(255, 255, 255, 0.06);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-
-    position: relative;
-    z-index: 1;
-
-    flex-shrink: 0;
-
-    transition: border-color 0.3s ease, transform 0.3s ease;
-
-    .motm__card:hover & {
-      border-color: var(--skin-color);
-      transform: scale(1.05);
-    }
+  &-avatar {
+    width: 100%;
+    height: 100%;
   }
 
-  &__avatar-photo {
+  &-avatar-image {
+    display: block;
+
     width: 100%;
     height: 100%;
 
     object-fit: cover;
-    object-position: top center;
-
-    border-radius: 50%;
+    object-position: center top;
   }
 
-  /* Initials — shown when no photo */
-  &__avatar-initials {
-    font-size: 26px;
-    font-weight: 900;
+  /* ======================================================
+     IMAGE FALLBACK
+  ====================================================== */
 
-    color: rgba(255, 255, 255, 0.35);
+  &-avatar-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    letter-spacing: 1px;
+    width: 100%;
+    height: 100%;
 
-    user-select: none;
+    background:
+      linear-gradient(
+        135deg,
+        var(--bg),
+        #111827
+      );
+
+    color: #ffffff;
+
+    font-size: 6rem;
   }
 
-  /* =======================================================
-     TEAM LOGO — bottom right of top panel
-  ======================================================= */
-  &__team-logo {
+  /* ======================================================
+     TEAM LOGO
+  ====================================================== */
+
+  &-team-logo {
     position: absolute;
-    bottom: 9px;
-    right: 10px;
 
-    width: 30px;
-    height: 30px;
+    right: 12px;
+    bottom: 12px;
 
+    z-index: 5;
+
+    width: 54px;
+    height: 54px;
+
+    padding: 4px;
+
+    border: 2px solid #ffffff;
     border-radius: 50%;
+
+    background: #ffffff;
 
     object-fit: contain;
 
-    background: rgba(255, 255, 255, 0.07);
-
-    border: 1px solid rgba(255, 255, 255, 0.12);
-
-    padding: 3px;
-
-    transition: transform 0.3s ease, border-color 0.3s ease;
-
-    .motm__card:hover & {
-      transform: scale(1.12);
-      border-color: var(--skin-color);
-    }
+    box-shadow:
+      0 8px 20px rgba(0, 0, 0, 0.18);
   }
 
-  /* =======================================================
-     CARD — BODY (bottom ~35% of card)
-  ======================================================= */
-  &__card-body {
-    padding: 10px 12px 11px;
+  /* ======================================================
+     CONTENT SECTION
+     30%
+  ====================================================== */
 
-    background: var(--card-bg);
-
+  &-card-body {
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    justify-content: center;
 
-    /* Subtle top separator */
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    height: 30%;
+
+    padding: 14px;
+
+    text-align: center;
   }
 
-  &__player {
-    font-size: 12px;
-    font-weight: 900;
-
-    color: var(--text);
-
-    margin: 0;
-
-    white-space: nowrap;
+  &-player-name {
     overflow: hidden;
-    text-overflow: ellipsis;
 
-    line-height: 1.2;
-  }
+    color: #111827;
 
-  &__team {
-    font-size: 10px;
+    font-size: 1rem;
     font-weight: 700;
 
-    letter-spacing: 0.3px;
-    text-transform: uppercase;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &-team-name {
+    overflow: hidden;
+
+    margin-top: 4px;
 
     color: var(--skin-color);
 
-    margin: 0;
+    font-size: 0.85rem;
+    font-weight: 600;
 
-    white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
-  /* =======================================================
-     STAT PILLS
-  ======================================================= */
-  &__stats {
+  /* ======================================================
+     STATS
+  ====================================================== */
+
+  &-stats {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
+    justify-content: center;
 
-    margin-top: 2px;
+    gap: 6px;
+
+    margin-top: 10px;
   }
 
-  &__stat {
-    font-size: 9px;
-    font-weight: 700;
-
-    padding: 2px 6px;
+  &-stat {
+    padding: 5px 10px;
 
     border-radius: 999px;
 
-    white-space: nowrap;
+    background: #f3f4f6;
 
-    @supports (background: color-mix(in srgb, red 50%, blue)) {
-      background: color-mix(in srgb, var(--skin-color) 8%, transparent);
-      color: var(--muted);
-      border: 1px solid color-mix(in srgb, var(--skin-color) 20%, transparent);
-    }
+    color: #374151;
 
-    @supports not (background: color-mix(in srgb, red 50%, blue)) {
-      background: rgba(0, 0, 0, 0.05);
-      color: var(--muted);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-    }
+    font-size: 0.7rem;
+    font-weight: 600;
   }
 
-  /* =======================================================
+  /* ======================================================
      FOOTER
-  ======================================================= */
-  &__footer {
+  ====================================================== */
+
+  &-footer {
     margin-top: 40px;
 
     text-align: center;
 
-    font-size: 14px;
+    color: #111827;
+
+    font-size: 1rem;
     font-weight: 700;
-
-    color: var(--skin-color);
-
-    padding: 16px;
-
-    border-radius: 12px;
-
-    letter-spacing: 0.5px;
-
-    @supports (background: color-mix(in srgb, red 50%, blue)) {
-      background: color-mix(in srgb, var(--skin-color) 8%, transparent);
-      border: 1px solid color-mix(in srgb, var(--skin-color) 20%, transparent);
-    }
-
-    @supports not (background: color-mix(in srgb, red 50%, blue)) {
-      background: rgba(0, 0, 0, 0.05);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-    }
   }
 
-  /* =======================================================
-     RESPONSIVE BREAKPOINTS
-  ======================================================= */
+  /* ======================================================
+     xxs - 360px
+  ====================================================== */
 
-  /* -- XXL: >= 1400px ----------------------------------- */
-  @include xxl {
-    &__grid {
-      grid-template-columns: repeat(5, 1fr);
-      gap: 18px;
-    }
-
-    &__avatar {
-      width: 190px;
-      height: 190px;
-    }
-
-    &__avatar-initials {
-      font-size: 30px;
-    }
-
-    &__team-logo {
-      width: 34px;
-      height: 34px;
-    }
-
-    &__player {
-      font-size: 13px;
-    }
-
-    &__team {
-      font-size: 11px;
-    }
-
-    &__stat {
-      font-size: 10px;
-    }
-  }
-
-  /* -- XL: <= 1200px ------------------------------------ */
-  @include xl {
-    &__grid {
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-    }
-
-    &__title {
-      font-size: 38px;
-    }
-
-    &__avatar {
-      width: 176px;
-      height: 176px;
-    }
-  }
-
-  /* -- LG: <= 992px ------------------------------------- */
-  @include lg {
-    padding: 60px 0;
-
-    &__grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    &__title {
-      font-size: 34px;
-    }
-
-    &__avatar {
-      width: 170px;
-      height: 170px;
-    }
-
-    &__avatar-initials {
-      font-size: 22px;
-    }
-
-    &__team-logo {
-      width: 26px;
-      height: 26px;
-    }
-
-    &__card-body {
-      padding: 9px 11px 10px;
-    }
-  }
-
-  /* -- MD: <= 768px ------------------------------------- */
-  @include md {
-    padding: 50px 0;
-
-    &__grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    &__title {
-      font-size: 30px;
-    }
-
-    &__title-star {
-      font-size: 22px;
-    }
-
-    &__avatar {
-      width: 110px;
-      height: 110px;
-    }
-
-    &__avatar-initials {
-      font-size: 20px;
-    }
-
-    &__team-logo {
-      width: 24px;
-      height: 24px;
-      bottom: 7px;
-      right: 8px;
-    }
-
-    &__card-srno {
-      font-size: 9px;
-    }
-
-    &__card-trophy {
-      font-size: 12px;
-    }
-
-    &__card-body {
-      padding: 8px 10px 9px;
-    }
-
-    &__player {
-      font-size: 11px;
-    }
-
-    &__team {
-      font-size: 9px;
-    }
-
-    &__stat {
-      font-size: 8px;
-      padding: 2px 5px;
-    }
-  }
-
-  /* -- SM: <= 576px ------------------------------------- */
-  @include sm {
-    padding: 40px 0;
-
-    &__grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    &__title {
-      font-size: 26px;
-      gap: 8px;
-    }
-
-    &__title-star {
-      font-size: 18px;
-    }
-
-    &__sub {
-      font-size: 13px;
-    }
-
-    &__avatar {
-      width: 100px;
-      height: 100px;
-    }
-
-    &__avatar-initials {
-      font-size: 22px;
-    }
-
-    &__team-logo {
-      width: 26px;
-      height: 26px;
-    }
-
-    /* Hide trophy on small screens */
-    &__card-trophy {
-      display: none;
-    }
-
-    &__card-body {
-      padding: 9px 11px 10px;
-    }
-
-    &__player {
-      font-size: 12px;
-    }
-
-    &__team {
-      font-size: 10px;
-    }
-
-    &__stat {
-      font-size: 9px;
-    }
-  }
-
-  /* -- XS: <= 420px ------------------------------------- */
-  @include xs {
-    padding: 36px 0;
-
-    &__grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-
-    &__title {
-      font-size: 22px;
-    }
-
-    &__header {
-      margin-bottom: 32px;
-    }
-
-    &__avatar {
-      width: 100px;
-      height: 100px;
-    }
-
-    &__avatar-initials {
-      font-size: 18px;
-    }
-
-    &__team-logo {
-      width: 22px;
-      height: 22px;
-      bottom: 6px;
-      right: 7px;
-      padding: 2px;
-    }
-
-    &__card-srno {
-      font-size: 9px;
-      top: 7px;
-      left: 8px;
-    }
-
-    &__card-body {
-      padding: 7px 9px 8px;
-      gap: 2px;
-    }
-
-    &__player {
-      font-size: 11px;
-    }
-
-    &__team {
-      font-size: 9px;
-    }
-
-    &__stats {
-      gap: 3px;
-    }
-
-    &__stat {
-      font-size: 8px;
-      padding: 1px 5px;
-    }
-  }
-
-  /* -- XXS: <= 360px ------------------------------------ */
   @include xxs {
-    padding: 32px 0;
+    &-grid {
+      gap: 16px;
 
-    &__grid {
-      grid-template-columns: 1fr;
-      gap: 10px;
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(220px, 220px)
+        );
+    }
+  }
+
+  /* ======================================================
+     xs - 420px
+  ====================================================== */
+
+  @include xs {
+    &-card {
+      width: 230px;
+      height: 330px;
     }
 
-    &__title {
-      font-size: 20px;
+    &-grid {
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(230px, 230px)
+        );
+    }
+  }
+
+  /* ======================================================
+     sm - 576px
+  ====================================================== */
+
+  @include sm {
+    &-card {
+      width: 240px;
+      height: 340px;
     }
 
-    &__header {
-      margin-bottom: 24px;
+    &-grid {
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(240px, 240px)
+        );
+    }
+  }
+
+  /* ======================================================
+     md - 768px
+  ====================================================== */
+
+  @include md {
+    &-card {
+      width: 250px;
+      height: 350px;
     }
 
-    /* On single col, card doesn't need to be square — let it breathe */
-    &__card {
-      aspect-ratio: unset;
+    &-grid {
+      gap: 20px;
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(250px, 250px)
+        );
+    }
+  }
+
+  /* ======================================================
+     lg - 992px
+  ====================================================== */
+
+  @include lg {
+    &-card {
+      width: 260px;
+      height: 360px;
     }
 
-    &__card-top {
-      height: 130px;
+    &-grid {
+      gap: 24px;
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(260px, 260px)
+        );
+    }
+  }
+
+  /* ======================================================
+     xl - 1200px
+  ====================================================== */
+
+  @include xl {
+    &-card {
+      width: 270px;
+      height: 370px;
     }
 
-    &__avatar {
-      width: 100px;
-      height: 100px;
+    &-grid {
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(270px, 270px)
+        );
+    }
+  }
+
+  /* ======================================================
+     xxl - 1400px
+  ====================================================== */
+
+  @include xxl {
+    &-card {
+      width: 280px;
+      height: 380px;
     }
 
-    &__avatar-initials {
-      font-size: 24px;
-    }
+    &-grid {
+      gap: 28px;
 
-    &__team-logo {
-      width: 28px;
-      height: 28px;
-      bottom: 8px;
-      right: 10px;
-    }
-
-    &__card-srno {
-      font-size: 10px;
-    }
-
-    &__card-trophy {
-      display: flex;
-      font-size: 14px;
-    }
-
-    &__card-body {
-      padding: 11px 14px 13px;
-    }
-
-    &__player {
-      font-size: 14px;
-      white-space: normal;
-    }
-
-    &__team {
-      font-size: 11px;
-      white-space: normal;
-    }
-
-    &__stat {
-      font-size: 10px;
-      padding: 2px 7px;
-    }
-
-    &__footer {
-      font-size: 13px;
-      padding: 14px;
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(280px, 280px)
+        );
     }
   }
 }

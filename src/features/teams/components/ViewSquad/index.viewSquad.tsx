@@ -9,7 +9,7 @@
    └── .view-squad-page-groups
 ========================================================= */
 
-import { TeamSquad } from "../../../../types/teams/viewSquad.types";
+import { TeamSquad } from "../../../../types/teams/viewSquad/viewSquad.types";
 import SquadHeader from "./components/ViewSquadHeader";
 import SquadRoleGroup from "./components/ViewSquadSquadRoleGroup";
 

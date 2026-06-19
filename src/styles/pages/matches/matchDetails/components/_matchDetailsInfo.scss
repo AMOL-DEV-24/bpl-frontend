@@ -1,0 +1,251 @@
+/* =========================================================
+   IMPORTS
+========================================================= */
+@use "../../../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   MATCH DETAILS INFO
+   ---------------------------------------------------------
+   Scope   : .match-details-info
+   Purpose : Match metadata section
+             - Date
+             - Time
+             - Venue
+             - Toss
+             - Umpires
+             - Referee
+   Notes   :
+   - Fully isolated styles
+   - No global selectors
+   - No style leakage
+   - Future safe architecture
+   - Responsive XXS → XXL
+========================================================= */
+
+.match-details-info {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  margin-top: 24px;
+
+  padding: 24px;
+
+  border-radius: 20px;
+
+  background: var(--card-bg);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  overflow: hidden;
+
+  /* =======================================================
+     HEADER
+  ======================================================= */
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &-title {
+    margin: 0;
+
+    font-size: 24px;
+    font-weight: 800;
+
+    color: var(--text);
+
+    line-height: 1.3;
+  }
+
+  /* =======================================================
+     INFO GRID
+  ======================================================= */
+  &-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  /* =======================================================
+     INFO CARD
+  ======================================================= */
+  &-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    padding: 18px;
+
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.03);
+
+    border: 1px solid rgba(255, 255, 255, 0.06);
+
+    transition:
+      transform 0.3s ease,
+      border-color 0.3s ease;
+
+    &:hover {
+      transform: translateY(-3px);
+      border-color: var(--skin-color);
+    }
+  }
+
+  /* =======================================================
+     LABEL
+  ======================================================= */
+  &-label {
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+
+    color: var(--muted);
+  }
+
+  /* =======================================================
+     VALUE
+  ======================================================= */
+  &-value {
+    font-size: 15px;
+    font-weight: 700;
+
+    color: var(--text);
+
+    line-height: 1.6;
+
+    word-break: break-word;
+  }
+
+  /* =======================================================
+     XXL BREAKPOINT (1400px+)
+  ======================================================= */
+  @include xxl {
+    padding: 28px;
+
+    &-title {
+      font-size: 28px;
+    }
+
+    &-grid {
+      gap: 18px;
+    }
+
+    &-value {
+      font-size: 16px;
+    }
+  }
+
+  /* =======================================================
+     XL BREAKPOINT (1200px and below)
+  ======================================================= */
+  @include xl {
+    &-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+  }
+
+  /* =======================================================
+     LG BREAKPOINT (992px and below)
+  ======================================================= */
+  @include lg {
+    &-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    &-title {
+      font-size: 22px;
+    }
+  }
+
+  /* =======================================================
+     MD BREAKPOINT (768px and below)
+  ======================================================= */
+  @include md {
+    padding: 20px;
+
+    &-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    &-item {
+      padding: 16px;
+    }
+  }
+
+  /* =======================================================
+     SM BREAKPOINT (576px and below)
+  ======================================================= */
+  @include sm {
+    gap: 20px;
+
+    padding: 18px;
+
+    &-title {
+      font-size: 20px;
+    }
+
+    &-value {
+      font-size: 14px;
+    }
+
+    &-item {
+      padding: 14px;
+    }
+  }
+
+  /* =======================================================
+     XS BREAKPOINT (420px and below)
+  ======================================================= */
+  @include xs {
+    padding: 16px;
+
+    &-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    &-label {
+      font-size: 10px;
+    }
+
+    &-value {
+      font-size: 13px;
+    }
+  }
+
+  /* =======================================================
+     XXS BREAKPOINT (360px and below)
+  ======================================================= */
+  @include xxs {
+    gap: 16px;
+
+    padding: 14px;
+
+    border-radius: 16px;
+
+    &-title {
+      font-size: 18px;
+    }
+
+    &-item {
+      padding: 12px;
+      border-radius: 12px;
+    }
+
+    &-label {
+      font-size: 9px;
+    }
+
+    &-value {
+      font-size: 12px;
+      line-height: 1.5;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 import ViewSquad from "@/features/teams/components/ViewSquad/index.viewSquad";
-import { squads } from "@/data/teams/squadMockData";
+import { squadsData } from "@/data/teams/viewSquad/squadMockData";
 
 export default async function TeamSquadPage({
   params,
@@ -10,7 +10,7 @@ export default async function TeamSquadPage({
 }) {
   const { id } = await params;
 
-  const squad = squads.find(
+  const squad = squadsData.find(
     (team) => team.teamId === Number(id)
   );
 

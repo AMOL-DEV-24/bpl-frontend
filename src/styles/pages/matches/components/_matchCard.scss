@@ -1,0 +1,467 @@
+/* =========================================================
+   MATCH CARD
+   FILE : _matchCard.scss
+
+   PURPOSE
+   ---------------------------------------------------------
+   Reusable match fixture card used inside Matches page.
+
+   FEATURES
+   ---------------------------------------------------------
+   • Match Number
+   • Status Badge
+   • Team Logos
+   • Team Names
+   • Venue
+   • CTA Button
+
+   NAMING RULES
+   ---------------------------------------------------------
+   • Uses ONLY dash (-)
+   • No underscore (_)
+   • No BEM double underscore (__)
+   • Scoped under .match-card
+   • Safe from collisions
+========================================================= */
+
+@use "../../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+.match-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  width: 100%;
+
+  padding: 1.25rem;
+
+  overflow: hidden;
+
+  border-radius: 1rem;
+
+  background: var(--card-bg);
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+
+  /* =======================================================
+     TOP ACCENT BAR
+  ======================================================= */
+
+  &::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 3px;
+
+    background: var(--skin-color);
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+
+    border-color: var(--skin-color);
+
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  }
+}
+
+/* =========================================================
+   STATUS VARIANTS
+========================================================= */
+
+.match-card-live::before {
+  background: #ef4444;
+}
+
+.match-card-upcoming::before {
+  background: var(--skin-color);
+}
+
+.match-card-completed::before {
+  background: #22c55e;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.match-card-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+}
+
+.match-card-match-no {
+  font-size: 0.7rem;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+
+  color: var(--muted);
+}
+
+/* =========================================================
+   STATUS BADGE
+========================================================= */
+
+.match-card-status {
+  display: inline-flex;
+
+  align-items: center;
+  gap: 0.35rem;
+
+  padding: 0.25rem 0.65rem;
+
+  border-radius: 999px;
+
+  font-size: 0.65rem;
+  font-weight: 800;
+
+  text-transform: uppercase;
+}
+
+.match-card-status-live {
+  color: #ffffff;
+
+  background: #ef4444;
+
+  animation: match-card-pulse-badge 2s infinite;
+}
+
+.match-card-status-upcoming {
+  color: var(--skin-color);
+
+  background: rgba(255, 255, 255, 0.08);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.match-card-status-completed {
+  color: #22c55e;
+
+  background: rgba(34, 197, 94, 0.1);
+
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+/* =========================================================
+   LIVE DOT
+========================================================= */
+
+.match-card-live-dot {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  animation: match-card-pulse-dot 1.2s infinite;
+}
+
+/* =========================================================
+   TEAMS
+========================================================= */
+
+.match-card-teams {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+}
+
+.match-card-team {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 0.5rem;
+
+  text-align: center;
+}
+
+/* =========================================================
+   TEAM LOGO
+========================================================= */
+
+.match-card-team-logo-wrap {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 90px;
+  height: 90px;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.05);
+
+  border: 2px solid rgba(255, 255, 255, 0.08);
+
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.match-card:hover .match-card-team-logo-wrap {
+  border-color: var(--skin-color);
+}
+
+.match-card-team-logo {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  padding: 0.25rem;
+}
+
+.match-card-team-name {
+  font-size: 0.85rem;
+
+  font-weight: 800;
+
+  color: var(--text);
+}
+
+/* =========================================================
+   VS
+========================================================= */
+
+.match-card-vs {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  font-size: 0.7rem;
+  font-weight: 900;
+
+  color: var(--skin-color);
+
+  background: rgba(255, 255, 255, 0.05);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.match-card-divider {
+  height: 1px;
+
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
+.match-card-details {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0.4rem;
+}
+
+.match-card-detail {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 0.5rem;
+}
+
+.match-card-detail-label {
+  font-size: 0.75rem;
+
+  color: var(--muted);
+}
+
+.match-card-detail-value {
+  font-size: 0.75rem;
+
+  font-weight: 700;
+
+  color: var(--text);
+
+  text-align: right;
+}
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.match-card-btn {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  margin-top: auto;
+
+  padding: 0.75rem 1rem;
+
+  border-radius: 0.625rem;
+
+  text-decoration: none;
+
+  font-size: 0.85rem;
+  font-weight: 700;
+
+  color: #ffffff;
+
+  background: var(--skin-color);
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.match-card-btn:hover {
+  opacity: 0.9;
+
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes match-card-pulse-badge {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes match-card-pulse-dot {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.4);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE BREAKPOINTS
+========================================================= */
+
+/* XXL : 1400px */
+@include xxl {
+  .match-card-team-logo-wrap {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* XL : 1200px */
+@include xl {
+  .match-card-team-logo-wrap {
+    width: 84px;
+    height: 84px;
+  }
+}
+
+/* LG : 992px */
+@include lg {
+  .match-card-team-logo-wrap {
+    width: 76px;
+    height: 76px;
+  }
+}
+
+/* MD : 768px */
+@include md {
+  .match-card-team-logo-wrap {
+    width: 68px;
+    height: 68px;
+  }
+
+  .match-card-vs {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* SM : 576px */
+@include sm {
+  .match-card-team-logo-wrap {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* XS : 420px */
+@include xs {
+  .match-card {
+    padding: 0.75rem;
+  }
+
+  .match-card-team-logo-wrap {
+    width: 54px;
+    height: 54px;
+  }
+
+  .match-card-btn {
+    font-size: 0.75rem;
+  }
+}
+
+/* XXS : 360px */
+@include xxs {
+  .match-card-team-logo-wrap {
+    width: 48px;
+    height: 48px;
+  }
+
+  .match-card-team-name {
+    font-size: 0.65rem;
+  }
+}

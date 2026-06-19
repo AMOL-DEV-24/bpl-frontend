@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Player } from "../types";
+import { Player } from "@/types/players/player.types";
 
 /* =========================================================
    PLAYER CARD

@@ -6,24 +6,7 @@
    Location : Home Page
 ========================================================= */
 
-const stats = [
-  {
-    title: "Teams",
-    value: "8",
-  },
-  {
-    title: "Players",
-    value: "120",
-  },
-  {
-    title: "Matches",
-    value: "32",
-  },
-  {
-    title: "Sponsors",
-    value: "15",
-  },
-];
+import tournamentsStatsData from "@/data/home/tournamentsStats/tournamentsStatsData";
 
 export default function TournamentStats() {
   return (
@@ -47,7 +30,7 @@ export default function TournamentStats() {
         ================================================= */}
         <div className="tournament-stats-grid">
 
-          {stats.map((item) => (
+          {tournamentsStatsData.map((item) => (
             <article
               key={item.title}
               className="tournament-stats-card"

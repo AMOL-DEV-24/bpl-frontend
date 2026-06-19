@@ -1,0 +1,426 @@
+/* =========================================================
+   IMPORTS
+========================================================= */
+@use "../../../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   MATCH DETAILS HEADER
+   ---------------------------------------------------------
+   Scope   : .match-details-header
+   Purpose :
+   - Match number
+   - Status badge
+   - Team logos
+   - Team names
+   - VS section
+   - Venue
+   Notes :
+   - Fully isolated component styles
+   - No global selectors
+   - No style leakage
+   - Future safe architecture
+   - Responsive XXS → XXL
+========================================================= */
+
+.match-details-header {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  padding: 32px;
+
+  border-radius: 24px;
+
+  background: var(--card-bg);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  overflow: hidden;
+
+  position: relative;
+
+  /* =======================================================
+     TOP ACCENT BAR
+  ======================================================= */
+  &::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 4px;
+
+    background: var(--skin-color);
+  }
+
+  /* =======================================================
+     MATCH META
+  ======================================================= */
+  &-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    flex-wrap: wrap;
+  }
+
+  &-match-no {
+    font-size: 13px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    color: var(--muted);
+  }
+
+  /* =======================================================
+     STATUS BADGE
+  ======================================================= */
+  &-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+
+    &--upcoming {
+      color: var(--skin-color);
+
+      background: rgba(255, 255, 255, 0.04);
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    &--live {
+      color: #ffffff;
+
+      background: #ef4444;
+
+      animation: match-details-header-live-pulse 2s infinite;
+    }
+
+    &--completed {
+      color: #22c55e;
+
+      background: rgba(34, 197, 94, 0.12);
+
+      border: 1px solid rgba(34, 197, 94, 0.25);
+    }
+  }
+
+  /* =======================================================
+     TEAMS WRAPPER
+  ======================================================= */
+  &-teams {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  /* =======================================================
+     TEAM
+  ======================================================= */
+  &-team {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    text-align: center;
+  }
+
+  /* =======================================================
+     TEAM LOGO
+  ======================================================= */
+  &-team-logo-wrapper {
+    width: 140px;
+    height: 140px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    background: rgba(255, 255, 255, 0.03);
+
+    border: 2px solid rgba(255, 255, 255, 0.08);
+
+    transition:
+      transform 0.3s ease,
+      border-color 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+
+      border-color: var(--skin-color);
+    }
+  }
+
+  &-team-logo {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    padding: 10px;
+  }
+
+  &-team-name {
+    margin: 0;
+
+    font-size: 24px;
+    font-weight: 800;
+
+    color: var(--text);
+
+    line-height: 1.3;
+
+    word-break: break-word;
+  }
+
+  /* =======================================================
+     VS BADGE
+  ======================================================= */
+  &-vs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 72px;
+    height: 72px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    font-size: 18px;
+    font-weight: 900;
+
+    color: var(--skin-color);
+
+    background: rgba(255, 255, 255, 0.04);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* =======================================================
+     VENUE
+  ======================================================= */
+  &-venue {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 14px 18px;
+
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.03);
+
+    border: 1px solid rgba(255, 255, 255, 0.06);
+
+    font-size: 15px;
+    font-weight: 600;
+
+    color: var(--text);
+
+    word-break: break-word;
+  }
+
+  /* =======================================================
+     LIVE ANIMATION
+  ======================================================= */
+  @keyframes match-details-header-live-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  /* =======================================================
+     XXL BREAKPOINT (1400px+)
+  ======================================================= */
+  @include xxl {
+    &-team-logo-wrapper {
+      width: 160px;
+      height: 160px;
+    }
+
+    &-team-name {
+      font-size: 28px;
+    }
+  }
+
+  /* =======================================================
+     XL BREAKPOINT (1200px and below)
+  ======================================================= */
+  @include xl {
+    &-team-logo-wrapper {
+      width: 130px;
+      height: 130px;
+    }
+  }
+
+  /* =======================================================
+     LG BREAKPOINT (992px and below)
+  ======================================================= */
+  @include lg {
+    padding: 28px;
+
+    &-team-logo-wrapper {
+      width: 110px;
+      height: 110px;
+    }
+
+    &-team-name {
+      font-size: 22px;
+    }
+  }
+
+  /* =======================================================
+     MD BREAKPOINT (768px and below)
+  ======================================================= */
+  @include md {
+    padding: 24px;
+
+    &-teams {
+      gap: 16px;
+    }
+
+    &-team-logo-wrapper {
+      width: 90px;
+      height: 90px;
+    }
+
+    &-team-name {
+      font-size: 18px;
+    }
+
+    &-vs {
+      width: 56px;
+      height: 56px;
+
+      font-size: 14px;
+    }
+  }
+
+  /* =======================================================
+     SM BREAKPOINT (576px and below)
+  ======================================================= */
+  @include sm {
+    gap: 20px;
+
+    padding: 20px;
+
+    &-teams {
+      flex-direction: column;
+    }
+
+    &-vs {
+      width: 50px;
+      height: 50px;
+
+      font-size: 13px;
+    }
+
+    &-team-logo-wrapper {
+      width: 88px;
+      height: 88px;
+    }
+
+    &-team-name {
+      font-size: 17px;
+    }
+  }
+
+  /* =======================================================
+     XS BREAKPOINT (420px and below)
+  ======================================================= */
+  @include xs {
+    padding: 18px;
+
+    border-radius: 18px;
+
+    &-team-logo-wrapper {
+      width: 76px;
+      height: 76px;
+    }
+
+    &-team-name {
+      font-size: 15px;
+    }
+
+    &-venue {
+      font-size: 13px;
+      padding: 12px;
+    }
+  }
+
+  /* =======================================================
+     XXS BREAKPOINT (360px and below)
+  ======================================================= */
+  @include xxs {
+    gap: 16px;
+
+    padding: 14px;
+
+    border-radius: 16px;
+
+    &-match-no {
+      font-size: 10px;
+    }
+
+    &-status {
+      font-size: 9px;
+
+      padding: 6px 10px;
+    }
+
+    &-team-logo-wrapper {
+      width: 64px;
+      height: 64px;
+    }
+
+    &-team-name {
+      font-size: 13px;
+    }
+
+    &-vs {
+      width: 44px;
+      height: 44px;
+
+      font-size: 11px;
+    }
+
+    &-venue {
+      font-size: 12px;
+
+      padding: 10px;
+    }
+  }
+}

@@ -1,0 +1,367 @@
+/* =========================================================
+   IMPORTS
+========================================================= */
+@use "../../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   GALLERY CARD
+   ---------------------------------------------------------
+   Scope   : .gallery-card
+   Purpose : Premium gallery image card with
+             featured mode, hover overlay and
+             responsive behaviour.
+
+   Naming  : Flat Component Convention
+             No BEM
+             No "__"
+             No "--"
+             Collision Safe
+========================================================= */
+
+/* =========================================================
+   CARD ROOT
+========================================================= */
+
+.gallery-card {
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius: 14px;
+
+  background: #0d0d0d;
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+
+    border-color: var(--skin-color);
+
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+
+    @supports (background: color-mix(in srgb, red 50%, blue)) {
+      box-shadow: 0 12px 32px
+        color-mix(
+          in srgb,
+          var(--skin-color) 20%,
+          transparent
+        );
+    }
+  }
+}
+
+/* =========================================================
+   FEATURED VARIANT
+========================================================= */
+
+.gallery-card-featured {
+  grid-column: span 2;
+  grid-row: span 2;
+
+  border-color: rgba(255, 255, 255, 0.1);
+
+  &:hover {
+    border-color: var(--skin-color);
+  }
+}
+
+/* =========================================================
+   FEATURED BADGE
+========================================================= */
+
+.gallery-card-featured-tag {
+  position: absolute;
+
+  top: 14px;
+  left: 14px;
+
+  z-index: 5;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 5px 12px;
+
+  border-radius: 999px;
+
+  background: var(--skin-color);
+
+  color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 0.5px;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* =========================================================
+   IMAGE WRAPPER
+========================================================= */
+
+.gallery-card-image-wrapper {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+}
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.gallery-card-image {
+  object-fit: cover;
+
+  transition: transform 0.5s ease;
+}
+
+.gallery-card:hover .gallery-card-image {
+  transform: scale(1.06);
+}
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.gallery-card-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  display: flex;
+  align-items: flex-end;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    transparent 100%
+  );
+
+  opacity: 0;
+
+  transition: opacity 0.35s ease;
+}
+
+.gallery-card:hover .gallery-card-overlay {
+  opacity: 1;
+}
+
+/* =========================================================
+   OVERLAY CONTENT
+========================================================= */
+
+.gallery-card-overlay-content {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 16px 14px;
+
+  transform: translateY(8px);
+
+  transition: transform 0.35s ease;
+}
+
+.gallery-card:hover .gallery-card-overlay-content {
+  transform: translateY(0);
+}
+
+/* =========================================================
+   VIEW ICON
+========================================================= */
+
+.gallery-card-view-icon {
+  flex-shrink: 0;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color: #ffffff;
+
+  background: rgba(255, 255, 255, 0.15);
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  backdrop-filter: blur(6px);
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.gallery-card:hover .gallery-card-view-icon {
+  background: var(--skin-color);
+
+  border-color: var(--skin-color);
+}
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.gallery-card-title {
+  flex: 1;
+
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 0.3px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* =========================================================
+   RESPONSIVE BREAKPOINTS
+========================================================= */
+
+/* ---------------------------------------------------------
+   XL
+--------------------------------------------------------- */
+
+@include xl {
+  .gallery-card {
+    border-radius: 12px;
+  }
+}
+
+/* ---------------------------------------------------------
+   LG
+--------------------------------------------------------- */
+
+@include lg {
+  .gallery-card {
+    border-radius: 10px;
+  }
+
+  .gallery-card-view-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .gallery-card-title {
+    font-size: 12px;
+  }
+}
+
+/* ---------------------------------------------------------
+   MD
+--------------------------------------------------------- */
+
+@include md {
+  .gallery-card-featured {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+
+  .gallery-card-overlay-content {
+    padding: 12px 10px;
+  }
+
+  .gallery-card-title {
+    font-size: 12px;
+  }
+}
+
+/* ---------------------------------------------------------
+   SM
+--------------------------------------------------------- */
+
+@include sm {
+  .gallery-card {
+    border-radius: 8px;
+  }
+
+  .gallery-card-featured {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+
+  .gallery-card-title {
+    font-size: 11px;
+  }
+
+  .gallery-card-view-icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* ---------------------------------------------------------
+   XS
+--------------------------------------------------------- */
+
+@include xs {
+  .gallery-card-featured {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .gallery-card-overlay {
+    opacity: 1;
+  }
+
+  .gallery-card-overlay-content {
+    transform: translateY(0);
+  }
+
+  .gallery-card-featured-tag {
+    padding: 4px 8px;
+
+    font-size: 10px;
+  }
+
+  .gallery-card-title {
+    font-size: 11px;
+  }
+}
+
+/* ---------------------------------------------------------
+   XXS
+--------------------------------------------------------- */
+
+@include xxs {
+  .gallery-card {
+    border-radius: 6px;
+  }
+
+  .gallery-card-title {
+    font-size: 10px;
+  }
+
+  .gallery-card-overlay-content {
+    padding: 8px;
+
+    gap: 6px;
+  }
+
+  .gallery-card-view-icon {
+    width: 24px;
+    height: 24px;
+  }
+}

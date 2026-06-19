@@ -4,89 +4,7 @@
              won, lost, tied, NR, points, NRR. BPL 2026.
 ========================================================= */
 
-interface TeamStanding {
-  team: string;
-  played: number;
-  won: number;
-  lost: number;
-  tied: number;
-  nr: number;
-  points: number;
-  nrr: string;
-}
-
-const teams: TeamStanding[] = [
-  {
-    team: "Gajanan Riders",
-    played: 4,
-    won: 3,
-    lost: 1,
-    tied: 0,
-    nr: 0,
-    points: 6,
-    nrr: "+1.868",
-  },
-  {
-    team: "Sadguru Lions",
-    played: 3,
-    won: 2,
-    lost: 1,
-    tied: 0,
-    nr: 0,
-    points: 4,
-    nrr: "+3.655",
-  },
-  {
-    team: "Mahalaxmi Warriors",
-    played: 3,
-    won: 2,
-    lost: 1,
-    tied: 0,
-    nr: 0,
-    points: 4,
-    nrr: "+2.790",
-  },
-  {
-    team: "Linge Super Kings",
-    played: 3,
-    won: 2,
-    lost: 1,
-    tied: 0,
-    nr: 0,
-    points: 4,
-    nrr: "+2.200",
-  },
-  {
-    team: "Samrat Yodha",
-    played: 3,
-    won: 1,
-    lost: 2,
-    tied: 0,
-    nr: 0,
-    points: 2,
-    nrr: "-2.190",
-  },
-  {
-    team: "Dayavan 11",
-    played: 3,
-    won: 1,
-    lost: 2,
-    tied: 0,
-    nr: 0,
-    points: 2,
-    nrr: "-4.883",
-  },
-  {
-    team: "Irfan Fighters",
-    played: 3,
-    won: 0,
-    lost: 3,
-    tied: 0,
-    nr: 0,
-    points: 0,
-    nrr: "-3.986",
-  },
-];
+import pointsTableData from "@/data/pointsTable/pointsTableData";
 
 export default function PointsTable() {
   return (
@@ -96,7 +14,7 @@ export default function PointsTable() {
         {/* ── Section Heading ── */}
         <div className="points-table-heading">
           <h2 className="points-table-heading-title">Standings</h2>
-          <span className="points-table-heading-badge">{teams.length} Teams</span>
+          <span className="points-table-heading-badge">{pointsTableData.length} Teams</span>
         </div>
 
         {/* ── Scrollable Table Wrapper ── */}
@@ -118,7 +36,7 @@ export default function PointsTable() {
             </thead>
 
             <tbody className="points-table-body">
-              {teams.map((team, index) => (
+              {pointsTableData.map((team, index) => (
                 <tr
                   key={team.team}
                   className={`points-table-row ${index < 4 ? "points-table-row--qualifier" : ""}`}

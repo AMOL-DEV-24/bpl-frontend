@@ -8,9 +8,10 @@
 
 @use "../../abstracts/breakpoints" as *;
 
-@forward "./liveScoreCard";
-@forward "./matchCard";
-@forward "./matchList";
+@forward "./components/liveScoreCard";
+@forward "./components/matchCard";
+@forward "./components/matchList";
+@forward "./matchDetails/matchDetails.index";
 
 /* =========================================================
    MATCHES PAGE WRAPPER

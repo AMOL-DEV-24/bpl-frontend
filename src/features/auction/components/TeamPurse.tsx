@@ -1,26 +1,75 @@
 /* =========================================================
    TEAM PURSE
    Purpose : Displays remaining purse amount for each team.
+   Scope   : Auction Module
+
+   Features
+   ---------------------------------------------------------
+   - Team Logo
+   - Team Name
+   - Remaining Purse Amount
+   - Section Header
+   - Responsive Layout
+   - Future-safe CSS namespace
+
    ========================================================= */
 
-const purses = [
-  { team: "Warriors", amount: "2,50,000" },
-  { team: "Kings",    amount: "1,80,000" },
-  { team: "Titans",   amount: "3,20,000" },
-  { team: "Strikers", amount: "2,10,000" },
-];
+import Image from "next/image";
+import teamPurseData from "@/data/auction/teamPurse/teamPurseData";
 
 export default function TeamPurse() {
   return (
-    <section className="team-purse">
+    <section className="auction-purse">
       <div className="auction-page-container">
 
-        <div className="team-purse-grid">
-          {purses.map((item) => (
-            <div key={item.team} className="team-purse-card">
-              <h3 className="team-purse-card__name">{item.team}</h3>
-              <span className="team-purse-card__amount">₹ {item.amount}</span>
-            </div>
+        {/* =====================================================
+            SECTION HEADER
+            ===================================================== */}
+        <div className="auction-purse-header">
+          <h2 className="auction-purse-heading">
+            Team Purse Status
+          </h2>
+
+          <p className="auction-purse-subheading">
+            Available purse balance for all participating teams.
+          </p>
+        </div>
+
+        {/* =====================================================
+            TEAM PURSE GRID
+            ===================================================== */}
+        <div className="auction-purse-grid">
+          {teamPurseData.map((team) => (
+            <article
+              key={team.team}
+              className="auction-purse-card"
+            >
+              {/* =================================================
+                  TEAM LOGO
+                  ================================================= */}
+              <div className="auction-purse-card-logo">
+                <Image
+                  src={team.image}
+                  alt={team.team}
+                  width={80}
+                  height={80}
+                />
+              </div>
+
+              {/* =================================================
+                  TEAM NAME
+                  ================================================= */}
+              <h3 className="auction-purse-card-title">
+                {team.team}
+              </h3>
+
+              {/* =================================================
+                  PURSE AMOUNT
+                  ================================================= */}
+              <span className="auction-purse-card-amount">
+                ₹ {team.amount}
+              </span>
+            </article>
           ))}
         </div>
 

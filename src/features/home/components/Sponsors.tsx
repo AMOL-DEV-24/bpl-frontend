@@ -11,18 +11,7 @@
      - sponsors-section-grid
        - sponsors-section-card
 ========================================================= */
-
-interface Sponsor {
-  id: number;
-  name: string;
-}
-
-const SPONSORS: Sponsor[] = [
-  { id: 1, name: "Sponsor One" },
-  { id: 2, name: "Sponsor Two" },
-  { id: 3, name: "Sponsor Three" },
-  { id: 4, name: "Sponsor Four" },
-];
+import sponsorsData from "@/data/home/sponsors/sponsorsData";
 
 export default function Sponsors() {
   return (
@@ -40,7 +29,7 @@ export default function Sponsors() {
 
         <div className="sponsors-section-grid">
 
-          {SPONSORS.map((sponsor) => (
+          {sponsorsData.map((sponsor) => (
             <article
               key={sponsor.id}
               className="sponsors-section-card"

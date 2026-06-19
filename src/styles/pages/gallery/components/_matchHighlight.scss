@@ -1,0 +1,440 @@
+/* =========================================================
+   IMPORTS
+========================================================= */
+@use "../../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   MATCH HIGHLIGHTS
+   ---------------------------------------------------------
+   Scope   : .match-highlights
+   Purpose : Embedded YouTube match highlights section
+   Design  : Premium + Compact + Centered Layout
+========================================================= */
+
+.match-highlights {
+  padding: 80px 0;
+
+  background: var(--bg);
+
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.match-highlights-header {
+  max-width: 720px;
+
+  margin: 0 auto 48px;
+
+  text-align: center;
+}
+
+.match-highlights-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 6px 16px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+
+  color: var(--skin-color);
+
+  background: rgba(0, 0, 0, 0.05);
+
+  border: 1px solid rgba(0, 0, 0, 0.08);
+
+  @supports (background: color-mix(in srgb, red 50%, blue)) {
+    background: color-mix(
+      in srgb,
+      var(--skin-color) 10%,
+      transparent
+    );
+
+    border-color: color-mix(
+      in srgb,
+      var(--skin-color) 20%,
+      transparent
+    );
+  }
+}
+
+.match-highlights-title {
+  margin-top: 16px;
+
+  font-size: 40px;
+  font-weight: 900;
+
+  letter-spacing: -0.5px;
+
+  color: var(--text);
+}
+
+.match-highlights-subtitle {
+  margin-top: 12px;
+
+  font-size: 15px;
+  line-height: 1.7;
+
+  color: var(--muted);
+}
+
+/* =========================================================
+   GRID
+   ---------------------------------------------------------
+   Compact centered cards
+========================================================= */
+
+.match-highlights-grid {
+  display: grid;
+
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(420px, 520px)
+  );
+
+  justify-content: center;
+
+  gap: 24px;
+
+  max-width: 1200px;
+
+  margin-inline: auto;
+}
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.match-highlights-card {
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius: 18px;
+
+  background: var(--card-bg);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.match-highlights-card:hover {
+  transform: translateY(-4px);
+
+  border-color: var(--skin-color);
+
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+}
+
+@supports (background: color-mix(in srgb, red 50%, blue)) {
+  .match-highlights-card:hover {
+    box-shadow: 0 16px 40px
+      color-mix(
+        in srgb,
+        var(--skin-color) 18%,
+        transparent
+      );
+  }
+}
+
+/* =========================================================
+   UPCOMING CARD
+========================================================= */
+
+.match-highlights-card-upcoming {
+  opacity: 0.8;
+}
+
+/* =========================================================
+   BADGE
+========================================================= */
+
+.match-highlights-badge {
+  position: absolute;
+
+  top: 14px;
+  left: 14px;
+
+  z-index: 10;
+
+  padding: 5px 12px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+
+  color: #fff;
+
+  background: var(--skin-color);
+}
+
+/* =========================================================
+   VIDEO WRAPPER
+========================================================= */
+
+.match-highlights-iframe-wrapper {
+  position: relative;
+
+  width: 100%;
+
+  /* Compact ratio */
+  aspect-ratio: 16 / 8.5;
+
+  overflow: hidden;
+
+  background: #000;
+}
+
+.match-highlights-iframe-wrapper iframe {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  border: 0;
+}
+
+/* =========================================================
+   UPCOMING OVERLAY
+========================================================= */
+
+.match-highlights-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.6);
+
+  backdrop-filter: blur(6px);
+}
+
+.match-highlights-overlay-text {
+  font-size: 16px;
+  font-weight: 800;
+
+  color: #fff;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+
+  border-bottom: 2px solid var(--skin-color);
+
+  padding-bottom: 4px;
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.match-highlights-content {
+  padding: 14px 16px;
+}
+
+.match-highlights-card-title {
+  font-size: 15px;
+  font-weight: 700;
+
+  line-height: 1.5;
+
+  color: var(--text);
+}
+
+/* =========================================================
+   XXL
+========================================================= */
+
+@include xxl {
+  .match-highlights-title {
+    font-size: 46px;
+  }
+
+  .match-highlights-grid {
+    gap: 32px;
+  }
+}
+
+/* =========================================================
+   XL
+========================================================= */
+
+@include xl {
+  .match-highlights-title {
+    font-size: 36px;
+  }
+}
+
+/* =========================================================
+   LG
+========================================================= */
+
+@include lg {
+  .match-highlights {
+    padding: 70px 0;
+  }
+
+  .match-highlights-title {
+    font-size: 32px;
+  }
+
+  .match-highlights-grid {
+    gap: 20px;
+  }
+}
+
+/* =========================================================
+   MD
+========================================================= */
+
+@include md {
+  .match-highlights {
+    padding: 60px 0;
+  }
+
+  .match-highlights-grid {
+    grid-template-columns: minmax(0, 1fr);
+
+    max-width: 700px;
+
+    gap: 20px;
+  }
+
+  .match-highlights-iframe-wrapper {
+    aspect-ratio: 16 / 9;
+  }
+
+  .match-highlights-title {
+    font-size: 28px;
+  }
+
+  .match-highlights-content {
+    padding: 14px;
+  }
+}
+
+/* =========================================================
+   SM
+========================================================= */
+
+@include sm {
+  .match-highlights-header {
+    margin-bottom: 36px;
+  }
+
+  .match-highlights-title {
+    font-size: 24px;
+  }
+
+  .match-highlights-subtitle {
+    font-size: 14px;
+  }
+
+  .match-highlights-card {
+    border-radius: 14px;
+  }
+
+  .match-highlights-grid {
+    gap: 16px;
+  }
+
+  .match-highlights-content {
+    padding: 12px 14px;
+  }
+
+  .match-highlights-card-title {
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   XS
+========================================================= */
+
+@include xs {
+  .match-highlights {
+    padding: 50px 0;
+  }
+
+  .match-highlights-title {
+    font-size: 22px;
+  }
+
+  .match-highlights-tag {
+    font-size: 11px;
+
+    padding: 5px 12px;
+  }
+
+  .match-highlights-card {
+    border-radius: 12px;
+  }
+
+  .match-highlights-content {
+    padding: 12px;
+  }
+
+  .match-highlights-card-title {
+    font-size: 14px;
+  }
+
+  .match-highlights-overlay-text {
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   XXS
+========================================================= */
+
+@include xxs {
+  .match-highlights {
+    padding: 40px 0;
+  }
+
+  .match-highlights-title {
+    font-size: 20px;
+  }
+
+  .match-highlights-grid {
+    gap: 14px;
+  }
+
+  .match-highlights-content {
+    padding: 10px;
+  }
+
+  .match-highlights-card-title {
+    font-size: 13px;
+  }
+
+  .match-highlights-badge {
+    font-size: 10px;
+
+    padding: 4px 10px;
+  }
+}

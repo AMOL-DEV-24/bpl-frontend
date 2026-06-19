@@ -1,131 +1,280 @@
 /* =========================================================
-   TEAM PURSE
-   Scope   : .team-purse
-   Purpose : Section displaying each team's remaining
-             auction purse as a horizontal card grid.
+   AUCTION PURSE
+   Scope   : .auction-purse
+
+   Purpose
+   ---------------------------------------------------------
+   Displays remaining purse amount for each team.
+
+   Structure
+   ---------------------------------------------------------
+   .auction-purse
+   ├── .auction-purse-header
+   │   ├── .auction-purse-heading
+   │   └── .auction-purse-subheading
+   │
+   ├── .auction-purse-grid
+   │
+   └── .auction-purse-card
+       ├── .auction-purse-card-logo
+       ├── .auction-purse-card-title
+       └── .auction-purse-card-amount
+
+   Notes
+   ---------------------------------------------------------
+   - Fully namespaced.
+   - No style leakage.
+   - Safe for future modules.
+   - Supports all responsive breakpoints.
    ========================================================= */
 
 @use "../../../abstracts/breakpoints" as *;
 
 /* =========================================================
-   TEAM PURSE SECTION
-   Top and bottom padding for breathing room.
+   AUCTION PURSE SECTION
    ========================================================= */
-.team-purse {
+.auction-purse {
   padding: 48px 0 32px;
 }
 
 /* =========================================================
-   TEAM PURSE GRID
-   Four equal columns — one per team.
+   SECTION HEADER
    ========================================================= */
-.team-purse-grid {
+.auction-purse-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+/* =========================================================
+   SECTION TITLE
+   ========================================================= */
+.auction-purse-heading {
+  margin: 0;
+
+  font-size: 2rem;
+  font-weight: 800;
+
+  color: var(--text);
+
+  line-height: 1.2;
+}
+
+/* =========================================================
+   SECTION SUBTITLE
+   ========================================================= */
+.auction-purse-subheading {
+  margin-top: 10px;
+
+  font-size: 1rem;
+  line-height: 1.6;
+
+  color: var(--text-light);
+}
+
+/* =========================================================
+   TEAM PURSE GRID
+   ========================================================= */
+.auction-purse-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
   gap: 16px;
 }
 
 /* =========================================================
    TEAM PURSE CARD
-   Individual team tile with name and purse amount.
    ========================================================= */
-.team-purse-card {
+.auction-purse-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+
+  gap: 12px;
 
   padding: 24px 16px;
 
   background: var(--bg-black-100);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 14px;
 
   text-align: center;
 
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
-  }
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 /* =========================================================
-   TEAM PURSE CARD — TEAM NAME
+   CARD HOVER
    ========================================================= */
-.team-purse-card__name {
+.auction-purse-card:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(255, 255, 255, 0.14);
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+/* =========================================================
+   TEAM LOGO WRAPPER
+   ========================================================= */
+.auction-purse-card-logo {
+  width: 72px;
+  height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================================================
+   TEAM LOGO IMAGE
+   ========================================================= */
+.auction-purse-card-logo img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+}
+
+/* =========================================================
+   TEAM NAME
+   ========================================================= */
+.auction-purse-card-title {
+  margin: 0;
+
   font-size: 1rem;
   font-weight: 700;
+
   color: var(--text);
-  margin: 0;
+
+  line-height: 1.4;
   letter-spacing: 0.03em;
+
   text-transform: uppercase;
 }
 
 /* =========================================================
-   TEAM PURSE CARD — PURSE AMOUNT
-   Highlighted accent figure.
+   PURSE AMOUNT
    ========================================================= */
-.team-purse-card__amount {
+.auction-purse-card-amount {
   font-size: 1.25rem;
   font-weight: 800;
+
   color: var(--skin-color);
+
+  line-height: 1;
   letter-spacing: 0.02em;
 }
 
 /* =========================================================
-   RESPONSIVE — TEAM PURSE
+   RESPONSIVE : LG (≤1024px)
    ========================================================= */
-
-/* ── LG (<= 1024px) ── */
 @include lg {
-  .team-purse-grid {
+  .auction-purse-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* ── MD (<= 768px) ── */
+/* =========================================================
+   RESPONSIVE : MD (≤768px)
+   ========================================================= */
 @include md {
-  .team-purse {
-    padding: 36px 0 24px;
+  .auction-purse {
+    padding: 40px 0 28px;
+  }
+
+  .auction-purse-header {
+    margin-bottom: 28px;
+  }
+
+  .auction-purse-heading {
+    font-size: 1.75rem;
+  }
+
+  .auction-purse-card {
+    padding: 20px 14px;
+  }
+
+  .auction-purse-card-logo {
+    width: 64px;
+    height: 64px;
   }
 }
 
-/* ── SM (<= 576px) ── */
+/* =========================================================
+   RESPONSIVE : SM (≤576px)
+   ========================================================= */
 @include sm {
-  .team-purse-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .auction-purse-grid {
     gap: 12px;
   }
 
-  .team-purse-card {
-    padding: 18px 12px;
+  .auction-purse-heading {
+    font-size: 1.5rem;
   }
 
-  .team-purse-card__amount {
+  .auction-purse-subheading {
+    font-size: 0.95rem;
+  }
+
+  .auction-purse-card-title {
+    font-size: 0.95rem;
+  }
+
+  .auction-purse-card-amount {
     font-size: 1.1rem;
   }
 }
 
-/* ── XS (<= 420px) ── */
+/* =========================================================
+   RESPONSIVE : XS (≤420px)
+   ========================================================= */
 @include xs {
-  .team-purse-grid {
-    grid-template-columns: 1fr 1fr;
+  .auction-purse-card {
+    padding: 18px 12px;
   }
 
-  .team-purse-card__name {
+  .auction-purse-card-logo {
+    width: 56px;
+    height: 56px;
+  }
+
+  .auction-purse-heading {
+    font-size: 1.3rem;
+  }
+
+  .auction-purse-subheading {
+    font-size: 0.9rem;
+  }
+
+  .auction-purse-card-title {
     font-size: 0.85rem;
+  }
+
+  .auction-purse-card-amount {
+    font-size: 1rem;
   }
 }
 
-/* ── XXS (<= 360px) ── */
+/* =========================================================
+   RESPONSIVE : XXS (≤360px)
+   ========================================================= */
 @include xxs {
-  .team-purse-grid {
+  .auction-purse-grid {
     grid-template-columns: 1fr;
   }
 
-  .team-purse-card {
+  .auction-purse-card {
     padding: 16px 10px;
+  }
+
+  .auction-purse-card-logo {
+    width: 52px;
+    height: 52px;
   }
 }

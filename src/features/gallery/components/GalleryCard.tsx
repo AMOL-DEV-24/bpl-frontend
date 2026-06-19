@@ -2,8 +2,10 @@
    GALLERY CARD COMPONENT
    ---------------------------------------------------------
    Scope    : .gallery-card
-   Purpose  : Modern photo card with overlay + featured mode
+   Purpose  : Modern photo card with hover overlay
+              and featured mode support.
 ========================================================= */
+
 import Image from "next/image";
 
 interface GalleryCardProps {
@@ -18,35 +20,41 @@ export default function GalleryCard({
   featured = false,
 }: GalleryCardProps) {
   return (
-    <div
-      className={`gallery-card${featured ? " gallery-card--featured" : ""}`}
+    <article
+      className={`gallery-card ${
+        featured ? "gallery-card-featured" : ""
+      }`}
     >
-      {/* Featured tag — only on featured card */}
+      {/* Featured badge */}
       {featured && (
-        <div className="gallery-card__featured-tag">
+        <div className="gallery-card-featured-tag">
           ⭐ Featured
         </div>
       )}
 
       {/* Image wrapper */}
-      <div className="gallery-card__image-wrapper">
+      <div className="gallery-card-image-wrapper">
+
         <Image
           src={image}
           alt={title}
           fill
-          className="gallery-card__img"
-          sizes="(max-width: 576px) 100vw,
-                 (max-width: 992px) 50vw,
-                 33vw"
+          className="gallery-card-image"
+          sizes="
+            (max-width: 576px) 100vw,
+            (max-width: 992px) 50vw,
+            33vw
+          "
           loading="lazy"
         />
 
         {/* Hover overlay */}
-        <div className="gallery-card__overlay">
-          <div className="gallery-card__overlay-content">
+        <div className="gallery-card-overlay">
+
+          <div className="gallery-card-overlay-content">
 
             {/* View icon */}
-            <div className="gallery-card__view-icon">
+            <div className="gallery-card-view-icon">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="22"
@@ -59,17 +67,21 @@ export default function GalleryCard({
                 strokeLinejoin="round"
                 aria-hidden="true"
               >
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                <circle cx="12" cy="12" r="3"/>
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
               </svg>
             </div>
 
-            {/* Title */}
-            <h3 className="gallery-card__title">{title}</h3>
+            {/* Image title */}
+            <h3 className="gallery-card-title">
+              {title}
+            </h3>
 
           </div>
+
         </div>
+
       </div>
-    </div>
+    </article>
   );
 }
