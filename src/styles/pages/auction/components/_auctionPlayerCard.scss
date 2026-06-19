@@ -1,0 +1,142 @@
+/* =========================================================
+   AUCTION PLAYER CARD
+   Scope   : .auction-player-card
+   Purpose : Individual sold-player tile showing avatar,
+             name, role, team and final sold price.
+   ========================================================= */
+
+@use "../../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   CARD WRAPPER
+   Centered column layout with subtle border and hover lift.
+   ========================================================= */
+.auction-player-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  padding: 28px 20px;
+
+  background: var(--bg-black-100);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+
+  text-align: center;
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.22);
+  }
+}
+
+/* =========================================================
+   AVATAR
+   Large emoji / icon container with tinted background pill.
+   ========================================================= */
+.auction-player-card__avatar {
+  width: 64px;
+  height: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 2rem;
+
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+
+  margin-bottom: 4px;
+}
+
+/* =========================================================
+   PLAYER NAME
+   Bold primary identifier.
+   ========================================================= */
+.auction-player-card__name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* =========================================================
+   PLAYER ROLE
+   Muted secondary descriptor.
+   ========================================================= */
+.auction-player-card__role {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* =========================================================
+   TEAM NAME
+   Team assignment line.
+   ========================================================= */
+.auction-player-card__team {
+  font-size: 0.875rem;
+  color: var(--text);
+  margin: 0;
+
+  strong {
+    color: var(--muted);
+    font-weight: 600;
+  }
+}
+
+/* =========================================================
+   SOLD PRICE
+   Accent price badge at the bottom of the card.
+   ========================================================= */
+.auction-player-card__price {
+  margin-top: 8px;
+
+  padding: 6px 18px;
+
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+
+  color: var(--skin-color);
+
+  background: color-mix(in srgb, var(--skin-color) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--skin-color) 30%, transparent);
+  border-radius: 999px;
+}
+
+/* =========================================================
+   RESPONSIVE — AUCTION PLAYER CARD
+   ========================================================= */
+
+/* ── SM (<= 576px) ── */
+@include sm {
+  .auction-player-card {
+    padding: 20px 14px;
+  }
+
+  .auction-player-card__avatar {
+    width: 52px;
+    height: 52px;
+    font-size: 1.6rem;
+  }
+
+  .auction-player-card__name {
+    font-size: 0.95rem;
+  }
+}
+
+/* ── XXS (<= 360px) ── */
+@include xxs {
+  .auction-player-card__price {
+    font-size: 0.875rem;
+    padding: 5px 14px;
+  }
+}

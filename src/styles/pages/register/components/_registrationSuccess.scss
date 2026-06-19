@@ -1,0 +1,341 @@
+/* =========================================================
+   REGISTRATION SUCCESS
+   Scope   : .reg-success
+   Purpose : Full-page success confirmation with animated
+             SVG checkmark, status meta list and BPL badge.
+   ========================================================= */
+
+@use "../../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   SECTION WRAPPER
+   Centers the card vertically + horizontally.
+   ========================================================= */
+.reg-success {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: var(--bg);
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* =========================================================
+   BACKGROUND GLOW
+   Matches the registration page ambient glow.
+   ========================================================= */
+.reg-success::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at top,
+      color-mix(in srgb, var(--skin-color) 14%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at bottom,
+      color-mix(in srgb, var(--skin-secondary) 10%, transparent),
+      transparent 70%
+    );
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* =========================================================
+   CARD
+   Glassmorphism container with skin-color glow border.
+   ========================================================= */
+.reg-success__card {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: 480px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  padding: 48px 40px;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+
+  text-align: center;
+
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--skin-color) 15%, transparent),
+    0 24px 64px rgba(0, 0, 0, 0.3);
+}
+
+/* =========================================================
+   SVG CHECKMARK WRAPPER
+   ========================================================= */
+.reg-success__icon-wrap {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 8px;
+}
+
+/* =========================================================
+   SVG CHECKMARK
+   ========================================================= */
+.reg-success__checkmark {
+  width: 80px;
+  height: 80px;
+}
+
+/* =========================================================
+   ANIMATED CIRCLE
+   Draws on from stroke-dashoffset 166 → 0.
+   ========================================================= */
+.reg-success__circle {
+  stroke: var(--skin-color);
+  stroke-width: 2;
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-linecap: round;
+  animation: reg-draw-circle 0.6s cubic-bezier(0.65, 0, 0.45, 1) 0.1s forwards;
+}
+
+/* =========================================================
+   ANIMATED CHECK TICK
+   Draws on after the circle completes.
+   ========================================================= */
+.reg-success__check {
+  stroke: var(--skin-color);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: reg-draw-check 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.65s forwards;
+}
+
+@keyframes reg-draw-circle {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes reg-draw-check {
+  to { stroke-dashoffset: 0; }
+}
+
+/* =========================================================
+   BADGE
+   Small pill label above the title.
+   ========================================================= */
+.reg-success__badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--skin-color);
+
+  padding: 4px 14px;
+
+  background: color-mix(in srgb, var(--skin-color) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--skin-color) 28%, transparent);
+  border-radius: 999px;
+}
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+.reg-success__title {
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 800;
+  color: var(--text);
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+/* =========================================================
+   BODY TEXT
+   ========================================================= */
+.reg-success__body {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0;
+  max-width: 360px;
+}
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+.reg-success__divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 4px 0;
+}
+
+/* =========================================================
+   META LIST
+   Three status rows with emoji icons.
+   ========================================================= */
+.reg-success__meta {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* =========================================================
+   META LIST ITEM
+   ========================================================= */
+.reg-success__meta-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 16px;
+
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+/* =========================================================
+   META ICON
+   ========================================================= */
+.reg-success__meta-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   RESPONSIVE — REGISTRATION SUCCESS
+   ========================================================= */
+
+/* ── XXL (1400px+) ── */
+@include xxl {
+  .reg-success__card {
+    max-width: 520px;
+    padding: 56px 48px;
+  }
+
+  .reg-success__icon-wrap,
+  .reg-success__checkmark {
+    width: 92px;
+    height: 92px;
+  }
+}
+
+/* ── XL (<= 1399px) ── */
+@include xl {
+  .reg-success__card {
+    max-width: 500px;
+    padding: 52px 44px;
+  }
+}
+
+/* ── LG (<= 1199px) ── */
+@include lg {
+  .reg-success__card {
+    padding: 48px 40px;
+  }
+}
+
+/* ── MD (<= 991px) ── */
+@include md {
+  .reg-success__card {
+    padding: 40px 28px;
+  }
+
+  .reg-success {
+    padding: 32px 20px;
+  }
+}
+
+/* ── SM (<= 767px) ── */
+@include sm {
+  .reg-success__card {
+    padding: 32px 20px;
+    border-radius: 18px;
+    gap: 12px;
+  }
+
+  .reg-success__icon-wrap,
+  .reg-success__checkmark {
+    width: 66px;
+    height: 66px;
+  }
+
+  .reg-success__body {
+    font-size: 0.85rem;
+  }
+
+  .reg-success__meta-item {
+    padding: 9px 14px;
+    font-size: 0.825rem;
+  }
+}
+
+/* ── XS (<= 575px) ── */
+@include xs {
+  .reg-success__card {
+    padding: 28px 16px;
+    border-radius: 16px;
+  }
+
+  .reg-success__icon-wrap,
+  .reg-success__checkmark {
+    width: 58px;
+    height: 58px;
+  }
+
+  .reg-success__badge {
+    font-size: 0.65rem;
+    padding: 3px 12px;
+  }
+}
+
+/* ── XXS (<= 360px) ── */
+@include xxs {
+  .reg-success__card {
+    padding: 22px 12px;
+    border-radius: 14px;
+    gap: 10px;
+  }
+
+  .reg-success__icon-wrap,
+  .reg-success__checkmark {
+    width: 50px;
+    height: 50px;
+  }
+
+  .reg-success__meta-item {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    border-radius: 8px;
+  }
+
+  .reg-success__meta-icon {
+    font-size: 0.95rem;
+  }
+
+  .reg-success__body {
+    font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,115 @@
+/* =========================================================
+   SUBMIT BUTTON
+   Scope   : .submit-btn
+   Purpose : Full-width CTA button at the bottom of the
+             registration form.
+   ========================================================= */
+
+@use "../../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   BUTTON BASE
+   ========================================================= */
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+
+  border: none;
+  border-radius: 14px;
+
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+
+  color: #0b1020;
+  background: var(--skin-color);
+
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease;
+
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--skin-color) 25%, transparent);
+}
+
+/* =========================================================
+   HOVER
+   Lifts and brightens the button.
+   ========================================================= */
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  filter: brightness(1.1);
+  box-shadow: 0 16px 36px color-mix(in srgb, var(--skin-color) 35%, transparent);
+}
+
+/* =========================================================
+   DISABLED
+   Reduced opacity while form is submitting.
+   ========================================================= */
+.submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+  filter: none;
+  box-shadow: none;
+}
+
+/* =========================================================
+   RESPONSIVE — SUBMIT BUTTON
+   ========================================================= */
+
+/* ── XXL (1400px+) ── */
+@include xxl {
+  .submit-btn {
+    padding: 18px;
+    font-size: 1.05rem;
+    border-radius: 16px;
+  }
+}
+
+/* ── XL (<= 1399px) ── */
+@include xl {
+  .submit-btn {
+    padding: 17px;
+  }
+}
+
+/* ── LG (<= 1199px) ── */
+@include lg {
+  .submit-btn {
+    padding: 16px;
+  }
+}
+
+/* ── MD (<= 991px) ── */
+@include md {
+  .submit-btn {
+    padding: 15px;
+    font-size: 0.98rem;
+  }
+}
+
+/* ── SM (<= 767px) ── */
+@include sm {
+  .submit-btn {
+    padding: 14px;
+    font-size: 0.95rem;
+    border-radius: 12px;
+  }
+}
+
+/* ── XS (<= 575px) ── */
+@include xs {
+  .submit-btn {
+    padding: 13px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ── XXS (<= 360px) ── */
+@include xxs {
+  .submit-btn {
+    padding: 12px;
+    font-size: 0.875rem;
+    border-radius: 10px;
+    letter-spacing: 0.01em;
+  }
+}

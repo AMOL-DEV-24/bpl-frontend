@@ -1,0 +1,79 @@
+/* =========================================================
+   AUCTION LIST
+   Scope   : .auction-list
+   Purpose : Section wrapper and responsive grid that
+             houses all AuctionPlayerCard tiles.
+   ========================================================= */
+
+@use "../../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   AUCTION LIST SECTION
+   Vertical padding for the full sold-players section.
+   ========================================================= */
+.auction-list {
+  padding: 40px 0 72px;
+}
+
+/* =========================================================
+   AUCTION LIST GRID
+   Four-column card grid — scales down across breakpoints.
+   ========================================================= */
+.auction-list-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* =========================================================
+   RESPONSIVE — AUCTION LIST
+   ========================================================= */
+
+/* ── LG (<= 1024px) ── */
+@include lg {
+  .auction-list-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ── MD (<= 768px) ── */
+@include md {
+  .auction-list-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .auction-list {
+    padding: 32px 0 56px;
+  }
+}
+
+/* ── SM (<= 576px) ── */
+@include sm {
+  .auction-list-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .auction-list {
+    padding: 24px 0 48px;
+  }
+}
+
+/* ── XS (<= 420px) ── */
+@include xs {
+  .auction-list-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+}
+
+/* ── XXS (<= 360px) ── */
+@include xxs {
+  .auction-list-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .auction-list {
+    padding: 20px 0 40px;
+  }
+}

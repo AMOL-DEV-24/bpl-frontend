@@ -7,9 +7,15 @@
    FORWARD MODULES
 ========================================================= */
 
-@forward "./teamStats";
-@forward"./teamCard";
-@forward "./teamGrid";
+@forward "./components/teamStats";
+@forward"./components/teamCard";
+@forward "./components/teamGrid";
+
+/* =========================================================
+   VIEW SQUAD FEATURE
+========================================================= */
+
+@forward "./components/viewSquad/viewSquad.index";
 
 /* =========================================================
    TEAMS PAGE

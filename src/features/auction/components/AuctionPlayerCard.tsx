@@ -1,8 +1,13 @@
+/* =========================================================
+   AUCTION PLAYER CARD
+   Purpose : Single sold-player card shown inside AuctionList.
+   ========================================================= */
+
 interface AuctionPlayerCardProps {
   player: string;
-  role: string;
-  team: string;
-  price: string;
+  role:   string;
+  team:   string;
+  price:  string;
 }
 
 export default function AuctionPlayerCard({
@@ -13,21 +18,20 @@ export default function AuctionPlayerCard({
 }: AuctionPlayerCardProps) {
   return (
     <div className="auction-player-card">
-      <div className="player-avatar">
-        🏏
-      </div>
 
-      <h3>{player}</h3>
+      {/* ── Avatar ── */}
+      <div className="auction-player-card__avatar">🏏</div>
 
-      <p>{role}</p>
-
-      <p>
+      {/* ── Info ── */}
+      <h3 className="auction-player-card__name">{player}</h3>
+      <p  className="auction-player-card__role">{role}</p>
+      <p  className="auction-player-card__team">
         <strong>Team:</strong> {team}
       </p>
 
-      <div className="sold-price">
-        ₹ {price}
-      </div>
+      {/* ── Sold Price ── */}
+      <div className="auction-player-card__price">₹ {price}</div>
+
     </div>
   );
 }

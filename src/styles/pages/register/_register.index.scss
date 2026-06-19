@@ -1,0 +1,153 @@
+/* =========================================================
+   PLAYER REGISTRATION PAGE
+   Scope   : .player-registration-page
+   Purpose : Full-viewport shell, background glow, shared
+             container and form card. Imports all partials.
+   ========================================================= */
+
+@use "../../abstracts/breakpoints" as *;
+
+@forward "./components/registrationHeader";
+@forward "./components/_registrationSuccess.scss";
+@forward "./components/photoUpload";
+@forward "./components/formSection";
+@forward "./components/formField";
+@forward "./components/submitBtn";
+
+/* =========================================================
+   PAGE WRAPPER
+   Full viewport shell with centered flex layout.
+   ========================================================= */
+.player-registration-page {
+  min-height: 100vh;
+  padding: 80px 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--bg);
+  color: var(--text);
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* =========================================================
+   BACKGROUND GLOW
+   Dual radial gradient decorative layer — top + bottom.
+   ========================================================= */
+.player-registration-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at top,
+      color-mix(in srgb, var(--skin-color) 14%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at bottom,
+      color-mix(in srgb, var(--skin-secondary) 10%, transparent),
+      transparent 70%
+    );
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* =========================================================
+   REGISTRATION CONTAINER
+   Max-width wrapper lifted above background glow.
+   ========================================================= */
+.registration-container {
+  width: 100%;
+  max-width: 1100px;
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================================================
+   FORM CARD
+   Glassmorphism card wrapping all form sections.
+   ========================================================= */
+.player-form {
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+
+  padding: 40px;
+  border-radius: 28px;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+
+  backdrop-filter: blur(18px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================================================
+   RESPONSIVE — PAGE SHELL
+   ========================================================= */
+
+/* ── XXL (1400px+) ── */
+@include xxl {
+  .player-registration-page {
+    padding: 100px 24px;
+  }
+}
+
+/* ── XL (<= 1399px) ── */
+@include xl {
+  .player-form {
+    max-width: 860px;
+  }
+}
+
+/* ── LG (<= 1199px) ── */
+@include lg {
+  .player-form {
+    padding: 30px;
+  }
+}
+
+/* ── MD (<= 991px) ── */
+@include md {
+  .player-registration-page {
+    padding: 60px 20px;
+  }
+}
+
+/* ── SM (<= 767px) ── */
+@include sm {
+  .player-registration-page {
+    padding: 60px 16px;
+  }
+
+  .player-form {
+    padding: 22px;
+    border-radius: 20px;
+  }
+}
+
+/* ── XS (<= 575px) ── */
+@include xs {
+  .player-form {
+    padding: 18px;
+    border-radius: 16px;
+  }
+}
+
+/* ── XXS (<= 360px) ── */
+@include xxs {
+  .player-registration-page {
+    padding: 40px 12px;
+  }
+
+  .player-form {
+    padding: 14px;
+    border-radius: 14px;
+  }
+}

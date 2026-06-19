@@ -34,8 +34,9 @@
 @use "./components/navbar/navbar.index";
 @use "./components/navbar/mobileMenu";
 @use "./components/theme/themeSwitcher";
-
 @use "./components/footer/footer";
+@use "./components/loader/loader.scss";
+@use "./components/toasts/toastMessage.scss";
 
 /* =========================================================
    4. pages (PAGE LEVEL STYLES)
@@ -59,12 +60,13 @@
 @use "./pages/players/players.index";
 
 // 5. Player registration page styles
-@use "./pages/register/register";
+@use "./pages/register/register.index";
 
-// 6. Gallery page styles
+// 6. Auction Page Styles
+@use "./pages/auction/auction.index";
+
+// 7. Gallery page styles
 @use "./pages/gallery/_index.gallery.scss";
-
-@use "./pages/auction";
 
 @use "./pages/admin";
 

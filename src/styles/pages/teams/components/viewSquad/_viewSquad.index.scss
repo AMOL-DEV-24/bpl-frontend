@@ -1,0 +1,185 @@
+/* =========================================================
+   VIEW SQUAD
+   ---------------------------------------------------------
+   Scope   : .view-squad
+   Purpose : Full squad view for a single team.
+
+   Features:
+   - Squad page layout container
+   - Header section wrapper
+   - Squad role group wrapper
+   - Responsive spacing system
+
+   Notes:
+   - Fully scoped to .view-squad
+   - No PlayerCard styles
+   - No SquadHeader styles
+   - No SquadRoleGroup styles
+   - Child components own their styles
+   - Future safe for:
+     • squad filters
+     • squad search
+     • statistics blocks
+     • season selectors
+     • tabs
+
+   Structure:
+   .view-squad
+   ├── SquadHeader
+   └── .view-squad-groups
+       ├── SquadRoleGroup
+       ├── SquadRoleGroup
+       └── SquadRoleGroup
+========================================================= */
+
+@use "../../../../abstracts/breakpoints" as *;
+
+
+/* =========================================================
+   VIEW SQUAD STYLES
+   ---------------------------------------------------------
+   Purpose : Single entry point for all View Squad styles.
+========================================================= */
+
+@forward "./components/viewSquadPlayerCard";
+@forward "./components/viewSquadHeader";
+@forward "./components/viewSquadRoleGroup";
+
+/* =========================================================
+   ROOT CONTAINER
+========================================================= */
+
+.view-squad-page {
+  width: 100%;
+
+  max-width: 1440px;
+
+  margin-inline: auto;
+
+  padding-block: 3rem;
+  padding-inline: 3rem;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 2.5rem;
+
+  min-height: 100vh;
+
+  /* =======================================================
+     GROUPS WRAPPER
+  ======================================================= */
+
+  &-groups {
+    display: flex;
+    flex-direction: column;
+
+    gap: 2.5rem;
+
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   XXL <= 1400px
+========================================================= */
+
+@include xxl {
+  .view-squad-page {
+    max-width: 1280px;
+
+    padding-inline: 2.5rem;
+  }
+}
+
+/* =========================================================
+   XL <= 1200px
+========================================================= */
+
+@include xl {
+  .view-squad-page {
+    padding-inline: 2rem;
+  }
+}
+
+/* =========================================================
+   LG <= 992px
+========================================================= */
+
+@include lg {
+  .view-squad-page {
+    padding-block: 2.5rem;
+    padding-inline: 1.75rem;
+
+    gap: 2rem;
+
+    &-groups {
+      gap: 2rem;
+    }
+  }
+}
+
+/* =========================================================
+   MD <= 768px
+========================================================= */
+
+@include md {
+  .view-squad-page {
+    padding-block: 2rem;
+    padding-inline: 1.5rem;
+
+    gap: 1.75rem;
+
+    &-groups {
+      gap: 1.75rem;
+    }
+  }
+}
+
+/* =========================================================
+   SM <= 576px
+========================================================= */
+
+@include sm {
+  .view-squad-page {
+    padding-block: 1.75rem;
+    padding-inline: 1.25rem;
+
+    &-groups {
+      gap: 1.5rem;
+    }
+  }
+}
+
+/* =========================================================
+   XS <= 420px
+========================================================= */
+
+@include xs {
+  .view-squad-page {
+    padding-block: 1.5rem;
+    padding-inline: 1rem;
+
+    gap: 1.25rem;
+
+    &-groups {
+      gap: 1.25rem;
+    }
+  }
+}
+
+/* =========================================================
+   XXS <= 360px
+========================================================= */
+
+@include xxs {
+  .view-squad-page {
+    padding-inline: 0.75rem;
+
+    gap: 1rem;
+
+    &-groups {
+      gap: 1rem;
+    }
+  }
+}

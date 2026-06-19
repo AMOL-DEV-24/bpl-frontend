@@ -1,0 +1,91 @@
+/* =========================================================
+   AUCTION PAGE — INDEX
+   Scope   : .auction-page
+   Purpose : Page-level shell. Imports all partials.
+             Only page wrapper and header styles live here.
+             Component styles stay in their own files.
+   ========================================================= */
+
+@use "../../abstracts/breakpoints" as *;
+
+@forward "./components/teamPurse";
+@forward "./components/auctionList";
+@forward "./components/auctionPlayerCard";
+
+/* =========================================================
+   AUCTION PAGE WRAPPER
+   Full viewport shell. Theme-controlled bg and color.
+   ========================================================= */
+.auction-page {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* =========================================================
+   AUCTION PAGE HEADER
+   Slim hero strip with title and subtitle.
+   ========================================================= */
+.auction-page-header {
+  padding: 32px 0 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* =========================================================
+   AUCTION PAGE CONTAINER
+   Shared max-width wrapper reused across all sections.
+   ========================================================= */
+.auction-page-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* =========================================================
+   AUCTION PAGE TITLE
+   Primary H1 display heading.
+   ========================================================= */
+.auction-page-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  margin: 0 0 6px;
+  color: var(--text);
+}
+
+/* =========================================================
+   AUCTION PAGE SUBTITLE
+   Supporting descriptor below page title.
+   ========================================================= */
+.auction-page-subtitle {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   RESPONSIVE — AUCTION PAGE
+   ========================================================= */
+
+/* ── MD (<= 768px) ── */
+@include md {
+  .auction-page-header {
+    padding: 24px 0 18px;
+  }
+}
+
+/* ── SM (<= 576px) ── */
+@include sm {
+  .auction-page-header {
+    padding: 18px 0 14px;
+  }
+}
+
+/* ── XXS (<= 360px) ── */
+@include xxs {
+  .auction-page-subtitle {
+    font-size: 0.8rem;
+  }
+}

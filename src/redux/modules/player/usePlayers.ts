@@ -44,7 +44,7 @@ export function usePlayers(): UsePlayersReturn {
      the `data?.data ?? []` fallback expression.
   ===================================================== */
   const players = useMemo<Player[]>(
-    () => data?.data ?? [],
+    () => (data?.data ?? []).filter((p) => p.status === "approved"),
     [data],
   );
 
@@ -63,10 +63,10 @@ export function usePlayers(): UsePlayersReturn {
   ===================================================== */
   const stats = useMemo(
     () => ({
-      total:       players?.length,
-      batsmen:     players?.filter((p) => p?.role === "Batsman")?.length,
-      bowlers:     players?.filter((p) => p?.role === "Bowler")?.length,
-      keepers:     players?.filter((p) => p?.role === "Wicket Keeper")?.length,
+      total: players?.length,
+      batsmen: players?.filter((p) => p?.role === "Batsman")?.length,
+      bowlers: players?.filter((p) => p?.role === "Bowler")?.length,
+      keepers: players?.filter((p) => p?.role === "Wicket Keeper")?.length,
       allRounders: players?.filter((p) => p?.role === "All Rounder")?.length,
     }),
     [players],

@@ -24,7 +24,7 @@ export default function TeamStats() {
           </div>
 
           <div className="team-stats-card">
-            <h3>77</h3>
+            <h3>88</h3>
             <p>Total Players</p>
           </div>
 

@@ -1,0 +1,218 @@
+/* =========================================================
+   IMPORTS
+========================================================= */
+
+@use "../../../../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   VIEW SQUAD ROLE GROUP
+   ---------------------------------------------------------
+   Scope   : .view-squad-role-group
+
+   Features:
+   ✅ Fully isolated
+   ✅ No style leakage
+   ✅ Future API safe
+   ✅ Responsive grid
+   ✅ Enterprise naming convention
+========================================================= */
+
+.view-squad-role-group {
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.5rem;
+
+  width: 100%;
+
+  /* =======================================================
+     GROUP HEADER
+  ======================================================= */
+
+  &-heading {
+    display: flex;
+    align-items: center;
+
+    gap: 0.75rem;
+
+    margin: 0;
+
+    font-size: 1.5rem;
+    font-weight: 700;
+
+    color: var(--text-primary);
+  }
+
+  /* =======================================================
+     PLAYER COUNT BADGE
+  ======================================================= */
+
+  &-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 32px;
+    height: 32px;
+
+    padding-inline: 0.75rem;
+
+    border-radius: 999px;
+
+    background: var(--skin-color);
+
+    color: #ffffff;
+
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  /* =======================================================
+     PLAYERS GRID
+  ======================================================= */
+
+  &-grid {
+    display: grid;
+
+    grid-template-columns:
+      repeat(
+        auto-fill,
+        minmax(220px, 1fr)
+      );
+
+    gap: 1.5rem;
+  }
+}
+
+/* =========================================================
+   XXL <= 1400px
+========================================================= */
+
+@include xxl {
+  .view-squad-role-group {
+
+    &-grid {
+      gap: 1.4rem;
+    }
+  }
+}
+
+/* =========================================================
+   XL <= 1200px
+========================================================= */
+
+@include xl {
+  .view-squad-role-group {
+
+    &-heading {
+      font-size: 1.4rem;
+    }
+  }
+}
+
+/* =========================================================
+   LG <= 992px
+========================================================= */
+
+@include lg {
+  .view-squad-role-group {
+
+    gap: 1.25rem;
+
+    &-grid {
+      grid-template-columns:
+        repeat(
+          auto-fill,
+          minmax(200px, 1fr)
+        );
+
+      gap: 1.25rem;
+    }
+  }
+}
+
+/* =========================================================
+   MD <= 768px
+========================================================= */
+
+@include md {
+  .view-squad-role-group {
+
+    &-heading {
+      font-size: 1.3rem;
+    }
+
+    &-grid {
+      grid-template-columns:
+        repeat(
+          auto-fill,
+          minmax(180px, 1fr)
+        );
+    }
+  }
+}
+
+/* =========================================================
+   SM <= 576px
+========================================================= */
+
+@include sm {
+  .view-squad-role-group {
+
+    gap: 1rem;
+
+    &-heading {
+      font-size: 1.2rem;
+    }
+
+    &-count {
+      min-width: 28px;
+      height: 28px;
+
+      font-size: 0.8rem;
+    }
+
+    &-grid {
+      gap: 1rem;
+    }
+  }
+}
+
+/* =========================================================
+   XS <= 420px
+========================================================= */
+
+@include xs {
+  .view-squad-role-group {
+
+    &-heading {
+      font-size: 1.1rem;
+    }
+
+    &-grid {
+      grid-template-columns: 1fr 1fr;
+
+      gap: 0.875rem;
+    }
+  }
+}
+
+/* =========================================================
+   XXS <= 360px
+========================================================= */
+
+@include xxs {
+  .view-squad-role-group {
+
+    &-heading {
+      font-size: 1rem;
+    }
+
+    &-grid {
+      grid-template-columns: 1fr;
+
+      gap: 0.75rem;
+    }
+  }
+}

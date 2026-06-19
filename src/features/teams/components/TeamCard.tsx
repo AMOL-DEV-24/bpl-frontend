@@ -5,6 +5,8 @@
    Purpose : Team showcase card for Teams page
    Layout  : Glassmorphism card with image, content and meta
 
+   Route   : /teams/[id]
+
    Structure:
    .team-card
    ├── .team-card-image
@@ -17,9 +19,11 @@
    └── .team-card-button
 ========================================================= */
 
+import Link from "next/link";
 import Image from "next/image";
 
 interface TeamCardProps {
+  id: number;
   name: string;
   image: string;
   captain: string;
@@ -27,6 +31,7 @@ interface TeamCardProps {
 }
 
 export default function TeamCard({
+  id,
   name,
   image,
   captain,
@@ -74,12 +79,15 @@ export default function TeamCard({
 
         </div>
 
-        <button
-          type="button"
+        {/* ===================================================
+            VIEW SQUAD
+        ==================================================== */}
+        <Link
+          href={`/teams/${id}`}
           className="team-card-button"
         >
           View Squad
-        </button>
+        </Link>
 
       </div>
 

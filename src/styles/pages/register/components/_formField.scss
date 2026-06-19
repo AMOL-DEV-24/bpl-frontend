@@ -1,0 +1,196 @@
+/* =========================================================
+   FORM FIELD
+   Scope   : .form-field, input, select, textarea,
+             .field-error, .form-fatal-error
+   Purpose : Base styles for all inputs, selects, textareas
+             and inline validation error messages.
+   ========================================================= */
+
+@use "../../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   FIELD WRAPPER
+   Stacks input + error message vertically.
+   ========================================================= */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* =========================================================
+   INPUT / SELECT / TEXTAREA — BASE
+   Shared padding, radius, border and transition.
+   ========================================================= */
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 14px 16px;
+
+  border-radius: 14px;
+  border: 1px solid var(--border);
+
+  background: var(--surface);
+  color: var(--text);
+
+  font-size: 0.95rem;
+
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+  &:focus {
+    border-color: var(--skin-color);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--skin-color) 20%, transparent);
+  }
+}
+
+/* =========================================================
+   SELECT — CUSTOM ARROW
+   Hides native arrow and injects CSS chevron.
+   ========================================================= */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  cursor: pointer;
+
+  background-image:
+    linear-gradient(45deg,  transparent      50%, var(--skin-color) 50%),
+    linear-gradient(135deg, var(--skin-color) 50%, transparent      50%);
+
+  background-position:
+    calc(100% - 18px) calc(50% - 3px),
+    calc(100% - 12px) calc(50% - 3px);
+
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+}
+
+/* =========================================================
+   OPTION
+   Theme-aware option background.
+   ========================================================= */
+option {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* =========================================================
+   FIELD ERROR
+   Inline validation message shown below each field.
+   ========================================================= */
+.field-error {
+  margin-top: 4px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  color: #ff3b3b;
+}
+
+/* =========================================================
+   FORM FATAL ERROR
+   Full-width error block shown above the submit button.
+   ========================================================= */
+.form-fatal-error {
+  padding: 12px 16px;
+  margin-bottom: 16px;
+
+  border-radius: 10px;
+  border: 1px solid rgba(255, 59, 59, 0.3);
+
+  background: rgba(255, 59, 59, 0.08);
+
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #ff3b3b;
+}
+
+/* =========================================================
+   RESPONSIVE — FORM FIELD
+   ========================================================= */
+
+/* ── XXL (1400px+) ── */
+@include xxl {
+  input,
+  textarea,
+  select {
+    padding: 16px 18px;
+    font-size: 1rem;
+  }
+}
+
+/* ── XL (<= 1399px) ── */
+@include xl {
+  input,
+  textarea,
+  select {
+    padding: 15px 17px;
+  }
+}
+
+/* ── LG (<= 1199px) ── */
+@include lg {
+  input,
+  textarea,
+  select {
+    padding: 14px 16px;
+  }
+}
+
+/* ── MD (<= 991px) ── */
+@include md {
+  input,
+  textarea,
+  select {
+    padding: 13px 15px;
+  }
+}
+
+/* ── SM (<= 767px) ── */
+@include sm {
+  input,
+  textarea,
+  select {
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+  }
+
+  .form-fatal-error {
+    font-size: 0.825rem;
+    padding: 10px 14px;
+  }
+}
+
+/* ── XS (<= 575px) ── */
+@include xs {
+  input,
+  textarea,
+  select {
+    padding: 11px 13px;
+  }
+}
+
+/* ── XXS (<= 360px) ── */
+@include xxs {
+  input,
+  textarea,
+  select {
+    font-size: 0.875rem;
+    padding: 10px 12px;
+    border-radius: 10px;
+  }
+
+  .field-error {
+    font-size: 11px;
+  }
+
+  .form-fatal-error {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    border-radius: 8px;
+  }
+}

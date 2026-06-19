@@ -28,7 +28,7 @@ const banners = [
   {
     id: 3,
     title: "Gajanan Riders",
-    image: "/assets/images/banners/Gajanan Riders Poster 1.jpeg",
+    image: "/assets/images/banners/Gajanan Riders Poster.jpeg",
   },
   {
     id: 4,

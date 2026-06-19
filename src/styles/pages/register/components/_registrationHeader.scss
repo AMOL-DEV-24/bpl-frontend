@@ -1,0 +1,142 @@
+/* =========================================================
+   REGISTRATION HEADER
+   Scope   : .registration-header
+   Purpose : Page badge, H1 title and subtitle strip
+             centered above the form card.
+   ========================================================= */
+
+@use "../../../abstracts/breakpoints" as *;
+
+/* =========================================================
+   HEADER WRAPPER
+   ========================================================= */
+.registration-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+/* =========================================================
+   BADGE
+   Small pill label — "BPL OFFICIAL".
+   ========================================================= */
+.registration-header__badge {
+  display: inline-block;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  color: var(--skin-color);
+
+  padding: 6px 14px;
+  border-radius: 999px;
+
+  background: color-mix(in srgb, var(--skin-color) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--skin-color) 25%, transparent);
+}
+
+/* =========================================================
+   TITLE
+   Primary H1 display heading.
+   ========================================================= */
+.registration-header__title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin-top: 15px;
+  color: var(--text);
+}
+
+/* =========================================================
+   SUBTITLE
+   Supporting descriptor below the title.
+   ========================================================= */
+.registration-header__subtitle {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* =========================================================
+   RESPONSIVE — REGISTRATION HEADER
+   ========================================================= */
+
+/* ── XXL (1400px+) ── */
+@include xxl {
+  .registration-header__title {
+    font-size: 3.3rem;
+  }
+}
+
+/* ── XL (<= 1399px) ── */
+@include xl {
+  .registration-header__title {
+    font-size: 3rem;
+  }
+}
+
+/* ── LG (<= 1199px) ── */
+@include lg {
+  .registration-header__title {
+    font-size: 2.6rem;
+  }
+
+  .registration-header {
+    margin-bottom: 40px;
+  }
+}
+
+/* ── MD (<= 991px) ── */
+@include md {
+  .registration-header__title {
+    font-size: 2.3rem;
+  }
+
+  .registration-header {
+    margin-bottom: 32px;
+  }
+}
+
+/* ── SM (<= 767px) ── */
+@include sm {
+  .registration-header__title {
+    font-size: 2rem;
+  }
+
+  .registration-header {
+    margin-bottom: 28px;
+  }
+
+  .registration-header__subtitle {
+    font-size: 0.875rem;
+  }
+}
+
+/* ── XS (<= 575px) ── */
+@include xs {
+  .registration-header__title {
+    font-size: 1.9rem;
+  }
+
+  .registration-header__badge {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    padding: 5px 12px;
+  }
+}
+
+/* ── XXS (<= 360px) ── */
+@include xxs {
+  .registration-header__title {
+    font-size: 1.7rem;
+  }
+
+  .registration-header {
+    margin-bottom: 20px;
+  }
+
+  .registration-header__subtitle {
+    font-size: 0.8rem;
+  }
+}
