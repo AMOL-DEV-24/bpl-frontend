@@ -86,8 +86,7 @@ export default function VideoCard({ title, description, src }: VideoCardProps) {
           preload="metadata"
           aria-label={title}
         >
-          <source src={`${src}.mp4`} type="video/mp4" />
-          <source src={`${src}.mov`} type="video/quicktime" />
+          <source src={src} type="video/mp4" />
           Your browser does not support HTML5 video.
         </video>
 

@@ -31,6 +31,7 @@ import TeamsPreview from "./components/TeamPreview";
 import Banners from "./components/Banners";
 
 import Sponsors from "./components/Sponsors";
+import Champions from "./components/Champions";
 
 /* ---------------------------------------------------------
    Page Component
@@ -52,16 +53,19 @@ export default function HomePage() {
       {/* 3 — Live Match: real-time score widget */}
       <LiveMatch />
 
-      {/* 4 — Tournament Stats: standings table */}
+      {/* 4 - Champions : Show Winners History */}
+      <Champions/>
+
+      {/*5 — Tournament Stats: standings table */}
       <TournamentStats />
 
-      {/* 5 — Teams Preview: squad card grid */}
+      {/* 6 — Teams Preview: squad card grid */}
       <TeamsPreview />
 
-      {/* 6 — Banners: promotional poster strips */}
+      {/* 7 — Banners: promotional poster strips */}
       <Banners />
 
-      {/* 7 — Sponsors: partner logos */}
+      {/* 8 — Sponsors: partner logos */}
       <Sponsors />
 
     </main>

@@ -28,21 +28,21 @@ const TournamentVideosData: TournamentVideos[] = [
     title: "BPL League Intro Video 1",
     description:
       "Official introduction to the Bhalawani Premier League 2026 season.",
-    src: "/assets/videos/gallery/BPL 2026 Intro 1",
+    src: "https://res.cloudinary.com/dlvxltdgu/video/upload/v1781942344/u5m8vudip7yegqtmwxin.mp4",
   },
   {
     id: 2,
     title: "BPL League Intro Video 2",
     description:
       "Official introduction to the Bhalawani Premier League 2026 season.",
-    src: "/assets/videos/gallery/BPL 2026 Intro 2",
+    src: "https://res.cloudinary.com/dlvxltdgu/video/upload/v1781942328/lboguaimlbgnbgvadtum.mp4",
   },
   {
     id: 3,
     title: "BPL Ground Video",
     description:
       "A walkthrough of the official BPL match ground at Pandharpur.",
-    src: "/assets/videos/gallery/Kazi Maidan Grond Overview",
+    src: "https://res.cloudinary.com/dlvxltdgu/video/upload/v1781942289/rwet3tshyoxkjuvmumas.mp4",
   },
 ];
 

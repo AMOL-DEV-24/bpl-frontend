@@ -216,7 +216,7 @@ export const squadsData: TeamSquad[] = [
 
     teamName: "Gajanan Riders",
 
-    teamImage: "/assets/images/teams/Gajanan Riders 2.png",
+    teamImage: "/assets/images/teams/Gajanan Rider 1.png",
 
     captain: "Arjun Mane",
 

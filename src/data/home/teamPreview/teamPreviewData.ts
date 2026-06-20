@@ -12,7 +12,7 @@ const teamPreviewData = [
   {
     id: 3,
     name: "Gajanan Riders",
-    image: "/assets/images/teams/Gajanan Riders 2.png",
+    image: "/assets/images/teams/Gajanan Rider 1.png",
   },
   {
     id: 4,

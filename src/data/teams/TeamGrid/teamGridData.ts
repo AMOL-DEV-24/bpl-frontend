@@ -18,7 +18,7 @@ const teamGridData = [
   {
     id: 3,
     name: "Gajanan Riders",
-    image: "/assets/images/teams/Gajanan Riders 2.png",
+    image: "/assets/images/teams/Gajanan Rider 1.png",
     captain: "Mahadev Kukade",
     players: 13,
   },

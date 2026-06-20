@@ -1,0 +1,915 @@
+/* =========================================================
+   CHAMPIONS — Warp Gate Design
+   ---------------------------------------------------------
+   Scope        : .champions
+   Naming       : Flat dash-only. No BEM. No underscores.
+   Design       : Dual neon bars. Hero logo. Scanlines.
+   Responsive   : Mobile-first. xxs → xxl. Full coverage.
+   Leak Free    : Every rule nested under .champions {}
+
+   Layout Strategy
+   ---------------------------------------------------------
+   xxs–sm : Single col. Mobile logo shown. Right panel hidden.
+   md+    : Two col.  Mobile logo hidden. Right panel shown.
+
+   Breakpoints
+   ---------------------------------------------------------
+   xxs  : 360px  (base)
+   xs   : 480px
+   sm   : 576px
+   md   : 768px  ← two-column activates
+   lg   : 992px
+   xl   : 1200px
+   xxl  : 1400px
+========================================================= */
+
+@use "../../../abstracts/breakpoints" as *;
+
+.champions {
+
+  /* ===================================================
+     PRIVATE TOKENS — scoped, zero global leak
+  =================================================== */
+
+  /* Cyan neon */
+  --c-cyan:         #60C0FF;
+  --c-cyan-light:   #A0E0FF;
+  --c-cyan-glow:    rgba(96, 192, 255, 0.55);
+  --c-cyan-soft:    rgba(96, 192, 255, 0.18);
+  --c-cyan-bg:      rgba(96, 192, 255, 0.05);
+  --c-cyan-border:  rgba(96, 192, 255, 0.28);
+
+  /* Gold neon */
+  --c-gold:         #D4A833;
+  --c-gold-light:   #F5D778;
+  --c-gold-dim:     #B8892A;
+  --c-gold-glow:    rgba(212, 168, 51, 0.55);
+  --c-gold-soft:    rgba(212, 168, 51, 0.18);
+  --c-gold-bg:      rgba(212, 168, 51, 0.08);
+  --c-gold-border:  rgba(212, 168, 51, 0.28);
+
+  /* Surfaces */
+  --c-card:         #020210;
+  --c-rule:         rgba(96, 192, 255, 0.10);
+  --c-border:       rgba(96, 192, 255, 0.20);
+
+  /* Text */
+  --c-white:        #FFFFFF;
+  --c-soft:         rgba(255, 255, 255, 0.75);
+  --c-muted:        rgba(255, 255, 255, 0.38);
+  --c-faint:        rgba(255, 255, 255, 0.20);
+
+  /* ===================================================
+     SECTION
+  =================================================== */
+
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  padding: 3rem 0 3.5rem;
+
+  /* ===================================================
+     CONTAINER
+  =================================================== */
+
+  .champions-container {
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  /* ===================================================
+     HEADER
+  =================================================== */
+
+  .champions-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .champions-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 14px;
+
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(96, 192, 255, 0.75);
+
+    background: var(--c-cyan-bg);
+    border: 0.5px solid var(--c-cyan-border);
+    border-radius: 999px;
+    box-shadow: 0 0 14px var(--c-cyan-soft);
+  }
+
+  .champions-kicker-dot {
+    display: block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--c-cyan);
+    box-shadow: 0 0 6px 2px var(--c-cyan-glow);
+    flex-shrink: 0;
+  }
+
+  .champions-title {
+    font-size: 1.55rem;
+    font-weight: 800;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  .champions-summary {
+    font-size: 0.83rem;
+    line-height: 1.72;
+    color: var(--c-muted);
+    max-width: 400px;
+    margin: 0;
+  }
+
+  /* ===================================================
+     GRID
+  =================================================== */
+
+  .champions-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  /* ===================================================
+     CARD SHELL
+  =================================================== */
+
+  .champions-card {
+    position: relative;
+    background: var(--c-card);
+    border: 1px solid var(--c-border);
+    border-radius: 20px;
+    overflow: hidden;
+
+    transition:
+      transform 0.28s ease,
+      box-shadow 0.28s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 0 0 1px var(--c-cyan-border),
+        0 24px 56px rgba(0, 0, 0, 0.65),
+        0 0 56px var(--c-cyan-soft);
+    }
+  }
+
+  /* ── Scanlines ── */
+  .champions-scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(96, 192, 255, 0.013) 0px,
+      rgba(96, 192, 255, 0.013) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ── Cyan neon top ── */
+  .champions-neon-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--c-cyan) 28%,
+      var(--c-cyan-light) 50%,
+      var(--c-cyan) 72%,
+      transparent
+    );
+    box-shadow:
+      0 0 16px 4px var(--c-cyan-glow),
+      0 0 40px var(--c-cyan-soft);
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  /* ── Gold neon bottom ── */
+  .champions-neon-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--c-gold) 28%,
+      var(--c-gold-light) 50%,
+      var(--c-gold) 72%,
+      transparent
+    );
+    box-shadow:
+      0 0 16px 4px var(--c-gold-glow),
+      0 0 40px var(--c-gold-soft);
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  /* ===================================================
+     MOBILE LOGO WRAP
+     Visible:  xxs → sm  (display: flex)
+     Hidden:   md+       (display: none)
+  =================================================== */
+
+  .champions-mobile-logo-wrap {
+    display: flex;                /* VISIBLE on mobile by default */
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1.25rem 0.75rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .champions-mobile-logo-glow {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(
+      ellipse,
+      rgba(96, 192, 255, 0.20) 0%,
+      rgba(212, 168, 51, 0.08) 45%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  /* ===================================================
+     LOGO FRAME — shared by mobile + desktop
+  =================================================== */
+
+  .champions-logo-frame {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    /* Mobile default size */
+    width: 130px;
+    height: 130px;
+    border-radius: 22px;
+
+    background: rgba(96, 192, 255, 0.05);
+    border: 1px solid var(--c-cyan-border);
+
+    box-shadow:
+      0 0 28px 5px rgba(96, 192, 255, 0.16),
+      inset 0 0 18px rgba(96, 192, 255, 0.05);
+  }
+
+  /* Dual-tone neon gradient border overlay */
+  .champions-logo-neon-border {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      rgba(96, 192, 255, 0.38) 0%,
+      transparent 40%,
+      rgba(212, 168, 51, 0.30) 100%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .champions-logo-image {
+    position: relative;
+    z-index: 1;
+    width: 78%;
+    height: 78%;
+    object-fit: contain;
+  }
+
+  /* ===================================================
+     CARD BODY — content grid
+  =================================================== */
+
+  .champions-card-body {
+    position: relative;
+    z-index: 2;
+
+    /* Mobile: single column */
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  /* ===================================================
+     LEFT PANEL
+  =================================================== */
+
+  .champions-card-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 1.25rem 1.5rem;
+  }
+
+  .champions-left-top {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .champions-left-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  /* ── Eyebrow ── */
+  .champions-eyebrow {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(96, 192, 255, 0.60);
+  }
+
+  /* ── Team name ── */
+  .champions-team-name {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--c-white);
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+    margin: 0;
+  }
+
+  .champions-name-white {
+    color: var(--c-white);
+  }
+
+  .champions-name-gold {
+    color: var(--c-gold);
+    text-shadow: 0 0 28px var(--c-gold-soft);
+  }
+
+  /* ── Description ── */
+  .champions-caption {
+    font-size: 0.77rem;
+    color: var(--c-muted);
+    line-height: 1.72;
+    margin: 0;
+  }
+
+  /* ── Meta rows ── */
+  .champions-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .champions-meta-dot {
+    display: block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: var(--c-cyan);
+    box-shadow: 0 0 5px 2px var(--c-cyan-glow);
+  }
+
+  .champions-meta-text {
+    font-size: 0.76rem;
+    color: var(--c-muted);
+
+    strong {
+      color: var(--c-soft);
+      font-weight: 600;
+    }
+  }
+
+  /* ── Trophy badge ── */
+  .champions-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    align-self: flex-start;
+    margin-top: 0.25rem;
+    padding: 6px 12px;
+
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-gold);
+
+    background: var(--c-gold-bg);
+    border: 1px solid var(--c-gold-border);
+    border-radius: 8px;
+    box-shadow: 0 0 14px var(--c-gold-soft);
+  }
+
+  /* Trophy SVG fill roles */
+  .champions-trophy-gold   { fill: var(--c-gold); }
+  .champions-trophy-stroke { stroke: var(--c-gold); }
+  .champions-trophy-dark   { fill: var(--c-gold-dim); }
+
+  /* ===================================================
+     RIGHT PANEL — desktop only
+     Hidden:  xxs → sm  (display: none — default)
+     Visible: md+       (display: flex)
+  =================================================== */
+
+  .champions-card-right {
+    display: none;              /* HIDDEN on mobile by default */
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    padding: 1.75rem 1.5rem;
+    border-left: 1px solid var(--c-rule);
+  }
+
+  .champions-desktop-logo-glow {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(
+      ellipse,
+      rgba(96, 192, 255, 0.20) 0%,
+      rgba(212, 168, 51, 0.06) 45%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  /* ===================================================
+     STAT STRIP
+  =================================================== */
+
+  .champions-stat-strip {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--c-rule);
+  }
+
+  .champions-stat {
+    padding: 0.85rem 0.4rem;
+    text-align: center;
+    border-right: 1px solid var(--c-rule);
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  .champions-stat-value {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--c-white);
+    margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .champions-stat-label {
+    display: block;
+    font-size: 0.56rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(96, 192, 255, 0.40);
+  }
+
+  /* ===================================================
+     XS ≥ 480px
+  =================================================== */
+
+  @include xs {
+    .champions-title {
+      font-size: 1.7rem;
+    }
+
+    .champions-mobile-logo-wrap {
+      padding: 2.25rem 1.5rem 0.75rem;
+    }
+
+    .champions-logo-frame {
+      width: 150px;
+      height: 150px;
+    }
+
+    .champions-card-left {
+      padding: 0.75rem 1.5rem 1.5rem;
+    }
+
+    .champions-team-name {
+      font-size: 2.25rem;
+    }
+
+    .champions-caption {
+      font-size: 0.8rem;
+    }
+
+    .champions-meta-text {
+      font-size: 0.78rem;
+    }
+
+    .champions-stat {
+      padding: 0.9rem 0.5rem;
+    }
+
+    .champions-stat-value {
+      font-size: 0.78rem;
+    }
+
+    .champions-stat-label {
+      font-size: 0.58rem;
+    }
+  }
+
+  /* ===================================================
+     SM ≥ 576px
+  =================================================== */
+
+  @include sm {
+    padding: 3.5rem 0 4rem;
+
+    .champions-container {
+      padding: 0 1.25rem;
+    }
+
+    .champions-title {
+      font-size: 1.85rem;
+    }
+
+    .champions-mobile-logo-wrap {
+      padding: 2.5rem 1.75rem 1rem;
+    }
+
+    .champions-logo-frame {
+      width: 170px;
+      height: 170px;
+      border-radius: 24px;
+    }
+
+    .champions-card-left {
+      padding: 1rem 1.75rem 1.75rem;
+      gap: 1.1rem;
+    }
+
+    .champions-team-name {
+      font-size: 2.5rem;
+    }
+
+    .champions-caption {
+      font-size: 0.82rem;
+    }
+
+    .champions-eyebrow {
+      font-size: 0.62rem;
+    }
+
+    .champions-badge {
+      font-size: 0.68rem;
+      padding: 7px 14px;
+    }
+
+    .champions-stat {
+      padding: 1rem 0.5rem;
+    }
+
+    .champions-stat-value {
+      font-size: 0.82rem;
+    }
+
+    .champions-stat-label {
+      font-size: 0.6rem;
+    }
+  }
+
+  /* ===================================================
+     MD ≥ 768px
+     KEY BREAKPOINT — two-column layout activates
+     Mobile logo   → display: none
+     Desktop panel → display: flex
+  =================================================== */
+
+  @include md {
+    padding: 4.5rem 0 5rem;
+
+    .champions-container {
+      max-width: 820px;
+      padding: 0 1.5rem;
+    }
+
+    .champions-header {
+      margin-bottom: 2.25rem;
+    }
+
+    .champions-title {
+      font-size: 2rem;
+    }
+
+    .champions-summary {
+      font-size: 0.88rem;
+      max-width: 460px;
+    }
+
+    /* ── SWAP: hide mobile logo, show desktop panel ── */
+    .champions-mobile-logo-wrap {
+      display: none;           /* ← OFF at md+ */
+    }
+
+    .champions-card-right {
+      display: flex;           /* ← ON at md+ */
+    }
+
+    /* Two-column card body */
+    .champions-card-body {
+      grid-template-columns: 1fr 210px;
+    }
+
+    /* Left panel fills card height */
+    .champions-card-left {
+      padding: 1.75rem 1.75rem 1.75rem;
+      gap: 1.25rem;
+    }
+
+    .champions-team-name {
+      font-size: 2.3rem;
+    }
+
+    /* Desktop logo size */
+    .champions-logo-frame {
+      width: 160px;
+      height: 160px;
+      border-radius: 22px;
+    }
+
+    .champions-stat {
+      padding: 1rem 0.5rem;
+    }
+
+    .champions-stat-value {
+      font-size: 0.85rem;
+    }
+
+    .champions-card {
+      border-radius: 22px;
+    }
+  }
+
+  /* ===================================================
+     LG ≥ 992px
+  =================================================== */
+
+  @include lg {
+    padding: 5rem 0 5.5rem;
+
+    .champions-container {
+      max-width: 920px;
+    }
+
+    .champions-card-body {
+      grid-template-columns: 1fr 240px;
+    }
+
+    .champions-card-left {
+      padding: 2rem 2rem;
+      gap: 1.4rem;
+    }
+
+    .champions-card-right {
+      padding: 2rem 1.75rem;
+    }
+
+    .champions-logo-frame {
+      width: 190px;
+      height: 190px;
+      border-radius: 26px;
+    }
+
+    .champions-desktop-logo-glow {
+      width: 300px;
+      height: 300px;
+    }
+
+    .champions-team-name {
+      font-size: 2.7rem;
+    }
+
+    .champions-eyebrow {
+      font-size: 0.65rem;
+    }
+
+    .champions-caption {
+      font-size: 0.84rem;
+    }
+
+    .champions-meta-text {
+      font-size: 0.82rem;
+    }
+
+    .champions-badge {
+      font-size: 0.7rem;
+      padding: 7px 15px;
+    }
+
+    .champions-stat {
+      padding: 1.1rem 0.6rem;
+    }
+
+    .champions-stat-value {
+      font-size: 0.9rem;
+    }
+
+    .champions-stat-label {
+      font-size: 0.62rem;
+    }
+
+    .champions-title {
+      font-size: 2.1rem;
+    }
+
+    .champions-card {
+      border-radius: 24px;
+    }
+  }
+
+  /* ===================================================
+     XL ≥ 1200px
+  =================================================== */
+
+  @include xl {
+    padding: 6rem 0 6.5rem;
+
+    .champions-container {
+      max-width: 1040px;
+    }
+
+    .champions-card-body {
+      grid-template-columns: 1fr 270px;
+    }
+
+    .champions-card-left {
+      padding: 2.25rem 2.25rem;
+      gap: 1.5rem;
+    }
+
+    .champions-card-right {
+      padding: 2.25rem 2rem;
+    }
+
+    .champions-logo-frame {
+      width: 210px;
+      height: 210px;
+      border-radius: 28px;
+    }
+
+    .champions-desktop-logo-glow {
+      width: 330px;
+      height: 330px;
+    }
+
+    .champions-team-name {
+      font-size: 3rem;
+    }
+
+    .champions-caption {
+      font-size: 0.86rem;
+    }
+
+    .champions-meta-text {
+      font-size: 0.84rem;
+    }
+
+    .champions-badge {
+      font-size: 0.72rem;
+      padding: 8px 16px;
+    }
+
+    .champions-stat {
+      padding: 1.2rem 0.75rem;
+    }
+
+    .champions-stat-value {
+      font-size: 0.94rem;
+    }
+
+    .champions-stat-label {
+      font-size: 0.64rem;
+    }
+
+    .champions-title {
+      font-size: 2.2rem;
+    }
+
+    .champions-summary {
+      font-size: 0.92rem;
+    }
+
+    .champions-card {
+      border-radius: 26px;
+    }
+  }
+
+  /* ===================================================
+     XXL ≥ 1400px
+  =================================================== */
+
+  @include xxl {
+    padding: 7rem 0 7.5rem;
+
+    .champions-container {
+      max-width: 1120px;
+    }
+
+    .champions-card-body {
+      grid-template-columns: 1fr 300px;
+    }
+
+    .champions-card-left {
+      padding: 2.5rem 2.5rem;
+      gap: 1.65rem;
+    }
+
+    .champions-card-right {
+      padding: 2.5rem 2.25rem;
+    }
+
+    .champions-logo-frame {
+      width: 230px;
+      height: 230px;
+      border-radius: 30px;
+    }
+
+    .champions-desktop-logo-glow {
+      width: 360px;
+      height: 360px;
+    }
+
+    .champions-team-name {
+      font-size: 3.4rem;
+    }
+
+    .champions-eyebrow {
+      font-size: 0.68rem;
+    }
+
+    .champions-caption {
+      font-size: 0.9rem;
+    }
+
+    .champions-meta-text {
+      font-size: 0.88rem;
+    }
+
+    .champions-badge {
+      font-size: 0.75rem;
+      padding: 9px 18px;
+    }
+
+    .champions-stat {
+      padding: 1.35rem 1rem;
+    }
+
+    .champions-stat-value {
+      font-size: 1rem;
+    }
+
+    .champions-stat-label {
+      font-size: 0.66rem;
+    }
+
+    .champions-title {
+      font-size: 2.4rem;
+    }
+
+    .champions-summary {
+      font-size: 0.96rem;
+      max-width: 500px;
+    }
+
+    .champions-card {
+      border-radius: 28px;
+    }
+  }
+
+} /* END .champions */
